@@ -1,0 +1,50 @@
+
+<ion-header>
+
+  <ion-navbar>
+
+    <ion-title>Datos del articulo a cambiar</ion-title>
+    <ion-buttons right>
+      <button ion-button icon-only style="background-color: transparent;" (click)="closeModal()" >
+        <ion-icon style="color: white;" name="md-arrow-back"></ion-icon>
+      </button>
+    </ion-buttons>
+
+
+  </ion-navbar>
+
+</ion-header>
+
+
+
+<ion-content padding>
+  <ion-scroll style="height:100%;" scrollY="true">
+    <div >
+      <ion-slides  style="max-height:300px;width: 230px;text-align: center"  >
+        <ion-slide *ngFor="let slide of data.imageThumb">
+          <img style="text-align: center" [src]="slide">
+        </ion-slide>
+      </ion-slides>
+
+    </div>
+    <h2 style="text-align: center;color:#25cad3;font-size: 1.5rem; ">{{data.titulo}}</h2>
+    <h2 style="color:#25cad3;font-size: 1.5rem; ">Categoria</h2>
+    <p>{{data.categoria}}</p>
+    <h2 style="color:#25cad3;font-size: 1.5rem; ">Descripción</h2>
+    <p>{{data.descripcion}}</p>
+    <h2 style="color:#25cad3;font-size: 1.5rem; ">Categoria cambio</h2>
+    <p>{{data.categoriasCambio}}</p>
+    <button ion-button color="secondary"  item-end icon-left style="text-align:right" (click)="confirmarCambio()">
+      <ion-icon name="star"></ion-icon>
+      Swap
+    </button>
+    <button ion-button color="secondary"  item-end icon-left style="text-align:right" (click)="swapiar()">
+      <ion-icon name="star"></ion-icon>
+      Swapiar
+    </button>
+
+
+  </ion-scroll>
+
+
+</ion-content>

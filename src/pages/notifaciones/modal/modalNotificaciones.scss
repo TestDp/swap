@@ -1,0 +1,24 @@
+
+.containerNotificaciones {
+  margin-top: 20%;
+  margin-left: auto;
+  margin-right: auto;
+  border: .3px solid gray;
+  width: 85%;
+  height: 85%;
+  max-height: 100%;
+  background-color: #fff;
+  border-radius: 10px;
+  text-align: center;
+  position: relative;
+
+
+}
+
+
+div.options {
+  will-change: height;
+  transition: height $animation-duration ease;
+  overflow-y: hidden;
+  height: 0;
+}

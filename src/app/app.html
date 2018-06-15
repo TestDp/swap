@@ -1,0 +1,56 @@
+<ion-menu [content]="mainContent">
+  <ion-header>
+    <ion-toolbar>
+      <ion-title>
+        Menú
+      </ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content id="side-menu21">
+    <ion-list id="men-list1">
+      <ion-item menuClose="" on-click="logout()" id="men-list-item1">
+        Logout
+      </ion-item>
+      <ion-item menuClose="" on-click="disabledCount()" id="men-list-item2">
+        Desactivar cuenta
+      </ion-item>
+      <ion-item menuClose="" on-click="resetPassword()" id="men-list-item3">
+        Cambiar contraseña
+      </ion-item>
+      <ion-item menuClose="" (click)="publicaciones()" id="men-list-item4">
+       Mis publicaciones
+      </ion-item>
+      <ion-item menuClose="" (click)="notificaciones()" id="men-list-item5">
+      Notificaciones
+    </ion-item>
+      <ion-item menuClose="" (click)="conversaciones()" id="men-list-item6">
+      Conversaciones
+    </ion-item>
+      <ion-item menuClose="" (click)="cambios()" id="men-list-item7">
+        Cambios exitosos
+      </ion-item>
+      <ion-item menuClose="" (click)="inicio()" id="men-list-item8">
+        Inicio
+      </ion-item>
+      <ion-item menuClose="" (click)="terminos()" id="men-list-item8">
+        Términos y condiciones 
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-menu>
+<ion-footer *ngIf="submenu" no-border>
+
+  <ion-toolbar>
+    <ion-segment >
+      <ion-segment-button style="color: white;"  (click)="inicio()"  value="Publicar"> <ion-icon name="home"></ion-icon></ion-segment-button>
+      <ion-segment-button style="color: white;"  (click)="publicar()"  value="Publicar">Publicar</ion-segment-button>
+      <ion-segment-button style="color: white;"   (click)="publicaciones()" value="Publicaciones">Publicaciones</ion-segment-button>
+      <ion-segment-button style="color: white;"   (click)="busqueda()" value="Búsqueda"> <ion-icon name="search"></ion-icon></ion-segment-button>
+    </ion-segment>
+
+
+ </ion-toolbar>
+
+</ion-footer>
+
+<ion-nav #mainContent [root]="rootPage"></ion-nav>

@@ -1,0 +1,35 @@
+<!--
+  Generated template for the ForgotpassPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+
+
+
+
+<ion-content class="fondo">
+
+  <ion-content class="contenedor-logo">
+    <ion-img width="204" height="75" src="assets/images/logo-login.png"></ion-img>
+  </ion-content>
+  <ion-content class="login">
+    <div style="text-align:center;" class="padding">
+      <h2 color="danger">Ingresa tu correo y recibirás un Email para reestablecer tu contraseña</h2>
+    </div>
+
+    <div class="list">
+
+      <ion-item>
+        <ion-icon name="mail" item-left></ion-icon>
+        <ion-label stacked>Correo electronico:</ion-label>
+        <ion-input type="email" [(ngModel)]="user.email" placeholder="me@gmail.com"></ion-input>
+      </ion-item>
+
+    </div>
+
+    <div style="padding-top: 20px;">
+       <button ion-button block color="happiness" (click)="resetPassword(user)" >Reset Password</button>
+    </div>
+  </ion-content>
+</ion-content>

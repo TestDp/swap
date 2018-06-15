@@ -1,0 +1,112 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+
+
+    <ion-title style="background-image: url('assets/images/favicon.png') !important; background-repeat: no-repeat; background-position-x: 35%;
+    background-size: 25px;">
+      SWAP
+
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content style="text-align:center;" class="fondo">
+  <h4 style="margin-top: 1rem;">ÚLTIMAS PUBLICACIONES</h4>
+  <ion-searchbar style="padding: 4px;" [(ngModel)]="busqueda" placeholder="Buscar" [showCancelButton]="shouldShowCancel" (ionInput)="onInput($event)" (ionCancel)="onCancel($event)">
+  </ion-searchbar>
+
+  <ion-scroll style="height: 72%;padding: 8px;" scrollY="true">
+
+    <ion-row>
+      <ion-col *ngFor="let publicacion of publicaciones" col-6>
+        <ion-item  style="border-bottom: 0px solid #ccc;">
+          <div (click)="swapInfo(publicacion)" style="height:130px;width: 130px;">
+            <img-loader backgroundSize="contain" src="{{publicacion.imageThumb[0]}}"></img-loader>
+            <!-- <img style="max-width: 100%;max-height: 100%; margin:auto;display:block;width: 100%;height: 100%;"  src="{{publicacion.imageThumb[0]}}">-->
+          </div>
+          <h2 style="text-align: center;font-size:10pt;">{{publicacion.titulo}}</h2>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+  </ion-scroll>
+
+
+
+
+  <!--
+ 
+    <ion-scroll style="height: 100%;padding: 8px;" scrollY="true">
+
+
+    <div class="friends-list__container">
+      <div>
+        <ion-list [virtualScroll]="publicaciones" [approxItemHeight]=" '500px' " >
+          <ion-item *virtualItem="let publicacion">
+            <div (click)="swapInfo(publicacion)" style="height: 160px;width: 100%;position: relative;">
+              <ion-img style="max-width: 100%;max-height: 100%; margin:auto;display:block;width: 100%;height: 100%;" src="{{publicacion.imageUrl[0]}}"></ion-img>
+            </div>
+            <h2 style="text-align: center;font-size:10pt;">{{publicacion.titulo}}</h2>
+          </ion-item>
+        </ion-list>
+      </div>
+    </div>
+  </ion-scroll>
+
+
+
+
+  
+  <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+    <ion-infinite-scroll-content loadingSpinner="bubbles"></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+
+
+  <ion-scroll style="height: 100%;padding: 8px;" scrollY="true">
+
+    <ion-row>
+      <ion-col *ngFor="let publicacion of publicaciones" col-6>
+        <ion-item style="border-bottom: 0px solid #ccc;">
+          <div (click)="swapInfo(publicacion)" style="height: 160px;width: 100%;position: relative;">
+            <img style="max-width: 100%;max-height: 100%; margin:auto;display:block;width: 100%;height: 100%;" src="{{publicacion.imageUrl[0]}}"
+            />
+          </div>
+          <h2 style="text-align: center;font-size:10pt;">{{publicacion.titulo}}</h2>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+  </ion-scroll>
+
+  <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+    <ion-infinite-scroll-content loadingSpinner="bubbles"></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+
+  <ion-slides style="height: 70%;" *ngIf="publicaciones && publicaciones.length" autoplay="5000" loop="true" speed="1000">
+    <ion-slide *ngFor="let publicacion of publicaciones">
+      <div (click)="swapInfo(publicacion)" style="height: 250px;width: 100%;position: relative;">
+        <img style="max-width: 100%;max-height: 100%; margin:auto;display:block;width: 100%;height: 100%;" src="{{publicacion.imageUrl[0]}}"
+        />
+        <button (click)="swap(publicacion)" style="z-index: 100;position: absolute;top: 10px;right: 10px;width: 15%;height: 15%;background-color: #00d6b2;"
+          ion-button icon-only>
+          <ion-icon name="appname-customicon1"></ion-icon>
+        </button>
+      </div>
+    </ion-slide>
+  </ion-slides>
+
+ 
+<button ion-button color="secondary"  item-end icon-left style="text-align:right" (click)="publish()">
+  <ion-icon name="star"></ion-icon>
+  Crear publicación
+</button>
+
+ <ion-fab bottom left #fab>
+      <button ion-fab>Share</button>
+      <ion-fab-list side="right">
+        <button ion-fab (click)="share('facebook', fab)">Facebook</button>
+        <button ion-fab (click)="share('twitter', fab)">Twitter</button>
+      </ion-fab-list>
+    </ion-fab>-->
+
+</ion-content>

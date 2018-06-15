@@ -1,0 +1,133 @@
+// http://ionicframework.com/docs/v2/theming/
+
+
+// App Global Sass
+// --------------------------------------------------
+// Put style rules here that you want to apply globally. These
+// styles are for the entire app and not just one component.
+// Additionally, this file can be also used as an entry point
+// to import other Sass files to be included in the output CSS.
+//
+// Shared Sass variables, which can be used to adjust Ionic's
+// default Sass variables, belong in "theme/variables.scss".
+//
+// To declare rules for a specific mode, create a child rule
+// for the .md, .ios, or .wp mode classes. The mode class is
+// automatically applied to the <body> element in the app.
+
+.label {color:#25cad3 !important;}
+.toolbar-background-md {
+		background: rgba(128,211,173,1) !important;
+		background: -moz-linear-gradient(left, rgba(128,211,173,1) 15%, rgba(116,201,210,1) 100%) !important;
+		background: -webkit-gradient(left top, right top, color-stop(15%, rgba(128,211,173,1)), color-stop(100%, rgba(116,201,210,1))) !important;
+		background: -webkit-linear-gradient(left, rgba(128,211,173,1) 15%, rgba(116,201,210,1) 100%) !important;
+		background: -o-linear-gradient(left, rgba(128,211,173,1) 15%, rgba(116,201,210,1) 100%) !important;
+		background: -ms-linear-gradient(left, rgba(128,211,173,1) 15%, rgba(116,201,210,1) 100%) !important;
+		background: linear-gradient(to right, rgba(128,211,173,1) 15%, rgba(116,201,210,1) 100%) !important;
+		filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#80d3ad', endColorstr='#74c9d2', GradientType=1 ) !important;
+	}
+	
+.toolbar-title-md{
+		text-align:center !important;
+		color:#fff;
+		}
+		
+.ion-md-menu {color:#fff !important;}		
+
+
+.alert-md .alert-head {
+    background-color: #25cad3;
+	text-align: center;
+	color: white;
+	}
+	
+	.alert-md .alert-button-group {
+	background-color:#25cad3;
+	color: white; 
+	}
+	.alert-md .alert-button .button-inner {
+	 color: white;
+	}
+
+	.alert-md [aria-checked=true] .alert-checkbox-icon {
+		border-color: #25cad3;
+		background-color: #25cad3;
+	}
+	.alert-md [aria-checked=true] .alert-radio-icon {
+		border-color: #25cad3;
+	}
+	.alert-md [aria-checked=true] .alert-radio-label {
+		color: #25cad3;
+	}
+
+	.alert-md .alert-radio-inner {
+	   background-color: #25cad3;
+	}
+	.alert-md .alert-checkbox-label {
+		white-space: normal;
+	}
+	
+
+
+ion-alert {
+    &.alert-danger {
+       .alert-title{
+        color: #25cad3;  
+       }
+       .alert-head {
+         background: white;
+         color: #25cad3;
+         margin-bottom: 10px;
+         text-align: center;
+       }
+       .alert-button-group {
+        background-color:white;
+        text-align: center;
+     }
+        .alert-button {
+         border-radius: 6px;
+         position: relative;
+         overflow: hidden;
+         font-weight: 500;
+         text-transform: uppercase;
+         color: white;
+         background-color: transparent;
+         font-size: 13pt;
+         background: #25cad3;
+     }
+	 }
+	 
+	 &.alert-danger2 {
+		.alert-title{
+		 color: #25cad3;  
+		}
+		.alert-head {
+		  background: white;
+		  color: #25cad3;
+		  margin-bottom: 10px;
+		  text-align: center;
+		}
+		.alert-button-group {
+		 background-color:white;
+		 text-align: left;
+		 padding-left: 0px;
+	  }
+		 .alert-button {
+		  border-radius: 6px;
+		  position: relative;
+		  overflow: hidden;
+		  font-weight: 500;
+		  text-transform: uppercase;
+		  color: white;
+		  background-color: transparent;
+		  font-size: 13pt;
+		  background: #25cad3;
+	  }
+	  }
+   
+   }
+
+   .segment-md .segment-button {
+   
+    opacity: 1;
+}

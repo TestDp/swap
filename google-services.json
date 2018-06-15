@@ -1,0 +1,101 @@
+{
+  "project_info": {
+    "project_number": "512979795574",
+    "firebase_url": "https://swap-5f943.firebaseio.com",
+    "project_id": "swap-5f943",
+    "storage_bucket": "swap-5f943.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:512979795574:android:8cc6185873cb3260",
+        "android_client_info": {
+          "package_name": "co.com.swapHappines"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "512979795574-g30ft1msui465oqa12gbc6t134pre1to.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "co.com.swapHappines",
+            "certificate_hash": "5450792c6fb292c3da2035686a274cae1eec850f"
+          }
+        },
+        {
+          "client_id": "512979795574-19rk2jfnn18rot6cjs82jf9fmh1v91uh.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "co.com.swapHappines",
+            "certificate_hash": "53330c071e3809ff37633b9c138b69cfdae4b9a3"
+          }
+        },
+        {
+          "client_id": "512979795574-9fd1sac0f3arvseemqke0ivropb0m40p.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBHVPRq8Ww0TONEs6PnP7yzXscMGvfS9Nw"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "512979795574-q325j9dcm21gqv8n09172o53a5ng1cgg.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "co.com.swapHappines2017"
+              }
+            },
+            {
+              "client_id": "512979795574-9fd1sac0f3arvseemqke0ivropb0m40p.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:512979795574:android:681af54b298bfb0c",
+        "android_client_info": {
+          "package_name": "co.com.swapHappines2017"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "512979795574-9fd1sac0f3arvseemqke0ivropb0m40p.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBHVPRq8Ww0TONEs6PnP7yzXscMGvfS9Nw"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

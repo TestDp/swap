@@ -1,0 +1,62 @@
+<ion-header>
+
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Notificación Swap</ion-title>
+
+
+
+  </ion-navbar>
+
+</ion-header>
+
+
+
+<ion-content padding>
+  <ion-scroll style="height: 100%;" scrollY="true">
+    <ion-list>
+      <p style="text-align: center;color: #25cad3;">Presiona la flecha del artículo que quieren cambiar y revisa que te estan ofreciendo.</p>
+
+      <ng-template ngFor let-publicacion [ngForOf]="publicaciones" let-i="index">
+
+        <ng-template>
+          <ion-item>
+            <ion-label> {{ publicacion.articulo }} </ion-label>
+          </ion-item>
+        </ng-template>
+
+        <!-- It has nested options -->
+        <ng-template [ngIf]="publicacion.publicacionesArticulo && publicacion.publicacionesArticulo.length > 0">
+
+          <ion-list no-margin class="accordion-menu">
+            <ion-item tappable (click)="toggleItemOptions(options, headerIcon, publicacion.publicacionesArticulo.length)">
+              <ion-icon #headerIcon [id]="'header-icon-' + 'ios-arrow-down'" class="header-icon" name='ios-arrow-down' item-left></ion-icon>
+              <ion-avatar item-start>
+                <img style="width:auto; height: 4rem; background: #25cad3" src="assets/images/favicon.png">
+              </ion-avatar>
+              <ion-label> {{ publicacion.articulo }} </ion-label>
+
+            </ion-item>
+            
+            <ion-label style="font-size: 12px;">Articulos ofrecidos: </ion-label>
+            <div #options  [id]="'sub-item-' + i" class="options">
+              <ng-template ngFor let-item [ngForOf]="publicacion.publicacionesArticulo">
+                <ion-item style="background-color:  #F5F5F5" (click)="seleccionar(item, publicacion)" class="itemMenu">
+                  <ion-label style="color: #9B9B9A;"> {{ item.titulo }}</ion-label>
+                </ion-item>
+              </ng-template>
+
+            </div>
+          </ion-list>
+
+        </ng-template>
+
+      </ng-template>
+
+    </ion-list>
+  </ion-scroll>
+
+
+</ion-content>

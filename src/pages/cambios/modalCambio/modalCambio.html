@@ -1,0 +1,62 @@
+
+<ion-header>
+
+  <ion-navbar>
+
+    <ion-title>Cambio exitoso</ion-title>
+    <ion-buttons right>
+      <button ion-button icon-only style="background-color: transparent;" (click)="closeModal()" >
+        <ion-icon style="color: white;" name="md-arrow-back"></ion-icon>
+      </button>
+    </ion-buttons>
+
+
+  </ion-navbar>
+
+</ion-header>
+<ion-content class="card-background-page" padding>
+
+  <ion-card style="height: 42%;">
+    <img src="{{articulo.imageThumb[0]}}"/>
+    <div style="color:#25cad3"  class="card-title">{{articulo.titulo}}</div>
+    <div style="color:#25cad3"  class="card-subtitle">{{articulo.categoria}}</div>
+  </ion-card>
+  <h2 style="color:#25cad3">Cambiado por :</h2>
+  <ion-card style="height: 42%;">
+    <img src="{{articuloCambio2.imageThumb[0]}}"/>
+    <div style="color:#25cad3" class="card-title">{{articuloCambio2.titulo}}</div>
+    <div style="color:#25cad3" class="card-subtitle">{{articuloCambio2.categoria}}</div>
+  </ion-card>
+
+
+ <!-- <ion-card style="height: 50%;width: 50%;">
+
+    <ion-item>
+      <h2>{{articuloCambio.titulo}}</h2>
+      <p>{{articuloCambio.categoria}}</p>
+    </ion-item>
+
+    <img src="{{articuloCambio.imageUrl}}">
+
+    <ion-card-content>
+      <p>{{articuloCambio.descripcion}}</p>
+    </ion-card-content>
+
+    <ion-row>
+      <ion-col>
+        <button ion-button icon-left clear small>
+          <ion-icon name="thumbs-up"></ion-icon>
+          <div>{{articuloCambio.ciudad}}</div>
+        </button>
+      </ion-col>
+      <ion-col>
+        <button ion-button icon-left clear small>
+          <ion-icon name="text"></ion-icon>
+          <div>{{articuloCambio.usuario}}</div>
+        </button>
+      </ion-col>
+
+    </ion-row>
+
+  </ion-card> -->
+</ion-content>

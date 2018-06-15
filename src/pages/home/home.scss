@@ -1,0 +1,57 @@
+page-home {
+  ion-content{overflow-y:hidden !important; overflow-x:hidden !important;}
+  ion-img{background:transparent !important;}
+  ion-input{background:#e4e2e3;}
+  ion-label{color:#fff; cursor:pointer;}
+
+  .contenedor-logo{height:20%; text-align:center; background:transparent !important;}
+
+  .login{height:60%;}
+
+  .boton-login{background:#3fd4ad; width:100%; background:#3fd4ad;}
+  .button:hover{background:#25cad3;}
+
+  .registrar{width:100%; cursor:pointer; text-align:center; color:#25cad3;}
+
+  .fondo{
+    background: rgba(128,211,173,1) !important;
+    background: -moz-linear-gradient(left, rgba(128,211,173,1) 15%, rgba(116,201,210,1) 100%) !important;
+    background: -webkit-gradient(left top, right top, color-stop(15%, rgba(128,211,173,1)), color-stop(100%, rgba(116,201,210,1))) !important;
+    background: -webkit-linear-gradient(left, rgba(128,211,173,1) 15%, rgba(116,201,210,1) 100%) !important;
+    background: -o-linear-gradient(left, rgba(128,211,173,1) 15%, rgba(116,201,210,1) 100%) !important;
+    background: -ms-linear-gradient(left, rgba(128,211,173,1) 15%, rgba(116,201,210,1) 100%) !important;
+    background: linear-gradient(to right, rgba(128,211,173,1) 15%, rgba(116,201,210,1) 100%) !important;
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#80d3ad', endColorstr='#74c9d2', GradientType=1 ) !important;
+  }
+
+  .scroll-content{overflow-y:hidden;background-color: white;}
+
+  .campos{margin-bottom: 2%;}
+
+  .item-md.item-block .item-inner{border:none;}
+
+  ion-icon {
+    &[class*="appname-"] {
+      // Instead of using the font-based icons
+      // We're applying SVG masks
+      mask-size: contain;
+      mask-position: 50% 50%;
+      mask-repeat: no-repeat;
+      background: currentColor;
+      width: 1.5em;
+      height: 1.5em;
+    }
+    // custom icons
+    &[class*="appname-customicon1"] {
+      mask-image: url(../assets/images/favicon.png);
+    }
+
+
+}
+
+.imgLoader{
+ background-size: cover;
+}
+
+}
+

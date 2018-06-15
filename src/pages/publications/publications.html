@@ -1,0 +1,57 @@
+
+<ion-header>
+
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Mis publicaciones</ion-title>
+    <ion-buttons right>
+      <button ion-button icon-only style="background-color: transparent;" *ngIf="menuImagen" (click)="cerrarModal()" >
+        <ion-icon style="color: white;" name="md-arrow-back"></ion-icon>
+      </button>
+
+    </ion-buttons>
+
+
+  </ion-navbar>
+
+</ion-header>
+
+
+
+<ion-content padding>
+  <ion-scroll style="height: 90%;" scrollY="true">
+  <div *ngIf="!menuImagen" >
+  <ion-list  *ngFor="let publicacion of publicaciones">
+    <ion-item (click)="abrirModal(publicacion)" >
+    <ion-thumbnail item-start>
+      <img src="{{publicacion.imageThumb[0]}}">
+    </ion-thumbnail>
+    <h2 style="color:#25cad3; ">{{publicacion.titulo}}</h2>
+    <h2>{{publicacion.categoria}}</h2>
+    <p>{{publicacion.usuario}}</p>
+
+  </ion-item>
+    </ion-list>
+  </div>
+    <div *ngIf="menuImagen" >
+      <ion-slides  style="max-height:400px"  >
+        <ion-slide *ngFor="let slide of slides">
+          <img [src]="slide">
+        </ion-slide>
+      </ion-slides>
+      <h2 style="text-align: center;color:#25cad3; ">{{publicacion.titulo}}</h2>
+      <h2 style="color:#25cad3; ">Categoria</h2>
+      <p>{{publicacion.categoria}}</p>
+      <h2 style="color:#25cad3; ">Descripción</h2>
+      <p>{{publicacion.descripcion}}</p>
+      <h2 style="color:#25cad3; ">Categoria cambio</h2>
+      <p>{{publicacion.categoriasCambio}}</p>
+    </div>
+  </ion-scroll>
+
+
+
+
+</ion-content>

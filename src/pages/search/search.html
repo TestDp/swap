@@ -1,0 +1,74 @@
+<!--
+  Generated template for the PublishPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+
+    <ion-title>Búsqueda</ion-title>
+    <ion-buttons right>
+      <button ion-button menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <ion-list>
+    <ion-item>
+      <ion-label stacked>Ciudad:</ion-label>
+      <ion-input [(ngModel)]="article.ciudad" type="text" placeholder="Ciudad"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Categoria</ion-label>
+      <ion-select [(ngModel)]="article.categoria"   >
+        <ion-option>Hogar y muebles</ion-option>
+        <ion-option>Electrodomésticos</ion-option>
+        <ion-option>Accesorios para vehículos</ion-option>
+        <ion-option>Tecnología</ion-option>
+        <ion-option>Inmuebles</ion-option>
+        <ion-option>Accesorios personales</ion-option>
+        <ion-option>Entretenimiento y videojuegos</ion-option>
+        <ion-option>Industria</ion-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-label>Categorias de cambio</ion-label>
+      <ion-select  [(ngModel)]="article.categoriaCambio" >
+        <ion-option>Hogar y muebles</ion-option>
+        <ion-option>Electrodomésticos</ion-option>
+        <ion-option>Accesorios para vehículos</ion-option>
+        <ion-option>Tecnología</ion-option>
+        <ion-option>Inmuebles</ion-option>
+        <ion-option>Accesorios personales</ion-option>
+        <ion-option>Entretenimiento y videojuegos</ion-option>
+        <ion-option>Industria</ion-option>
+      </ion-select>
+    </ion-item>
+  </ion-list>
+  <div padding>
+    <button ion-button block style="background-color: #00d6b2"  (click)="buscar(article)" >Búsqueda</button>
+  </div>
+  <ion-scroll style="height: 50%;" scrollY="true">
+    <div  >
+      <ion-list  *ngFor="let publicacion of publicaciones">
+        <ion-item (click)="swapInfo(publicacion)">
+          <ion-thumbnail item-start>
+            <img src="{{publicacion.imageThumb[0]}}">
+          </ion-thumbnail>
+          <h2 style="color:#25cad3; ">{{publicacion.titulo}}</h2>
+          <h2>{{publicacion.categoria}}</h2>
+          <p>{{publicacion.usuario}}</p>
+
+        </ion-item>
+      </ion-list>
+    </div>
+  </ion-scroll>
+
+</ion-content>

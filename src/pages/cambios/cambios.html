@@ -1,0 +1,37 @@
+
+<ion-header>
+
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Cambios exitosos</ion-title>
+   </ion-navbar>
+
+</ion-header>
+
+
+
+<ion-content padding>
+
+  <ion-scroll style="height: 100%;" scrollY="true">
+    <div >
+      <ion-list  *ngFor="let cambio of cambios">
+        <ion-item (click)="abrirModal(cambio)" >
+          <ion-thumbnail item-start>
+            <img src="{{cambio.imageThumb[0]}}">
+          </ion-thumbnail>
+          <h2 style="color:#25cad3; ">{{cambio.titulo}}</h2>
+          <h2>{{cambio.categoria}}</h2>
+          <p>{{cambio.usuario}}</p>
+
+        </ion-item>
+      </ion-list>
+    </div>
+  </ion-scroll>
+
+
+
+
+
+</ion-content>

@@ -7,36 +7,36 @@
 <ion-content class="fondo" padding>
 
   <ion-content class="contenedor-logo">
-    <ion-img width="204" height="75" src="assets/images/logo-login.png"></ion-img>
+    <ion-img width="170" height="170" src="assets/images/logo-login.png"></ion-img>
   </ion-content>
 
   <ion-content class="login">
-    <ion-row class="campos">
+    <ion-row style="padding-top: 15px;" class="campos">
       <ion-item>
-        <ion-label floating>Email Adress</ion-label>
-        <ion-input type="text" [(ngModel)]="user.email"></ion-input>
+        <ion-label style="padding-left: 5%;" floating>Email Adress</ion-label>
+        <ion-input class="campos-login" type="text" [(ngModel)]="user.email"></ion-input>
       </ion-item>
       <ion-item>
-        <ion-label floating> Password</ion-label>
-        <ion-input type="password" [(ngModel)]="user.password"></ion-input>
+        <ion-label style="padding-left: 5%;" floating>Password</ion-label>
+        <ion-input class="campos-login" type="password" [(ngModel)]="user.password"></ion-input>
       </ion-item>
     </ion-row>
-    <ion-row style="width:100%;padding-top: 10px;">
-      <button class="boton-login" ion-button (click)="login(user)">Login</button>
+    <ion-row style="width:100%; padding-top: 15px;">
+      <button class="boton-login" ion-button (click)="login(user)">HAGAMOS EL TRATO</button>
     </ion-row>
-    <ion-row style="width:100%;padding-top: 10px;">
-      <button ion-button block color="danger" center (click)="loginGoogle()" block outline>
-        <ion-icon ios="logo-googleplus" md="logo-googleplus"></ion-icon> Login with google
-      </button>
-    </ion-row>
-    <ion-row style="width:100%;padding-top: 10px;">
-      <button ion-button center (click)="facebook1()" block outline>
-        <ion-icon ios="logo-facebook" md="logo-facebook"></ion-icon> Login with Facebook
-      </button>
-    </ion-row>
-    <ion-row style="width:100%;padding-top: 10px;">
+	    <ion-row style="width:100%;padding-top: 15%;">
       <label class="registrar" ion-href (click)="forgot()">Olvide mi Contraseña</label>
       <label class="registrar" ion-label color="light" (click)="register()">¿No tienes una cuenta aún? Regístrate AQUÍ</label>
+    </ion-row>
+    <ion-row style="width:100%;padding-top: 10px;">
+      <button ion-button block class="boton-google" center (click)="loginGoogle()" block outline>
+        <ion-icon ios="logo-googleplus" md="logo-googleplus"></ion-icon>  Conectar con google
+      </button>
+    </ion-row>
+    <ion-row style="width:100%;padding-top: 10px;">
+      <button ion-button class="boton-facebook" center (click)="facebook1()" block outline>
+        <ion-icon ios="logo-facebook" md="logo-facebook"></ion-icon>  Conectar con Facebook
+      </button>
     </ion-row>
 
   </ion-content>

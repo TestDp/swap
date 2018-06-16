@@ -6,16 +6,16 @@ ion-img{background:transparent !important;}
 ion-input{background:#e4e2e3;}
 ion-label{color:#fff; cursor:pointer;}
 
-.contenedor-logo{height:20%; text-align:center; background:transparent !important;}
+.contenedor-logo{height:20%; margin-top:25%; text-align:center; background:transparent !important;}
 
-.login{height:40%;}
+.login{height:40%; border-radius:30px;}
 
 .boton-login{background:#3fd4ad; width:100%; background:#3fd4ad;}
 .button:hover{background:#25cad3;}
 h2{color:#000;}
 .registrar{width:100%; cursor:pointer; text-align:center; color:#25cad3;}
 
-.fondo{background:#25cad3;}
+.fondo{background-image: url('/../../assets/images/fondo-pass.png'); background-size:contain;}
 
 .scroll-content{overflow-y:hidden;}
 

@@ -30010,12 +30010,14 @@ ion-label {
 
 .contenedor-logo {
   height: 20%;
+  margin-top: 25%;
   text-align: center;
   background: transparent !important;
 }
 
 .login {
   height: 40%;
+  border-radius: 30px;
 }
 
 .boton-login {
@@ -30040,7 +30042,8 @@ h2 {
 }
 
 .fondo {
-  background: #25cad3;
+  background-image: url("/../../assets/images/fondo-pass.png");
+  background-size: contain;
 }
 
 .scroll-content {
@@ -30380,6 +30383,41 @@ ion-input {
   border: none;
 }
 
+.fondo-register {
+  background-image: url("/../../assets/images/fondo-register.png");
+  background-size: contain;
+}
+
+.boton-registro {
+  background: #fc3850;
+  width: 100%;
+  border-radius: 30px;
+}
+
+.campos-register {
+  background: #ffffff !important;
+  border-radius: 30px;
+  height: 45px;
+  border: 1px #ddd solid;
+  padding-left: 5%;
+}
+
+.item-register {
+  padding: 2% 0 2% 0;
+}
+
+.list-ios .item-block .item-inner {
+  border-bottom: 0.55px solid #fff !important;
+}
+
+.toolbar-title {
+  color: #fff !important;
+}
+
+.bar-button-default {
+  color: #fff !important;
+}
+
 page-sign-in ion-content {
   overflow-y: hidden !important;
   overflow-x: hidden !important;
@@ -30404,9 +30442,29 @@ page-sign-in .login {
 }
 
 page-sign-in .boton-login {
-  background: #3fd4ad;
+  background: #fc3850;
   width: 100%;
-  background: #3fd4ad;
+  border-radius: 30px;
+}
+
+page-sign-in .boton-google {
+  background: #dd4b39;
+  width: 100%;
+  border-radius: 30px;
+  color: #fff;
+}
+
+page-sign-in .boton-facebook {
+  background: #3b5998;
+  width: 100%;
+  border-radius: 30px;
+  color: #fff;
+}
+
+page-sign-in .campos-login {
+  background: #ffffff !important;
+  border-radius: 30px;
+  height: 45px;
 }
 
 page-sign-in .button:hover {
@@ -30417,11 +30475,20 @@ page-sign-in .registrar {
   width: 100%;
   cursor: pointer;
   text-align: center;
-  color: #25cad3;
+  color: #ffffff;
 }
 
 page-sign-in .fondo {
-  background: #25cad3;
+  background-image: url("/../../assets/images/fondo-login.png");
+  background-size: contain;
+}
+
+page-sign-in .content-ios {
+  background-color: transparent !important;
+}
+
+page-sign-in .item-ios {
+  background-color: transparent !important;
 }
 
 page-sign-in .scroll-content {

@@ -8,13 +8,24 @@ page-sign-in {
 
   .login{height:80%;}
 
-  .boton-login{background:#3fd4ad; width:100%; background:#3fd4ad;}
+  .boton-login{background:#fc3850; width:100%; border-radius: 30px;}
+  
+  .boton-google{background:#dd4b39; width:100%; border-radius: 30px; color:#fff;}
+  
+  .boton-facebook{background:#3b5998; width:100%; border-radius: 30px; color:#fff;}
+  
+  .campos-login{background:#ffffff !important; border-radius: 30px; height: 45px;}
+
   .button:hover{background:#25cad3;}
 
-  .registrar{width:100%; cursor:pointer; text-align:center; color:#25cad3;}
+  .registrar{width:100%; cursor:pointer; text-align:center; color:#ffffff;}
 
-  .fondo{background:#25cad3;}
-
+  .fondo{background-image: url('/../../assets/images/fondo-login.png'); background-size:contain;}
+  
+  .content-ios{background-color: transparent !important;}
+  
+  .item-ios {background-color: transparent !important;}
+  
   .scroll-content{overflow-y:hidden;}
 
   .campos{margin-bottom: 2%;}

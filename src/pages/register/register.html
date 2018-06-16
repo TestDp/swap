@@ -1,62 +1,57 @@
 <ion-header>
   <ion-navbar>
-    <ion-title>
-      REGISTER
+    <ion-title style="background:#25cad3;">
+      REGÍSTRATE
     </ion-title>
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
+<ion-content class="fondo-register" padding>
   <form [formGroup]="myForm">
-    <div style="overflow-y: scroll; height:400px;">
+    <div style="padding-top:35%; overflow-y: scroll; height:500px;">
       <ion-list>
-        <ion-item>
+        <ion-item class="item-register">
           <ion-icon name="person" item-left></ion-icon>
-          <ion-label stacked>Nombres:</ion-label>
-          <ion-input formControlName="name" type="text" [(ngModel)]="user.nombre" placeholder="Nombre"></ion-input>
+          <ion-input class="campos-register" formControlName="name" type="text" [(ngModel)]="user.nombre" placeholder="Nombre"></ion-input>
         </ion-item>
         <ion-item *ngIf="myForm.get('name').errors && myForm.get('name').dirty">
           <p color="danger" ion-text *ngIf="myForm.get('name').hasError('required')">El campo nombre es requerido</p>
         </ion-item>
-        <ion-item>
+        <ion-item class="item-register">
           <ion-icon name="person" item-left></ion-icon>
-          <ion-label stacked>Apellidos:</ion-label>
-          <ion-input formControlName="lastName" type="text" [(ngModel)]="user.apellidos" placeholder="Apellidos"></ion-input>
+          <ion-input class="campos-register" formControlName="lastName" type="text" [(ngModel)]="user.apellidos" placeholder="Apellidos"></ion-input>
         </ion-item>
         <ion-item *ngIf="myForm.get('lastName').errors && myForm.get('lastName').dirty">
           <p color="danger" ion-text *ngIf="myForm.get('lastName').hasError('required')">El campo apellidos es requerido</p>
         </ion-item>
-        <ion-item>
+        <ion-item class="item-register">
           <ion-icon name="mail" item-left></ion-icon>
-          <ion-label stacked>Correo electronico:</ion-label>
-          <ion-input formControlName="email" type="email" [(ngModel)]="user.email" placeholder="Email"></ion-input>
+          <ion-input class="campos-register" formControlName="email" type="email" [(ngModel)]="user.email" placeholder="Email"></ion-input>
         </ion-item>
         <ion-item *ngIf="myForm.get('email').errors && myForm.get('email').dirty">
           <p color="danger" ion-text *ngIf="myForm.get('email').hasError('required')">El campo email es requerido</p>
           <p color="danger" ion-text *ngIf="myForm.get('email').hasError('email')">Ingresar un email valido</p>
         </ion-item>
-        <ion-item>
+        <ion-item class="item-register">
           <ion-icon name="calendar" item-left></ion-icon>
-          <ion-label stacked>Fecha de nacimiento:</ion-label>
-          <ion-datetime formControlName="dateBirth" displayFormat="MM-DD-YYYY" [(ngModel)]="user.fechaNacimiento" placeholder="MM-DD-YYY"></ion-datetime>
+          <ion-label style="padding-left:3%;" stacked>Fecha de nacimiento:</ion-label>
+          <ion-datetime style="padding-left: 5%;" formControlName="dateBirth" displayFormat="MM-DD-YYYY" [(ngModel)]="user.fechaNacimiento" placeholder="MM-DD-YYY"></ion-datetime>
         </ion-item>
         <ion-item *ngIf="myForm.get('dateBirth').errors && myForm.get('dateBirth').dirty">
           <p color="danger" ion-text *ngIf="myForm.get('dateBirth').hasError('required')">El campo fecha Nacimiento es requerido</p>
         </ion-item>
         <div formGroupName="passwordRetry">
-          <ion-item>
+          <ion-item class="item-register">
             <ion-icon name="eye" item-left></ion-icon>
-            <ion-label stacked>Contraseña:</ion-label>
-            <ion-input formControlName="password" type="password" [(ngModel)]="user.password" placeholder="Contraseña"></ion-input>
+            <ion-input class="campos-register" formControlName="password" type="password" [(ngModel)]="user.password" placeholder="Contraseña"></ion-input>
           </ion-item>
           <div *ngIf="myForm.get('passwordRetry').errors && myForm.get('passwordRetry').dirty">
             <p color="danger" ion-text *ngIf="myForm.get('passwordRetry').get('password').hasError('required')">El campo contraseña es requerido</p>
             <p color="danger" ion-text *ngIf="myForm.get('passwordRetry').get('password').hasError('pattern')">La contraseña debe tener entre 8 y 12 caracteres, al menos un dígito, al menos una minúscula y al menos una mayúscula</p>
           </div>
-          <ion-item>
+          <ion-item class="item-register">
             <ion-icon name="eye" item-left></ion-icon>
-            <ion-label stacked>Confirmar contraseña:</ion-label>
-            <ion-input formControlName="passwordConfirmation" type="password" [(ngModel)]="user.passwordConfirmation" placeholder="Confirmar contraseña"></ion-input>
+            <ion-input class="campos-register" formControlName="passwordConfirmation" type="password" [(ngModel)]="user.passwordConfirmation" placeholder="Confirmar contraseña"></ion-input>
           </ion-item>
           <div *ngIf="myForm.get('passwordRetry').errors && myForm.get('passwordRetry').dirty">
             <p color="danger" ion-text *ngIf="myForm.get('passwordRetry').get('passwordConfirmation').hasError('required')">El campo confirmar contraseña es requerido</p>
@@ -67,15 +62,15 @@
           <p color="danger" ion-text *ngIf="matchingPasswords(user.password,user.passwordConfirmation)">las contraseñas no son iguales</p>
         </div>
         <ion-row radio-group formControlName="gender" [(ngModel)]="user.genero">
-          <ion-item>
+          <ion-item class="item-register">
             <ion-icon name="woman" item-left></ion-icon>
-            <ion-label>Mujer</ion-label>
+            <ion-label style="padding-left:3%;">Mujer</ion-label>
             <ion-radio value="2"></ion-radio>
           </ion-item>
-          <ion-item>
+          <ion-item class="item-register">
             <ion-icon name="man" item-left></ion-icon>
-            <ion-label>Hombre</ion-label>
-            <ion-radio value="1"></ion-radio>
+            <ion-label style="padding-left:3%;">Hombre</ion-label>
+            <ion-radio style="color:#000;" value="1"></ion-radio>
           </ion-item>
         </ion-row>
         <ion-item *ngIf="myForm.get('gender').errors && myForm.get('gender').dirty">
@@ -84,7 +79,7 @@
       </ion-list>
     </div>
     <div padding>
-      <button ion-button block type="submit" (click)="register(user)" [disabled]="myForm.invalid">Guardar</button>
+      <button ion-button block class="boton-registro" type="submit" (click)="register(user)" [disabled]="myForm.invalid">Guardar</button>
 
     </div>
   </form>

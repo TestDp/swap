@@ -14,20 +14,20 @@
 </ion-header>
 <ion-content  style="text-align:center;" class="fondo" padding>
   <ion-list>
-    <ion-item>
+    <ion-item class = "campos-swap">
       <ion-label>Seleccione articulos de cambio</ion-label>
       <ion-select [(ngModel)]="swapArticle.articulosOfrece"   multiple="true">
         <ion-option *ngFor="let publicacion of publicaciones" value="{{publicacion.id}}" >{{publicacion.titulo}} - {{publicacion.descripcion}} </ion-option>
       </ion-select>
     </ion-item>
 
-    <ion-item>
+    <ion-item class = "campos-textcomentario">
       <ion-label floating>Comentario</ion-label>
-      <ion-textarea style="background-color: #F2F2F2;" #myInput id="myInput" rows="5" maxLength="500"  [(ngModel)]="swapArticle.comentario"></ion-textarea>
+      <ion-textarea class = "campos-textcomentario2"> style="background-color: #F2F2F2;" #myInput id="myInput" rows="5" maxLength="500"  [(ngModel)]="swapArticle.comentario"></ion-textarea>
     </ion-item>
   </ion-list>
   <div padding>
-    <button ion-button block color="happiness"  (click)="enviar()" >Swap</button>
+    <button ion-button block class="boton-swap" (click)="enviar()" >Swap</button>
   </div>
 
 </ion-content>

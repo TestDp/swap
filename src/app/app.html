@@ -40,12 +40,12 @@
 </ion-menu>
 <ion-footer *ngIf="submenu" no-border>
 
-  <ion-toolbar>
+  <ion-toolbar style="text-align:center; background-image: url('assets/images/fondo-home.png'); background-size:contain;" class="menu-ppal">
     <ion-segment >
-      <ion-segment-button style="color: white;"  (click)="inicio()"  value="Publicar"> <ion-icon name="home"></ion-icon></ion-segment-button>
-      <ion-segment-button style="color: white;"  (click)="publicar()"  value="Publicar">Publicar</ion-segment-button>
-      <ion-segment-button style="color: white;"   (click)="publicaciones()" value="Publicaciones">Publicaciones</ion-segment-button>
-      <ion-segment-button style="color: white;"   (click)="busqueda()" value="Búsqueda"> <ion-icon name="search"></ion-icon></ion-segment-button>
+      <ion-segment-button style="background-position: center; background-size: 30px; background-image: url('assets/images/home-icon-wh.png'); background-repeat:no-repeat;" (click)="inicio()"  value="Publicar"> </ion-segment-button>
+      <ion-segment-button style="background-position: center; background-size: 30px; background-image: url('assets/images/add-icon-wh.png'); background-repeat:no-repeat;" (click)="publicar()"  value="Publicar"></ion-segment-button>
+      <ion-segment-button style="background-position: center; background-size: 30px; background-image: url('assets/images/swap-icon-wh.png'); background-repeat:no-repeat;" (click)="publicaciones()" value="Publicaciones"></ion-segment-button>
+      <ion-segment-button style="background-position: center; background-size: 30px; background-image: url('assets/images/search-icon-wh.png'); background-repeat:no-repeat;" (click)="busqueda()" value="Búsqueda"></ion-segment-button>
     </ion-segment>
 
 

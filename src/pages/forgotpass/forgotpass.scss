@@ -17,6 +17,8 @@ h2{color:#000;}
 
 .fondo{background-image: url('/../../assets/images/fondo-pass.png'); background-size:contain;}
 
+.fondo-contra{padding-bottom: 5%; background-image: url('/../../assets/images/fondo-contra.png'); background-size:cover; background-repeat: no-repeat;}
+
 .scroll-content{overflow-y:hidden;}
 
 .campos{margin-bottom: 2%;}
@@ -24,3 +26,11 @@ h2{color:#000;}
 .item-md.item-block .item-inner{border:none;}
 
 .reset {background:#25cad3;}
+
+.campos-forgot{padding-left: 20%; padding-top: 4%; background: transparent !important; border-radius: 30px; height: 45px;}
+
+.boton-reset{background-color:#ffffff !important; color:red !important; font-size:20px;}
+
+.item-inner{border-bottom: 0.55px solid transparent !important;}
+
+.radio{border: 1px #ccc solid; border-radius: 10px; height: 25px; width: 25px;}

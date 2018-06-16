@@ -20,16 +20,14 @@
 
     <div class="list">
 
-      <ion-item>
-        <ion-icon name="mail" item-left></ion-icon>
-        <ion-label stacked>Correo electronico:</ion-label>
-        <ion-input type="email" [(ngModel)]="user.email" placeholder="me@gmail.com"></ion-input>
+      <ion-item class="fondo-contra">
+        <ion-input class="campos-forgot" type="email" [(ngModel)]="user.email" placeholder="me@gmail.com"></ion-input>
       </ion-item>
 
     </div>
 
     <div style="padding-top: 20px;">
-       <button ion-button block color="happiness" (click)="resetPassword(user)" >Reset Password</button>
+       <button class="boton-reset" ion-button block color="happiness" (click)="resetPassword(user)" >Reestrablecer contraseña</button>
     </div>
   </ion-content>
 </ion-content>

@@ -5,15 +5,14 @@
     </button>
 
 
-    <ion-title style="background-image: url('assets/images/favicon.png') !important; background-repeat: no-repeat; background-position-x: 35%;
-    background-size: 25px;">
+    <ion-title>
       SWAP
 
     </ion-title>
   </ion-navbar>
 </ion-header>
-<ion-content style="text-align:center;" class="fondo">
-  <h4 style="margin-top: 1rem;">ÚLTIMAS PUBLICACIONES</h4>
+<ion-content>
+  <h4 style="margin-top: 1rem; color:black; text-align:center;">ÚLTIMAS PUBLICACIONES</h4>
   <ion-searchbar style="padding: 4px;" [(ngModel)]="busqueda" placeholder="Buscar" [showCancelButton]="shouldShowCancel" (ionInput)="onInput($event)" (ionCancel)="onCancel($event)">
   </ion-searchbar>
 

@@ -29748,6 +29748,23 @@ ion-navbar.toolbar {
   }
 }
 
+.menu-ppal {
+  border-top-right-radius: 30px;
+  border-top-left-radius: 30px;
+}
+
+.segment-button {
+  border-color: transparent !important;
+}
+
+.toolbar {
+  min-height: 60px !important;
+}
+
+.toolbar-background {
+  background: transparent !important;
+}
+
 .label {
   color: #25cad3 !important;
 }
@@ -30046,6 +30063,13 @@ h2 {
   background-size: contain;
 }
 
+.fondo-contra {
+  padding-bottom: 5%;
+  background-image: url("/../../assets/images/fondo-contra.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
 .scroll-content {
   overflow-y: hidden;
 }
@@ -30060,6 +30084,31 @@ h2 {
 
 .reset {
   background: #25cad3;
+}
+
+.campos-forgot {
+  padding-left: 20%;
+  padding-top: 4%;
+  background: transparent !important;
+  border-radius: 30px;
+  height: 45px;
+}
+
+.boton-reset {
+  background-color: #ffffff !important;
+  color: red !important;
+  font-size: 20px;
+}
+
+.item-inner {
+  border-bottom: 0.55px solid transparent !important;
+}
+
+.radio {
+  border: 1px #ccc solid;
+  border-radius: 10px;
+  height: 25px;
+  width: 25px;
 }
 
 page-home ion-content {
@@ -30107,16 +30156,8 @@ page-home .registrar {
   color: #25cad3;
 }
 
-page-home .fondo {
-  background: #80d3ad !important;
-  background: -webkit-gradient(left top, right top, color-stop(15%, #80d3ad), color-stop(100%, #74c9d2)) !important;
-  background: linear-gradient(to right, #80d3ad 15%, #74c9d2 100%) !important;
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#80d3ad', endColorstr='#74c9d2', GradientType=1 ) !important;
-}
-
 page-home .scroll-content {
   overflow-y: hidden;
-  background-color: white;
 }
 
 page-home .campos {
@@ -30432,7 +30473,8 @@ page-sign-in ion-input {
 }
 
 page-sign-in .contenedor-logo {
-  height: 20%;
+  margin-top: 2% !important;
+  height: 25%;
   text-align: center;
   background: transparent !important;
 }

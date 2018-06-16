@@ -21,11 +21,11 @@
 
 <ion-content padding>
   <ion-list>
-    <ion-item>
+    <ion-item class ="campos-buscar2">
       <ion-label stacked>Ciudad:</ion-label>
-      <ion-input [(ngModel)]="article.ciudad" type="text" placeholder="Ciudad"></ion-input>
+      <ion-input class="campos-textbuscar" [(ngModel)]="article.ciudad" type="text" placeholder="Ciudad"></ion-input>
     </ion-item>
-    <ion-item>
+    <ion-item class ="campos-buscar2">
       <ion-label>Categoria</ion-label>
       <ion-select [(ngModel)]="article.categoria"   >
         <ion-option>Hogar y muebles</ion-option>
@@ -38,7 +38,7 @@
         <ion-option>Industria</ion-option>
       </ion-select>
     </ion-item>
-    <ion-item>
+    <ion-item class ="campos-buscar2">
       <ion-label>Categorias de cambio</ion-label>
       <ion-select  [(ngModel)]="article.categoriaCambio" >
         <ion-option>Hogar y muebles</ion-option>
@@ -53,7 +53,7 @@
     </ion-item>
   </ion-list>
   <div padding>
-    <button ion-button block style="background-color: #00d6b2"  (click)="buscar(article)" >Búsqueda</button>
+    <button ion-button block class="boton-buscar" (click)="buscar(article)" >Búsqueda</button>
   </div>
   <ion-scroll style="height: 50%;" scrollY="true">
     <div  >

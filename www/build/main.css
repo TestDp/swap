@@ -30064,9 +30064,8 @@ h2 {
   color: #25cad3;
 }
 
-.fondo {
-  background-image: url("/../../assets/images/fondo-pass.png");
-  background-size: contain;
+.scroll-content {
+  background: white !important;
 }
 
 .fondo-contra {
@@ -30164,7 +30163,6 @@ page-home .registrar {
 
 page-home .scroll-content {
   overflow-y: hidden;
-  background: white !important;
 }
 
 page-home .campos {
@@ -30194,6 +30192,48 @@ page-home ion-icon[class*="appname-customicon1"] {
 
 page-home .imgLoader {
   background-size: cover;
+}
+
+page-modalHome .alert-md .alert-button-group {
+  background: green;
+}
+
+page-modalHome .boton-swaparticulo {
+  background: #fc3850;
+  width: 100%;
+  border-radius: 30px;
+}
+
+page-modalHome .campos-categoria {
+  background: #25cad3 !important;
+  color: #ffffff;
+  font-size: 1.5rem;
+  border-radius: 30px;
+  height: 20px;
+  border: 1px #ddd solid;
+  padding-left: 5%;
+  margin: 0 60% 0 5%;
+}
+
+page-modalHome .campos-panelarticulo {
+  background: #ffffff !important;
+  border-radius: 30px;
+  border: 1px #ddd solid;
+  margin: 0 0 2% 0;
+}
+
+page-modalHome .campos-buscar3 {
+  background: #25cad3 !important;
+  border-radius: 30px;
+  height: 45px;
+  border: 1px #ddd solid;
+  padding-left: 5%;
+}
+
+page-modalHome .campos-textbuscar {
+  background: #ffffff !important;
+  height: 100px;
+  padding-left: 5%;
 }
 
 .toggle input:checked + .track {
@@ -30315,10 +30355,6 @@ div.options {
   height: 100px;
 }
 
-.scroll-content {
-  background: white !important;
-}
-
 .button-md:hover:not(.disable-hover) {
   background-color: #36f4b5;
 }
@@ -30331,10 +30367,6 @@ page-publish .boton-publicar {
   background: #fc3850;
   width: 100%;
   border-radius: 30px;
-}
-
-page-publish .scroll-content {
-  background: white !important;
 }
 
 page-publish .campos-publicar {
@@ -30472,6 +30504,47 @@ ion-input {
 
 .bar-button-default {
   color: #fff !important;
+}
+
+page-search .alert-md .alert-button-group {
+  background: green;
+}
+
+page-search .boton-buscar {
+  background: #fc3850;
+  width: 100%;
+  border-radius: 30px;
+}
+
+page-search .campos-buscar {
+  background: #ffffff !important;
+  border-radius: 30px;
+  height: 45px;
+  border: 1px #ddd solid;
+  padding-left: 5%;
+}
+
+page-search .campos-buscar2 {
+  background: #ffffff !important;
+  border-radius: 30px;
+  height: 45px;
+  border: 1px #ddd solid;
+  padding-left: 5%;
+  margin: 2% 0 2% 0;
+}
+
+page-search .campos-buscar3 {
+  background: #25cad3 !important;
+  border-radius: 30px;
+  height: 45px;
+  border: 1px #ddd solid;
+  padding-left: 5%;
+}
+
+page-search .campos-textbuscar {
+  background: #ffffff !important;
+  height: 100px;
+  padding-left: 5%;
 }
 
 page-sign-in ion-content {

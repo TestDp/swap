@@ -29755,6 +29755,12 @@ ion-navbar.toolbar {
 
 .segment-button {
   border-color: transparent !important;
+  height: 5rem !important;
+}
+
+.segment-activated {
+  background-color: transparent !important;
+  border-bottom: 1px #fff solid !important;
 }
 
 .toolbar {
@@ -30158,6 +30164,7 @@ page-home .registrar {
 
 page-home .scroll-content {
   overflow-y: hidden;
+  background: white !important;
 }
 
 page-home .campos {
@@ -30308,6 +30315,10 @@ div.options {
   height: 100px;
 }
 
+.scroll-content {
+  background: white !important;
+}
+
 .button-md:hover:not(.disable-hover) {
   background-color: #36f4b5;
 }
@@ -30320,6 +30331,10 @@ page-publish .boton-publicar {
   background: #fc3850;
   width: 100%;
   border-radius: 30px;
+}
+
+page-publish .scroll-content {
+  background: white !important;
 }
 
 page-publish .campos-publicar {

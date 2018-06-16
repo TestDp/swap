@@ -17,7 +17,9 @@
 
 .menu-ppal{border-top-right-radius: 30px; border-top-left-radius: 30px;}
 
-.segment-button{border-color:transparent !important;}
+.segment-button{border-color:transparent !important; height: 5rem !important;}
+
+.segment-activated{background-color: transparent !important; border-bottom: 1px #fff solid !important;}
 
 .toolbar{min-height: 60px !important;}
 

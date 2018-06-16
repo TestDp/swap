@@ -7,12 +7,11 @@
 
     <ion-title>
       SWAP
-
     </ion-title>
   </ion-navbar>
 </ion-header>
-<ion-content>
-  <h4 style="margin-top: 1rem; color:black; text-align:center;">ÚLTIMAS PUBLICACIONES</h4>
+<ion-content style="background-image: url('assets/images/fondo-home.png'); background-size:contain;">
+  <h4 style=" margin-top: 1rem; color:#5ec9be; text-align:center;">ÚLTIMAS PUBLICACIONES</h4>
   <ion-searchbar style="padding: 4px;" [(ngModel)]="busqueda" placeholder="Buscar" [showCancelButton]="shouldShowCancel" (ionInput)="onInput($event)" (ionCancel)="onCancel($event)">
   </ion-searchbar>
 
@@ -22,7 +21,7 @@
       <ion-col *ngFor="let publicacion of publicaciones" col-6>
         <ion-item  style="border-bottom: 0px solid #ccc;">
           <div (click)="swapInfo(publicacion)" style="height:130px;width: 130px;">
-            <img-loader backgroundSize="contain" src="{{publicacion.imageThumb[0]}}"></img-loader>
+            <img-loader style="border-radius:30px !important;" backgroundSize="cover" src="{{publicacion.imageThumb[0]}}"></img-loader>
             <!-- <img style="max-width: 100%;max-height: 100%; margin:auto;display:block;width: 100%;height: 100%;"  src="{{publicacion.imageThumb[0]}}">-->
           </div>
           <h2 style="text-align: center;font-size:10pt;">{{publicacion.titulo}}</h2>

@@ -20,13 +20,13 @@
 
 
 
-<ion-content padding>
+<ion-content style="background-image: url('assets/images/fondo-home.png'); background-size:contain;" padding>
   <ion-scroll style="height: 90%;" scrollY="true">
   <div *ngIf="!menuImagen" >
   <ion-list  *ngFor="let publicacion of publicaciones">
     <ion-item (click)="abrirModal(publicacion)" >
     <ion-thumbnail item-start>
-      <img src="{{publicacion.imageThumb[0]}}">
+      <img style="border-radius:30px;" src="{{publicacion.imageThumb[0]}}">
     </ion-thumbnail>
     <h2 style="color:#25cad3; ">{{publicacion.titulo}}</h2>
     <h2>{{publicacion.categoria}}</h2>

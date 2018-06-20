@@ -92,6 +92,14 @@ export class PublishPage {
     input.addEventListener("change", this.SubirImagenFirebase, false);
   }
 
+  ngAfterViewInit() {
+    this.myapp.submenu = false;
+  }
+
+  ionViewWillLeave(){
+    this.myapp.submenu = true;
+  }
+
 
   publish(article: Article) {
     this.loading = this.loadingCtrl.create({

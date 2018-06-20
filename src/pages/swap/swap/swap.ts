@@ -45,6 +45,15 @@ export class SwapPage {
 
   }
 
+  ngAfterViewInit() {
+    this.myapp.submenu = false;
+  }
+
+  ionViewWillLeave(){
+    this.myapp.submenu = true;
+  }
+
+
   cargarPublicacion() {
     if (this.usuarioPertenece == undefined) {
        this.cargarDatosUsuarioPertenece(2);

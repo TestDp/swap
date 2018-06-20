@@ -143,3 +143,10 @@ ion-alert {
    
     opacity: 1;
 }
+
+/* NOTA: para cambiar todo el tipo de letra de la app */
+ion-app.md {
+	font-family: "HelveticaNeueLTStd-Bd";
+	font-size: 1.4rem;
+	background-color: #fff;
+  }

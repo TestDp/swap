@@ -24,10 +24,9 @@
   <form [formGroup]="myForm" (ngSubmit)="saveData()">
     <div style="overflow-y: scroll; height:400px;">
       <ion-list >
-        <ion-item>
-          <ion-icon name="person" item-left></ion-icon>
+        <ion-row>
           <ion-input class="campos-publicar" formControlName="titulo" type="text" [(ngModel)]="article.titulo" placeholder="Titulo"></ion-input>
-        </ion-item>
+        </ion-row>
         <ion-item *ngIf="myForm.get('titulo').errors && myForm.get('titulo').dirty">
           <p color="danger" ion-text *ngIf="myForm.get('titulo').hasError('required')">El campo titulo es requerido</p>
         </ion-item> 
@@ -61,7 +60,7 @@
             <ion-option>Tecnología</ion-option>
             <ion-option>Inmuebles</ion-option>
             <ion-option>Accesorios personales</ion-option>
-            <ion-option>Entretenimiento y videojuegos prueba error</ion-option>
+            <ion-option>Entretenimiento y videojuegos </ion-option>
             <ion-option>Industria</ion-option>
           </ion-select>
         </ion-item>

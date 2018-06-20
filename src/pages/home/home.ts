@@ -162,8 +162,8 @@ export class HomePage {
     if (this.MyApp.mensajeBienvenidad == true && this.MyApp.mensajeBienvenidad2 == true) {
       this.MyApp.mensajeBienvenidad = false;
       let alert = this.alertCtrl.create({
-        title: 'Mensaje bienvenida',
-        subTitle: 'bienvenido a Swap, recuerda que tienes cinco publicaciones gratuitas, para la sexta debes suscribirte',
+        title: 'Bienvenid@',
+        subTitle: 'Tienes cinco publicaciones gratuitas, para hacer el trato, en la sexta te invitamos a seguir intercambiando felicidad, solo debes suscribirte',
         cssClass: 'alert-danger2',
         buttons: [
           {

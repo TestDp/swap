@@ -109,7 +109,7 @@ ion-alert {
 	 
 	 &.alert-danger2 {
 		.alert-title{
-		 color: #25cad3;  
+		 color: #fc3850;  
 		}
 		.alert-head {
 		  background: white;
@@ -120,10 +120,12 @@ ion-alert {
 		.alert-button-group {
 		 background-color:white;
 		 text-align: left;
-		 padding-left: 0px;
+		 padding-left: 3px;
+		 padding-right: 3px;
 	  }
 		 .alert-button {
-		  border-radius: 6px;
+		  border-radius: 30px;
+		  margin: 0 0 2% 0;
 		  position: relative;
 		  overflow: hidden;
 		  font-weight: 500;

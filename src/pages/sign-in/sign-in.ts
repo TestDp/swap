@@ -158,6 +158,15 @@ export class SignInPage {
             this.datos.email = this.datoss["email"];
             this.datos.genero = this.datoss["gender"];
             this.datos.apellidos = this.datoss["middle_name"];
+            firebase.auth().signInWithCredential(firebase.auth.FacebookAuthProvider.credential(lobThis.access_token ))
+            .then((success) => {
+              console.log("Facebook sing in success: " + JSON.stringify(success));
+              this.userProfile = success
+              this.navCtrl.setRoot('HomePage');
+            })
+            .catch((error) => {
+              console.log("Facebook sing in failure: " + JSON.stringify(error));
+            });
             this.crearUsuarioFirebaseFace(this.datos);
           
 

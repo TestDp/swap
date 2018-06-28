@@ -1,19 +1,19 @@
-<ion-content style="background-image: url('assets/images/fondo-login.png'); background-size:contain;" class="fondo" padding>
-
+<ion-content style="background-image: url('assets/images/fondo-login.png'); background-size:cover; background-repeat:no-repeat;" class="fondo" padding>
+<ion-scroll style="height: 100%;" scrollY="true">
   <!-- <ion-content style="color: #000; background-color: transparent !important;" padding> -->
     <ion-row>
-      <ion-img width="170" height="170" src="assets/images/logo-login.png"></ion-img>
+      <ion-img width="100%" height="170" src="assets/images/logo-login.png"></ion-img>
     </ion-row>
     <ion-row style="width:100%; padding-top: 15px;">
       <ion-col style="color: #000;background-color: transparent !important;">
         <!-- <ion-label style="padding-left: 5%;" >Email Adress</ion-label> -->
-        <ion-input class="campos-login" type="text" [(ngModel)]="user.email" placeholder="Email Adress"></ion-input>
+        <ion-input class="campos-login" type="text" [(ngModel)]="user.email" placeholder="Correo electrónico"></ion-input>
       </ion-col>
       </ion-row>
      <ion-row style="width:100%; padding-top: 15px;">  
       <ion-col style="color: #000;background-color: transparent !important;">
         <!-- <ion-label style="padding-left: 5%;" >Password</ion-label> -->
-        <ion-input class="campos-login" type="password" [(ngModel)]="user.password" placeholder="Password"></ion-input>
+        <ion-input class="campos-login" type="password" [(ngModel)]="user.password" placeholder="Contraseña"></ion-input>
       </ion-col>
     </ion-row>
     <ion-row style="width:100%; padding-top: 15px;">
@@ -35,5 +35,5 @@
     </ion-row>
 
   <!-- </ion-content> -->
-
+</ion-scroll>
 </ion-content>

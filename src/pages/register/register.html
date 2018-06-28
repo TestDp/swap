@@ -7,8 +7,9 @@
 </ion-header>
 
 <ion-content class="fondo-register" padding>
+<ion-scroll style="height: 100%;" scrollY="true">
   <form [formGroup]="myForm">
-    <div style="padding-top:35%; overflow-y: scroll; height:500px;">
+    <div style="padding-top:35%; overflow-y: scroll; height:100%;">
       <ion-list>
         <ion-item class="item-register">
           <ion-icon name="person" item-left></ion-icon>
@@ -76,12 +77,12 @@
         <ion-item *ngIf="myForm.get('gender').errors && myForm.get('gender').dirty">
           <p color="danger" ion-text *ngIf="myForm.get('gender').hasError('required')">El campo genero es requerido</p>
         </ion-item>
+		<div padding>
+		<button ion-button block class="boton-registro" type="submit" (click)="register(user)" [disabled]="myForm.invalid">Guardar</button>
+		</div>
       </ion-list>
     </div>
-    <div padding>
-      <button ion-button block class="boton-registro" type="submit" (click)="register(user)" [disabled]="myForm.invalid">Guardar</button>
 
-    </div>
   </form>
-
+</ion-scroll>
 </ion-content>

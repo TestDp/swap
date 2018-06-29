@@ -119,10 +119,8 @@
           <p color="danger" ion-text *ngIf="myForm.get('gender').hasError('required')">El campo genero es requerido</p>
         </ion-col>
       </ion-row>
-      <ion-row  padding>
-        <ion-col>
-          <button ion-button block class="boton-registro" type="submit" (click)="register(user)" [disabled]="myForm.invalid">Guardar</button>
-        </ion-col>
+      <ion-row  padding>        
+          <button ion-button block class="boton-registro" type="submit" (click)="register(user)" [disabled]="myForm.invalid">Guardar</button>        
       </ion-row>
     </form>
   </ion-scroll>

@@ -8,32 +8,32 @@
   </ion-header>
   <ion-content id="side-menu21">
     <ion-list id="men-list1">
-      <ion-item menuClose="" on-click="logout()" id="men-list-item1">
-        Cerrar Sesión
+      <ion-item menuClose="" (click)="inicio()" id="men-list-item8">
+        Inicio
       </ion-item>
-      <ion-item menuClose="" on-click="disabledCount()" id="men-list-item2">
-        Desactivar cuenta
+      <ion-item menuClose="" (click)="publicaciones()" id="men-list-item4">
+        Mis publicaciones
+      </ion-item>
+      <ion-item menuClose="" (click)="notificaciones()" id="men-list-item5">
+        Notificaciones
+      </ion-item>
+      <ion-item menuClose="" (click)="conversaciones()" id="men-list-item6">
+        Conversaciones
+      </ion-item>
+      <ion-item menuClose="" (click)="cambios()" id="men-list-item7">
+        Cambios exitosos
       </ion-item>
       <ion-item menuClose="" on-click="resetPassword()" id="men-list-item3">
         Cambiar contraseña
       </ion-item>
-      <ion-item menuClose="" (click)="publicaciones()" id="men-list-item4">
-       Mis publicaciones
-      </ion-item>
-      <ion-item menuClose="" (click)="notificaciones()" id="men-list-item5">
-      Notificaciones
-    </ion-item>
-      <ion-item menuClose="" (click)="conversaciones()" id="men-list-item6">
-      Conversaciones
-    </ion-item>
-      <ion-item menuClose="" (click)="cambios()" id="men-list-item7">
-        Cambios exitosos
-      </ion-item>
-      <ion-item menuClose="" (click)="inicio()" id="men-list-item8">
-        Inicio
-      </ion-item>
       <ion-item menuClose="" (click)="terminos()" id="men-list-item8">
-        Términos y condiciones 
+        Términos y condiciones
+      </ion-item>
+      <ion-item menuClose="" on-click="disabledCount()" id="men-list-item2">
+        Desactivar cuenta
+      </ion-item>
+      <ion-item menuClose="" on-click="logout()" id="men-list-item1">
+        Cerrar Sesión
       </ion-item>
     </ion-list>
   </ion-content>
@@ -41,15 +41,19 @@
 <ion-footer *ngIf="submenu" no-border>
 
   <ion-toolbar style="text-align:center; background-image: url('assets/images/fondo-home.png'); background-size:contain;" class="menu-ppal">
-    <ion-segment >
-      <ion-segment-button style="background-position: center; background-size: 40px; background-image: url('assets/images/home-icon-wh.png'); background-repeat:no-repeat;" (click)="inicio()"  value="Publicar"> </ion-segment-button>
-      <ion-segment-button style="background-position: center; background-size: 40px; background-image: url('assets/images/add-icon-wh.png'); background-repeat:no-repeat;" (click)="publicar()"  value="Publicar"></ion-segment-button>
-      <ion-segment-button style="background-position: center; background-size: 40px; background-image: url('assets/images/swap-icon-wh.png'); background-repeat:no-repeat;" (click)="publicaciones()" value="Publicaciones"></ion-segment-button>
-      <ion-segment-button style="background-position: center; background-size: 40px; background-image: url('assets/images/search-icon-wh.png'); background-repeat:no-repeat;" (click)="busqueda()" value="Búsqueda"></ion-segment-button>
+    <ion-segment>
+      <ion-segment-button style="background-position: center; background-size: 40px; background-image: url('assets/images/home-icon-wh.png'); background-repeat:no-repeat;"
+        (click)="inicio()" value="Publicar"> </ion-segment-button>
+      <ion-segment-button style="background-position: center; background-size: 40px; background-image: url('assets/images/add-icon-wh.png'); background-repeat:no-repeat;"
+        (click)="publicar()" value="Publicar"></ion-segment-button>
+      <ion-segment-button style="background-position: center; background-size: 40px; background-image: url('assets/images/swap-icon-wh.png'); background-repeat:no-repeat;"
+        (click)="publicaciones()" value="Publicaciones"></ion-segment-button>
+      <ion-segment-button style="background-position: center; background-size: 40px; background-image: url('assets/images/search-icon-wh.png'); background-repeat:no-repeat;"
+        (click)="busqueda()" value="Búsqueda"></ion-segment-button>
     </ion-segment>
 
 
- </ion-toolbar>
+  </ion-toolbar>
 
 </ion-footer>
 

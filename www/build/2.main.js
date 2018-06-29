@@ -124,6 +124,12 @@ var SwapPage = (function () {
     }
     SwapPage.prototype.ionViewDidLoad = function () {
     };
+    SwapPage.prototype.ngAfterViewInit = function () {
+        this.myapp.submenu = false;
+    };
+    SwapPage.prototype.ionViewWillLeave = function () {
+        this.myapp.submenu = true;
+    };
     SwapPage.prototype.cargarPublicacion = function () {
         var _this = this;
         if (this.usuarioPertenece == undefined) {
@@ -339,7 +345,7 @@ var SwapPage = (function () {
 SwapPage = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* IonicPage */])(),
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_5" /* Component */])({
-        selector: 'page-swap',template:/*ion-inline-start:"C:\Users\Diego\Desktop\swap\trunk\src\pages\swap\swap\swap.html"*/'<ion-header>\n  <ion-navbar>\n    <button ion-button menuToggle>\n      <ion-icon name="menu"></ion-icon>\n    </button>\n\n\n    <ion-title style="background-image: url(\'assets/images/favicon.png\') !important; background-repeat: no-repeat; background-position-x: 35%;\n    background-size: 25px;">\n      SWAP\n\n    </ion-title>\n  </ion-navbar>\n</ion-header>\n<ion-content  style="text-align:center;" class="fondo" padding>\n  <ion-list>\n    <ion-item>\n      <ion-label>Seleccione articulos de cambio</ion-label>\n      <ion-select [(ngModel)]="swapArticle.articulosOfrece"   multiple="true">\n        <ion-option *ngFor="let publicacion of publicaciones" value="{{publicacion.id}}" >{{publicacion.titulo}} - {{publicacion.descripcion}} </ion-option>\n      </ion-select>\n    </ion-item>\n\n    <ion-item>\n      <ion-label floating>Comentario</ion-label>\n      <ion-textarea style="background-color: #F2F2F2;" #myInput id="myInput" rows="5" maxLength="500"  [(ngModel)]="swapArticle.comentario"></ion-textarea>\n    </ion-item>\n  </ion-list>\n  <div padding>\n    <button ion-button block color="happiness"  (click)="enviar()" >Swap</button>\n  </div>\n\n</ion-content>\n\n'/*ion-inline-end:"C:\Users\Diego\Desktop\swap\trunk\src\pages\swap\swap\swap.html"*/
+        selector: 'page-swap',template:/*ion-inline-start:"C:\Users\N56J\Desktop\swap2\trunk\src\pages\swap\swap\swap.html"*/'<ion-header>\n  <ion-navbar>\n    <button ion-button menuToggle>\n      <ion-icon name="menu"></ion-icon>\n    </button>\n\n\n    <ion-title style="background-image: url(\'assets/images/favicon.png\') !important; background-repeat: no-repeat; background-position-x: 35%;\n    background-size: 25px;">\n      SWAP\n\n    </ion-title>\n  </ion-navbar>\n</ion-header>\n<ion-content  style="text-align:center;" class="fondo" padding>\n  <ion-list>\n    <ion-item class = "campos-swap">\n      <ion-label>Seleccione articulos de cambio</ion-label>\n      <ion-select [(ngModel)]="swapArticle.articulosOfrece"   multiple="true">\n        <ion-option *ngFor="let publicacion of publicaciones" value="{{publicacion.id}}" >{{publicacion.titulo}} - {{publicacion.descripcion}} </ion-option>\n      </ion-select>\n    </ion-item>\n\n    <ion-item class = "campos-textcomentario">\n      <ion-label floating>Comentario</ion-label>\n      <ion-textarea class = "campos-textcomentario2"> style="background-color: #F2F2F2;" #myInput id="myInput" rows="5" maxLength="500"  [(ngModel)]="swapArticle.comentario"></ion-textarea>\n    </ion-item>\n  </ion-list>\n  <div padding>\n    <button ion-button block class="boton-swap" (click)="enviar()" >Swap</button>\n  </div>\n\n</ion-content>\n\n'/*ion-inline-end:"C:\Users\N56J\Desktop\swap2\trunk\src\pages\swap\swap\swap.html"*/
     }),
     __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */],
         __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* AlertController */],

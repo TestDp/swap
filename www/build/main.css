@@ -29856,7 +29856,7 @@ ion-alert.alert-danger .alert-button {
 }
 
 ion-alert.alert-danger2 .alert-title {
-  color: #25cad3;
+  color: #fc3850;
 }
 
 ion-alert.alert-danger2 .alert-head {
@@ -29869,11 +29869,13 @@ ion-alert.alert-danger2 .alert-head {
 ion-alert.alert-danger2 .alert-button-group {
   background-color: white;
   text-align: left;
-  padding-left: 0px;
+  padding-left: 3px;
+  padding-right: 3px;
 }
 
 ion-alert.alert-danger2 .alert-button {
-  border-radius: 6px;
+  border-radius: 30px;
+  margin: 0 0 2% 0;
   position: relative;
   overflow: hidden;
   font-weight: 500;
@@ -29886,6 +29888,13 @@ ion-alert.alert-danger2 .alert-button {
 
 .segment-md .segment-button {
   opacity: 1;
+}
+
+/* NOTA: para cambiar todo el tipo de letra de la app */
+ion-app.md {
+  font-family: "HelveticaNeueLTStd-Bd";
+  font-size: 1.4rem;
+  background-color: #fff;
 }
 
 page-modalCambio .card-background-page ion-card {
@@ -30070,9 +30079,6 @@ h2 {
 
 .fondo-contra {
   padding-bottom: 5%;
-  background-image: url("/../../assets/images/fondo-contra.png");
-  background-size: cover;
-  background-repeat: no-repeat;
 }
 
 .scroll-content {
@@ -30102,7 +30108,7 @@ h2 {
 .boton-reset {
   background-color: #ffffff !important;
   color: red !important;
-  font-size: 20px;
+  font-size: 18px;
 }
 
 .item-inner {
@@ -30152,6 +30158,10 @@ page-home .boton-login {
 
 page-home .button:hover {
   background: #25cad3;
+}
+
+page-home .fondo-search {
+  padding-bottom: 5%;
 }
 
 page-home .registrar {
@@ -30359,6 +30369,24 @@ div.options {
   background-color: #36f4b5;
 }
 
+.campos-categoria {
+  background: #25cad3 !important;
+  color: #ffffff;
+  font-size: 1.5rem;
+  border-radius: 30px;
+  height: 20px;
+  border: 1px #ddd solid;
+  padding-left: 5%;
+  margin: 0 60% 0 5%;
+}
+
+.campos-panelarticulo {
+  background: #ffffff !important;
+  border-radius: 30px;
+  border: 1px #ddd solid;
+  margin: 0 0 2% 0;
+}
+
 page-publish .alert-md .alert-button-group {
   background: green;
 }
@@ -30389,7 +30417,6 @@ page-publish .campos-textpublicar {
 page-publish .campos-textpublicar2 {
   background: #ffffff !important;
   height: 100px;
-  padding-left: 5%;
 }
 
 page-publish .campos-publicar2 {
@@ -30544,7 +30571,6 @@ page-search .campos-buscar3 {
 page-search .campos-textbuscar {
   background: #ffffff !important;
   height: 100px;
-  padding-left: 5%;
 }
 
 page-sign-in ion-content {
@@ -30608,11 +30634,6 @@ page-sign-in .registrar {
   color: #ffffff;
 }
 
-page-sign-in .fondo {
-  background-image: url("/../../assets/images/fondo-login.png");
-  background-size: contain;
-}
-
 page-sign-in .content-ios {
   background-color: transparent !important;
 }
@@ -30631,4 +30652,41 @@ page-sign-in .campos {
 
 page-sign-in .item-md.item-block .item-inner {
   border: none;
+}
+
+page-sign-in .text-input {
+  padding-left: 15px !important;
+}
+
+page-swap .alert-md .alert-button-group {
+  background: green;
+}
+
+page-swap .boton-swap {
+  background: #fc3850;
+  width: 100%;
+  border-radius: 30px;
+}
+
+page-swap .campos-swap {
+  background: #ffffff !important;
+  border-radius: 30px;
+  height: 45px;
+  border: 1px #ddd solid;
+  padding-left: 5%;
+}
+
+page-swap .campos-textcomentario {
+  background: #ffffff !important;
+  border-radius: 30px;
+  height: 120px;
+  border: 1px #ddd solid;
+  padding-left: 5%;
+  margin: 2% 0 2% 0;
+}
+
+page-swap .campos-textcomentario2 {
+  background: #ffffff !important;
+  height: 100px;
+  padding-left: 5%;
 }

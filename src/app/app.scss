@@ -144,9 +144,43 @@ ion-alert {
     opacity: 1;
 }
 
+.radio-md .radio-icon {
+	left: 3px !important;
+    top: 4px !important;
+	border-color: #ffffff !important;
+	}
+
 /* NOTA: para cambiar todo el tipo de letra de la app */
+
+  @font-face {
+    font-family: 'SWAP';
+    src: url('../assets/font/SWAP.eot');
+    src: url('../assets/font/SWAP.eot') format('embedded-opentype'),
+         url('../assets/font/SWAP.woff2') format('woff2'),
+         url('../assets/font/SWAP.woff') format('woff'),
+         url('../assets/font/SWAP.ttf') format('truetype'),
+         url('../assets/font/SWAP.svg#SWAP') format('svg');
+}
+
+@font-face {
+    font-family: 'textos';
+    src: url('../assets/font/textos.eot');
+    src: url('../assets/font/textos.eot') format('embedded-opentype'),
+         url('../assets/font/textos.woff2') format('woff2'),
+         url('../assets/font/textos.woff') format('woff'),
+         url('../assets/font/textos.ttf') format('truetype'),
+         url('../assets/font/textos.svg#textos') format('svg');
+}
+
 ion-app.md {
-	font-family: "HelveticaNeueLTStd-Bd";
+	font-family: 'SWAP';
 	font-size: 1.4rem;
 	background-color: #fff;
   }
+  
+  .title{font-family: 'SWAP';}
+  h1, h4{font-family: 'SWAP';}
+  h2, h3{font-family: 'textos';}
+  p{font-family: 'textos';}
+  
+

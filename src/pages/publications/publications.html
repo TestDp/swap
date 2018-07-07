@@ -39,12 +39,14 @@
 	<h2 style="text-align: center;color:#25cad3;font-size: 2.5rem; ">{{publicacion.titulo}}</h2>
 	<div  class ="campos-panelarticulo">
 	<div>
-      <ion-slides  style="max-height:400px"  >
+      <ion-slides  style="text-align: center; border-radius: 30px;" >
         <ion-slide *ngFor="let slide of slides">
           <img style="text-align: center; border-radius: 30px;"  [src]="slide">
         </ion-slide>
       </ion-slides>
+	  <p style="text-align:center;"><--Desliza--></p>
 	</div>
+	
 	  
 	<h2 class ="campos-categoria">Categoria</h2>
     <p style="padding-left: 5%;">{{publicacion.categoria}}</p>

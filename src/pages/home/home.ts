@@ -139,14 +139,14 @@ export class HomePage {
       } */
 
     this.afAuth.authState.subscribe(data => {
-      if (data && data.email && data.uid && this.MyApp.mensajeBienvenidad3 == true) {
-        this.MyApp.mensajeBienvenidad3 = false;
-        this.toast.create({
-          message: 'Bienvenido a SWAP  '.concat(data.email),
-          duration: 3000
-        }).present();
+      // if (data && data.email && data.uid && this.MyApp.mensajeBienvenidad3 == true) {
+        // this.MyApp.mensajeBienvenidad3 = false;
+        // this.toast.create({
+          // message: 'Bienvenido a SWAP  '.concat(data.email),
+          // duration: 3000
+        // }).present();
 
-      }
+      // }
       localStorage.setItem("usuarioLoggeado", JSON.stringify(data));
       let usuarioLoggeado = JSON.parse(localStorage.getItem("usuarioLoggeado"));
       let idRegistro = JSON.parse(localStorage.getItem("idRegistro"));

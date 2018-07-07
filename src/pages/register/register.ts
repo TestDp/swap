@@ -111,7 +111,7 @@ export class RegisterPage {
                 });
          // }
         }).catch(e => {
-          if (e.message == 'The email address is already in use by another account.') {
+          if (e.message == 'La dirección de correo electrónico ya está siendo utilizada por otra cuenta.') {
             this.alertCtrl.create({
               title: 'Email ya registrado',
               subTitle: 'valide el Email',
@@ -123,7 +123,7 @@ export class RegisterPage {
     }
     catch (e) {
       console.log(e.code);
-      if (e.code === 'auth/email-already-in-use') {
+      if (e.code === 'Email ya esta en Uso') {
         this.alertCtrl.create({
           title: 'Email ya registrado',
           subTitle: 'valide el Email',

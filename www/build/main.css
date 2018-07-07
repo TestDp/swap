@@ -30533,7 +30533,7 @@ ion-input {
 }
 
 ion-item {
-  
+  /*border-bottom: 1px solid transparent !important;*/
 }
 
 .radio {

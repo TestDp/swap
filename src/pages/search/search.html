@@ -19,15 +19,15 @@
 </ion-header>
 
 
-<ion-content padding>
+<ion-content >  
   <ion-list>
-    <ion-item class ="campos-buscar2">
+    <ion-item class="campos-buscar2">
       <ion-label stacked>Ciudad:</ion-label>
       <ion-input class="campos-textbuscar" [(ngModel)]="article.ciudad" type="text" placeholder="Ciudad"></ion-input>
     </ion-item>
-    <ion-item class ="campos-buscar2">
+    <ion-item class="campos-buscar2">
       <ion-label>Categoria</ion-label>
-      <ion-select [(ngModel)]="article.categoria"   >
+      <ion-select [(ngModel)]="article.categoria">
         <ion-option>Hogar y muebles</ion-option>
         <ion-option>Electrodomésticos</ion-option>
         <ion-option>Accesorios para vehículos</ion-option>
@@ -38,9 +38,9 @@
         <ion-option>Industria</ion-option>
       </ion-select>
     </ion-item>
-    <ion-item class ="campos-buscar2">
+    <ion-item class="campos-buscar2">
       <ion-label>Categorias de cambio</ion-label>
-      <ion-select  [(ngModel)]="article.categoriaCambio" >
+      <ion-select [(ngModel)]="article.categoriaCambio">
         <ion-option>Hogar y muebles</ion-option>
         <ion-option>Electrodomésticos</ion-option>
         <ion-option>Accesorios para vehículos</ion-option>
@@ -53,11 +53,11 @@
     </ion-item>
   </ion-list>
   <div padding>
-    <button ion-button block class="boton-buscar" (click)="buscar(article)" >Búsqueda</button>
+    <button ion-button block class="boton-buscar" (click)="buscar(article)">Búsqueda</button>
   </div>
   <ion-scroll style="height: 50%;" scrollY="true">
-    <div  >
-      <ion-list  *ngFor="let publicacion of publicaciones">
+    <div>
+      <ion-list *ngFor="let publicacion of publicaciones">
         <ion-item (click)="swapInfo(publicacion)">
           <ion-thumbnail item-start>
             <img src="{{publicacion.imageThumb[0]}}">

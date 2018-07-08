@@ -20,7 +20,7 @@
 
 
 <ion-content padding>
-
+<ion-scroll style="height: 100%;" scrollY="true">
   <form [formGroup]="myForm" (ngSubmit)="saveData()">
     <div style="overflow-y: scroll; height:400px;">
       <ion-list >
@@ -72,16 +72,7 @@
             <ion-option value="3">1.000.000-2.000.000</ion-option>
             <ion-option value="4">2.000.000 o mayor</ion-option>
           </ion-select>
-        </ion-item>
-
-        <!-- <ion-item>
-                <ion-icon name="image" item-left></ion-icon>
-                <ion-label stacked>Imagen:</ion-label>
-                <ion-input formControlName="imagen" type="file" [(ngModel)]="article.imageUrl" placeholder="Imagen del articulo"></ion-input>
-              </ion-item>
-              <ion-item *ngIf="myForm.get('imagen').errors && myForm.get('imagen').dirty">
-                <p color="danger" ion-text *ngIf="myForm.get('imagen').hasError('required')">El campo Imagen es requerido</p>
-              </ion-item> -->
+        </ion-item>      
 
 
 
@@ -107,9 +98,7 @@
             </ion-item>
           </ion-col>
         </ion-row>
-
-
-        <!--  (click)="publish(article)"  <progress></progress>-->
+     
       </ion-list>
     </div>
     <div padding>
@@ -117,5 +106,5 @@
     </div>
   </form>
 
-
+  </ion-scroll>
 </ion-content>

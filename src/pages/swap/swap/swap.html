@@ -12,23 +12,25 @@
     </ion-title>
   </ion-navbar>
 </ion-header>
-<ion-content  style="text-align:center;" class="fondo" padding>
+<ion-content style="text-align:center;" class="fondo" padding>
   <ion-list>
-    <ion-item class = "campos-swap">
+    <ion-item class="campos-swap">
       <ion-label>Seleccione articulos de cambio</ion-label>
-      <ion-select [(ngModel)]="swapArticle.articulosOfrece"   multiple="true"  cancelText="Cancelar">
-        <ion-option *ngFor="let publicacion of publicaciones" value="{{publicacion.id}}" >{{publicacion.titulo}} - {{publicacion.descripcion}} </ion-option>
+      <ion-select [(ngModel)]="swapArticle.articulosOfrece" multiple="true" cancelText="Cancelar">
+        <ion-option *ngFor="let publicacion of publicaciones" value="{{publicacion.id}}">{{publicacion.titulo}} - {{publicacion.descripcion}} </ion-option>
       </ion-select>
     </ion-item>
 
-    <ion-item class = "campos-textcomentario">
-      <ion-label floating>Comentario</ion-label>
-      <ion-textarea class = "campos-textcomentario2" style="background-color: #F2F2F2;" #myInput id="myInput" rows="5" maxLength="500"  [(ngModel)]="swapArticle.comentario"></ion-textarea>
-    </ion-item>
+    <ion-row class="campos-textcomentario">
+      <ion-col>
+        <!-- <ion-label floating>Comentario</ion-label> -->
+        <ion-textarea class="campos-textcomentario2" style="background-color: #F2F2F2;" #myInput id="myInput" rows="5" maxLength="500"
+          [(ngModel)]="swapArticle.comentario" placeholder="Comentario"></ion-textarea>
+      </ion-col>
+    </ion-row>
   </ion-list>
   <div padding>
-    <button ion-button block class="boton-swap" (click)="enviar()" >Swap</button>
+    <button ion-button block class="boton-swap" (click)="enviar()">Swap</button>
   </div>
 
 </ion-content>
-

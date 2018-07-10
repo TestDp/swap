@@ -40,7 +40,7 @@
         </ion-item>
         <ion-item class ="campos-publicar2">
           <ion-label>Categoria</ion-label>
-          <ion-select formControlName="categoria" [(ngModel)]="article.categoria">
+          <ion-select formControlName="categoria" [(ngModel)]="article.categoria" cancelText="Cancelar">
             <ion-option>Hogar y muebles</ion-option>
             <ion-option>Electrodomésticos</ion-option>
             <ion-option>Accesorios para vehículos</ion-option>
@@ -53,7 +53,7 @@
         </ion-item>
         <ion-item class ="campos-publicar2">
           <ion-label>Categorias de cambio</ion-label>
-          <ion-select formControlName="categorias" [(ngModel)]="article.categorias" multiple="true">
+          <ion-select formControlName="categorias" [(ngModel)]="article.categorias" multiple="true"  cancelText="Cancelar">
             <ion-option>Hogar y muebles</ion-option>
             <ion-option>Electrodomésticos</ion-option>
             <ion-option>Accesorios para vehículos</ion-option>
@@ -66,7 +66,7 @@
         </ion-item>
         <ion-item class ="campos-publicar2">
           <ion-label>Rango precio</ion-label>
-          <ion-select formControlName="rango" [(ngModel)]="article.rango">
+          <ion-select formControlName="rango" [(ngModel)]="article.rango" cancelText="Cancelar">
             <ion-option value="1">0-500.000</ion-option>
             <ion-option value="2">500.000-1.000.000</ion-option>
             <ion-option value="3">1.000.000-2.000.000</ion-option>

@@ -16,7 +16,7 @@
   <ion-list>
     <ion-item class = "campos-swap">
       <ion-label>Seleccione articulos de cambio</ion-label>
-      <ion-select [(ngModel)]="swapArticle.articulosOfrece"   multiple="true">
+      <ion-select [(ngModel)]="swapArticle.articulosOfrece"   multiple="true"  cancelText="Cancelar">
         <ion-option *ngFor="let publicacion of publicaciones" value="{{publicacion.id}}" >{{publicacion.titulo}} - {{publicacion.descripcion}} </ion-option>
       </ion-select>
     </ion-item>

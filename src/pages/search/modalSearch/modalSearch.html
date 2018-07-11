@@ -14,25 +14,29 @@
   
   <ion-content padding>
     <ion-scroll style="height:100%;" scrollY="true">
-      <div>
-        <ion-slides style="max-height:300px;width: 230px;text-align: center">
-          <ion-slide *ngFor="let slide of data.imageThumb">
-            <img style="text-align: center" [src]="slide">
-          </ion-slide>
-        </ion-slides>
-  
-      </div>
-      <h2 style="text-align: center;color:#25cad3;font-size: 1.5rem; ">{{data.titulo}}</h2>
-      <h2 style="color:#25cad3;font-size: 1.5rem; ">Categoria</h2>
-      <p>{{data.categoria}}</p>
-      <h2 style="color:#25cad3;font-size: 1.5rem; ">Descripción</h2>
-      <p>{{data.descripcion}}</p>
-      <h2 style="color:#25cad3;font-size: 1.5rem; ">Categoria cambio</h2>
-      <p>{{data.categoriasCambio}}</p>
-      <button ion-button color="secondary" item-end icon-left style="text-align:right" (click)="swap()">
-        <ion-icon name="star"></ion-icon>
-        Intercambiar
-      </button>
+	
+       <h2 style="text-align: center;color:#25cad3;font-size: 2.5rem; ">{{data.titulo}}</h2>
+   <div class ="campos-panelarticulo">
+    <div>
+      <ion-slides style="text-align: center; border-radius: 30px;">
+        <ion-slide *ngFor="let slide of data.imageThumb">
+          <img style="text-align: center; border-radius: 30px;" [src]="slide">
+        </ion-slide>
+      </ion-slides>
+		<p style="text-align:center;"><--Desliza--></p>
+    </div>
+   
+    <h2 class ="campos-categoria">Categoria</h2>
+    <p style="padding-left: 5%;">{{data.categoria}}</p>
+    <h2 style="color:#25cad3;font-size: 1.5rem; padding-left: 5%;">Descripción</h2>
+    <p style="padding-left: 5%;">{{data.descripcion}}</p>
+    <h2 style="color:#25cad3;font-size: 1.5rem; padding-left: 5%;">Categoria cambio</h2>
+    <p style="padding-left: 5%;">{{data.categoriasCambio}}</p>
+ </div>
+    <button ion-button color="secondary" item-end icon-left class = "boton-swaparticulo" (click)="swap()">
+      <ion-icon ></ion-icon>
+      Intercambiar
+    </button>
   
   
     </ion-scroll>

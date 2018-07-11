@@ -72,6 +72,7 @@
         <input style="color:#ffff;" type="file" formControlName="imagen" multiple="true" (click)="alertaPrueba()" (change)="onImageChange()"
           [(ngModel)]="article.file" name="subir" value="" id="mainImage">
       </ion-item>
+	  <ion-label style="font-size:12px; text-align:center;">Puedes subir máximo 3 imágenes</ion-label>
       <ion-item *ngIf="myForm.get('imagen').errors && myForm.get('imagen').dirty">
         <p color="danger" ion-text *ngIf="myForm.get('imagen').hasError('required')">El campo Imagen es requerido</p>
       </ion-item>

@@ -17,7 +17,7 @@
 <ion-content padding>
   <ion-scroll style="height: 100%;" scrollY="true">
     <ion-list>
-      <p style="text-align: center;color: #25cad3;">Presiona la flecha del artículo que quieren cambiar y revisa que te estan ofreciendo.</p>
+      <p style="text-align: center;color: #000000;">Presiona la flecha del artículo que quieren cambiar y revisa que te estan ofreciendo.</p>
 
       <ng-template ngFor let-publicacion [ngForOf]="publicaciones" let-i="index">
 
@@ -34,7 +34,7 @@
             <ion-item tappable (click)="toggleItemOptions(options, headerIcon, publicacion.publicacionesArticulo.length)">
               <ion-icon #headerIcon [id]="'header-icon-' + 'ios-arrow-down'" class="header-icon" name='ios-arrow-down' item-left></ion-icon>
               <ion-avatar item-start>
-                <img style="width:auto; height: 4rem; background: #25cad3" src="assets/images/favicon.png">
+                <img style="width:auto; height: 4rem; background: #ffffff" src="assets/images/swap-icon.png">
               </ion-avatar>
               <ion-label> {{ publicacion.articulo }} </ion-label>
 

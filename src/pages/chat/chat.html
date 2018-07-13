@@ -15,7 +15,8 @@
   </ion-navbar>
 </ion-header>
 <ion-content padding>
-  <ion-scroll style="width:100%;height:90vh" scrollY="true">
+
+  <ion-scroll style="width:100%; height:90%" scrollY="true">
     <div *ngIf="tipoChat">
       <ion-list *ngFor="let conversacion of conversaciones">
         <ion-item (click)="cargarChat(conversacion)">

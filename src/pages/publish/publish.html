@@ -20,23 +20,23 @@
       <ion-list>
         <ion-row>
           <ion-col>
-            <ion-input class="campos-publicar" formControlName="titulo" type="text" [(ngModel)]="article.titulo" placeholder="Titulo"></ion-input>
+            <ion-input class="campos-publicar" formControlName="titulo" type="text" [(ngModel)]="article.titulo" placeholder="Título "></ion-input>
           </ion-col>
         </ion-row>
         <ion-row *ngIf="myForm.get('titulo').errors && myForm.get('titulo').dirty">
           <ion-col>
-            <p color="danger" ion-text *ngIf="myForm.get('titulo').hasError('required')">El campo titulo es requerido</p>
+            <p color="danger" ion-text *ngIf="myForm.get('titulo').hasError('required')">El campo título es requerido</p>
           </ion-col>
         </ion-row>
         <ion-row class="campos-textpublicar">
           <ion-col>
             <ion-textarea class="campos-textpublicar2" formControlName="descripcion" style="background-color: #F2F2F2;" #myInput id="myInput"
-              rows="5" maxLength="500" [(ngModel)]="article.descripcion" placeholder="Descripcion del articulo"></ion-textarea>
+              rows="5" maxLength="500" [(ngModel)]="article.descripcion" placeholder="Descripción del articulo"></ion-textarea>
           </ion-col>
         </ion-row>
         <ion-row *ngIf="myForm.get('descripcion').errors && myForm.get('descripcion').dirty">
           <ion-col>
-            <p color="danger" ion-text *ngIf="myForm.get('descripcion').hasError('required')">El campo Descripcion es requerido</p>
+            <p color="danger" ion-text *ngIf="myForm.get('descripcion').hasError('required')">El campo Descripción es requerido</p>
           </ion-col>
         </ion-row>
         <ion-row>

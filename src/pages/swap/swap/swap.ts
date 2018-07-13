@@ -144,7 +144,7 @@ export class SwapPage {
   alertCambio() {
     let alert = this.alertCtrl.create({
       title: 'Información importante',
-      subTitle: 'Debe seleccionar un o varios artículos de cambio.',
+      subTitle: 'Debe seleccionar uno o varios artículos de cambio.',
       cssClass: 'alert-danger',
       buttons: [
         {

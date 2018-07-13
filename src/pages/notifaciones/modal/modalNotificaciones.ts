@@ -45,7 +45,7 @@ export class modalNotificacionesPage {
           "to": idRegistro,
           "priority": "high",
           "data": {
-            "title": "Confirmacion cambio Swap",
+            "title": "Confirmación cambio Swap",
             "body": "se confirma cambio de articulo Swap",
             "payload": {
               "message": "se confirma cambio de articulo Swap",
@@ -57,7 +57,7 @@ export class modalNotificacionesPage {
           },
           "notification": {
             "sound": "default",
-            "title": "confirmacion cambio Swap",
+            "title": "Confirmación cambio Swap",
             "message": "pruebaMensaje",
             "body": "se confirma cambio de articulo Swap",
             "click_action": "FCM_PLUGIN_ACTIVITY",

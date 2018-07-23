@@ -61,6 +61,7 @@ export class HomePage {
   }
 
   ngAfterViewInit() {
+    this.MyApp.submenu = true;
     let currentPage = this.navCtrl.getActive().name;
     localStorage.setItem("paginaActual", JSON.stringify((currentPage)));
   }
@@ -131,6 +132,7 @@ export class HomePage {
 
 
   ionViewDidLoad() {
+    this.MyApp.submenu = true;
     /*  let payl = JSON.parse(localStorage.getItem("payload"));
       localStorage.setItem("payload", JSON.stringify(("")));
       if(payl != null && payl != null && payl != ""){

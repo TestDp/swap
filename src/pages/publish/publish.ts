@@ -93,7 +93,7 @@ export class PublishPage {
   }
 
   ngAfterViewInit() {
-    this.myapp.submenu = false;
+    this.myapp.submenu = true;
   }
 
   ionViewWillLeave(){

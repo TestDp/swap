@@ -1,4 +1,3 @@
-
 <ion-header>
 
   <ion-navbar>
@@ -7,7 +6,7 @@
     </button> -->
     <ion-title>Mis publicaciones</ion-title>
     <!-- se debe validar con sancocho por estan apareciendo varias flechas -->
-     <!-- <ion-buttons left> 
+    <!-- <ion-buttons left> 
       <button ion-button icon-only style="background-color: transparent;" *ngIf="menuImagen" (click)="cerrarModal()" >
         <ion-icon style="color: white;" name="md-arrow-back"></ion-icon>
       </button>
@@ -20,40 +19,42 @@
 
 <ion-content padding>
   <ion-scroll style="height: 90%;" scrollY="true">
-  <div *ngIf="!menuImagen" >
-  <ion-list  *ngFor="let publicacion of publicaciones">
-    <ion-item (click)="abrirModal(publicacion)" >
-    <ion-thumbnail item-start>
-      <img style="border-radius:30px;" src="{{publicacion.imageThumb[0]}}">
-    </ion-thumbnail>
-    <h2 style="color:#25cad3; ">{{publicacion.titulo}}</h2>
-    <h2>{{publicacion.categoria}}</h2>
-    <p>{{publicacion.usuario}}</p>
+    <div *ngIf="!menuImagen">
+      <ion-list *ngFor="let publicacion of publicaciones">
+        <ion-item (click)="abrirModal(publicacion)">
+          <ion-thumbnail item-start>
+            <img style="border-radius:30px;" src="{{publicacion.imageThumb[0]}}">
+          </ion-thumbnail>
+          <h2 style="color:#25cad3; ">{{publicacion.titulo}}</h2>
+          <h2>{{publicacion.categoria}}</h2>
+          <p>{{publicacion.usuario}}</p>
 
-  </ion-item>
-    </ion-list>
-  </div>
-    <div *ngIf="menuImagen" >
-	<h2 style="text-align: center;color:#25cad3;font-size: 2.5rem; ">{{publicacion.titulo}}</h2>
-	<div  class ="campos-panelarticulo">
-	<div>
-      <ion-slides  style="text-align: center; border-radius: 30px;" >
-        <ion-slide *ngFor="let slide of slides">
-          <img style="text-align: center; border-radius: 30px;"  [src]="slide">
-        </ion-slide>
-      </ion-slides>
-	  <p style="text-align:center;"><--Desliza--></p>
-	</div>
-	
-	  
-	<h2 class ="campos-categoria">Categoria</h2>
-    <p style="padding-left: 5%;">{{publicacion.categoria}}</p>
-    <h2 style="color:#25cad3;font-size: 1.5rem; padding-left: 5%;">Descripción</h2>
-    <p style="padding-left: 5%;">{{publicacion.descripcion}}</p>
-    <h2 style="color:#25cad3;font-size: 1.5rem; padding-left: 5%;">Categoria cambio</h2>
-    <p style="padding-left: 5%;">{{publicacion.categoriasCambio}}</p>
+        </ion-item>
+      </ion-list>
     </div>
-	</div>
+    <div *ngIf="menuImagen">
+      <h2 style="text-align: center;color:#25cad3;font-size: 2.5rem; ">{{publicacion.titulo}}</h2>
+      <div class="campos-panelarticulo">
+        <div>
+          <ion-slides style="text-align: center; border-radius: 30px;">
+            <ion-slide *ngFor="let slide of slides">
+              <img style="text-align: center; border-radius: 30px;" [src]="slide">
+            </ion-slide>
+          </ion-slides>
+          <p style="text-align:center;">
+            <--Desliza-->
+          </p>
+        </div>
+
+
+        <h2 class="campos-categoria">Categoria</h2>
+        <p style="padding-left: 5%;">{{publicacion.categoria}}</p>
+        <h2 style="color:#25cad3;font-size: 1.5rem; padding-left: 5%;">Descripción</h2>
+        <p style="padding-left: 5%;">{{publicacion.descripcion}}</p>
+        <h2 style="color:#25cad3;font-size: 1.5rem; padding-left: 5%;">Categoria cambio</h2>
+        <p style="padding-left: 5%;">{{publicacion.categoriasCambio}}</p>
+      </div>
+    </div>
   </ion-scroll>
 
 

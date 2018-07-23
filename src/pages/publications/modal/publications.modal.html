@@ -1,9 +1,41 @@
+<ion-header>
+
+  <ion-navbar>
+
+    <ion-title>Datos del articulo</ion-title>
+    <ion-buttons left>
+      <button ion-button icon-only style="background-color: transparent;" (click)="closeModal()">
+        <ion-icon style="color: white;" name="md-arrow-back"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+
+</ion-header>
 <ion-content padding>
+  <ion-scroll style="height: 90%;" scrollY="true">
 
-  <ion-slides  style="max-height:400px"  >
-    <ion-slide *ngFor="let slide of slides">
-      <img [src]="slide">
-    </ion-slide>
-  </ion-slides>
+    <div >
+      <h2 style="text-align: center;color:#25cad3;font-size: 2.5rem; ">{{publicacion.titulo}}</h2>
+      <div class="campos-panelarticulo">
+        <div>
+          <ion-slides style="text-align: center; border-radius: 30px;">
+            <ion-slide *ngFor="let slide of publicacion.imageThumb">
+              <img style="text-align: center; border-radius: 30px;" [src]="slide">
+            </ion-slide>
+          </ion-slides>
+          <p style="text-align:center;">
+            <--Desliza-->
+          </p>
+        </div>
 
+
+        <h2 class="campos-categoria">Categoria</h2>
+        <p style="padding-left: 5%;">{{publicacion.categoria}}</p>
+        <h2 style="color:#25cad3;font-size: 1.5rem; padding-left: 5%;">Descripción</h2>
+        <p style="padding-left: 5%;">{{publicacion.descripcion}}</p>
+        <h2 style="color:#25cad3;font-size: 1.5rem; padding-left: 5%;">Categoria cambio</h2>
+        <p style="padding-left: 5%;">{{publicacion.categoriasCambio}}</p>
+      </div>
+    </div>
+  </ion-scroll>
 </ion-content>

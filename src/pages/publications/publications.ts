@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import {IonicPage, ModalController,NavController} from 'ionic-angular';
 import { AngularFireDatabase } from 'angularfire2/database';
+import { PublitacionsModalPage } from './modal/publications.modal';
 
 //import firebase from 'firebase';
 
@@ -70,12 +71,12 @@ export class PublitacionsPage {
   }
 
   abrirModal(publicacion){
-    this.menuImagen = true;
-    this.slides = publicacion.imageThumb;
-    this.publicacion = publicacion;
+    //this.menuImagen = true;
+    //this.slides = publicacion.imageThumb;
+    //this.publicacion = publicacion;
 
-    //const modal = this.modalCtrl.create(PublitacionsModalPage, this.publicaciones);
-    //modal.present();
+    const modal = this.modalCtrl.create(PublitacionsModalPage, {publicacion:publicacion});
+    modal.present();
   }
 
   cerrarModal(){

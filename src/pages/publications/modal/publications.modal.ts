@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {NavController, NavParams} from "ionic-angular";
+import {NavController, NavParams, ViewController} from "ionic-angular";
 
 
 
@@ -11,18 +11,20 @@ import {NavController, NavParams} from "ionic-angular";
 
 export class PublitacionsModalPage {
   slides:any = [];
-  publicaciones: any = [];
-  constructor(public navCtrl: NavController, private navParams: NavParams) {
+  publicacion: any = [];
+  constructor(public navCtrl: NavController, private navParams: NavParams,
+    private view: ViewController) {
 
   }
 
   ionViewWillEnter() {
-      this.slides = this.navParams.data
+      this.publicacion = this.navParams.data.publicacion;
 
   }
 
-
-
+  closeModal(){
+    this.view.dismiss();
+  }
 
 
 }

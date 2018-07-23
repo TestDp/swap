@@ -226,7 +226,7 @@ export class ChatPage {
         console.log(queriedItems);
         this.items = queriedItems;
         if (this.items != null) {
-          this.myapp.submenu = false;
+          this.myapp.submenu = true;
           this.mostrar = true;
           // this.tipoChat = false;
           //this.mostrarCerrar = true;

@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { NavController, NavParams, AlertController, ViewController, Content } from 'ionic-angular';
+import { NavController, NavParams, AlertController, ViewController, Content, Platform } from 'ionic-angular';
 import { FirebaseListObservable, AngularFireDatabase, } from 'angularfire2/database';
 import { RequestOptions, Headers, Http } from "@angular/http";
 import 'rxjs/add/operator/map';
@@ -20,6 +20,7 @@ export class ChatModalPage {
   conversaciones: any = [];
   conversaciones2: any = [];
   usuarioLoggeado: any;
+  usuario: any;
   msgVal: string = '';
   chatActual: any;
   tipoChatEnvio: any;
@@ -38,6 +39,7 @@ export class ChatModalPage {
     private params: NavParams,
     public myapp: MyApp,
     private view: ViewController,
+    public platform: Platform,
 
   ) {
 
@@ -52,6 +54,14 @@ export class ChatModalPage {
     if (this.chatActual != undefined) {
       this.cargarChat();
     }
+
+    platform.registerBackButtonAction(() => {
+      
+      this.myapp.submenu = true;
+      localStorage.setItem("paginaActual", JSON.stringify(("ChatPage")));
+      this.view.dismiss();
+
+    }, 1);
 
   }
 
@@ -78,6 +88,7 @@ export class ChatModalPage {
 
 
   ionViewDidLoad() {
+    this.cargarInformacionUsuario();
     this.conversaciones = this.params.data.conversacion;
     this.chatActual = this.params.data.chatActual;
     this.tipoChatEnvio = this.params.data.tipoChatEnvio;
@@ -93,11 +104,11 @@ export class ChatModalPage {
       setTimeout(() => {
         this.content.scrollToBottom(0);
       }, 50);
-  
+
       this.myInput.setFocus();
-  
+
     }
-    
+
 
   }
 
@@ -174,7 +185,7 @@ export class ChatModalPage {
       });
     }
 
-    this.conversaciones2.push({ mensaje: this.msgVal, usuario: this.usuarioLoggeado.email, fecha: date });
+    this.conversaciones2.push({ mensaje: this.msgVal, usuario: this.usuarioLoggeado.email, fecha: date, nombre: this.usuario[0].nombre });
     this.mostrar = true;
     this.enviarNotificacionPush();
     this.msgVal = '';
@@ -233,6 +244,19 @@ export class ChatModalPage {
       });
 
 
+  }
+
+  cargarInformacionUsuario(){
+    const queryObservable = this.af.list('/usuario/', {
+      query: {
+        orderByChild: 'email',
+        equalTo: this.usuarioLoggeado.email,
+      }
+    });
+    queryObservable.subscribe(queriedItems => {
+      this.usuario = queriedItems;
+    })
+    
   }
 
 

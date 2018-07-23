@@ -20,7 +20,7 @@
           <ion-item  *ngFor="let item of conversaciones || async;">
             <div *ngIf="item.usuario == usuarioLoggeado.email">
               <div class="bubble you" style="background-color: #25cad3">
-                <h3 style="color: black">{{item.usuario}} </h3>
+                <h3 style="color: black">{{item.nombre}} </h3>
                 <p style="width:100%;white-space: normal;">{{item.mensaje}}</p>
                 <p style="font-size: 8pt; text-align: right"> {{ item.fecha | date:"dd/MM/yyyy HH:mm"}}</p>
               </div>
@@ -28,7 +28,7 @@
             <div style="clear:both"></div>
             <div *ngIf="item.usuario != usuarioLoggeado.email">
               <div class="bubble me" style="background-color: #DEDEE5">
-                <h3 style="color: #25cad3">{{item.usuario}}</h3>
+                <h3 style="color: #25cad3">{{item.nombre}}</h3>
                 <p style="width:100%;white-space: normal;">{{item.mensaje}}</p>
                 <p style="font-size: 8pt;text-align: right"> {{ item.fecha | date:"dd/MM/yyyy HH:mm"}}</p>
               </div>

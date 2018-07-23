@@ -9,6 +9,7 @@ import firebase from 'firebase';
 import { OauthCordova } from 'ng2-cordova-oauth/platform/cordova';
 import { Facebook } from "ng2-cordova-oauth/core";
 import { FacebookServiceProvider } from '../utilitys/facebook-service';
+import { Alert } from 'ionic-angular/components/alert/alert';
 
 /**
  * Generated class for the SignInPage page.
@@ -119,8 +120,9 @@ export class SignInPage {
           console.log("Google sing in success: " + JSON.stringify(success));
           this.crearUsuarioFirebase(success);
         })
-        .catch(error => console.log("Google sing in success: " + JSON.stringify(error)));
+        .catch(error => alert("Google sing in success: " + JSON.stringify(error)));
     }).catch((error) => {
+      alert("error 22" + JSON.stringify(error));
       console.error("Error: ", error);
     })
 
@@ -203,7 +205,7 @@ export class SignInPage {
     this.registrarUsuario = this.af.list('/usuario');
     this.registrarUsuario.push({
       nombre: datos.nombre,
-      apellidos: datos.apellidos,
+      apellidos: datos.apelliddos,
       email: datos.email,
       fechaNacimiento: "user.fechaNacimiento",
       genero: datos.genero,

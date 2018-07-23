@@ -20,7 +20,7 @@
 
 
 <ion-content >  
-  <ion-list>
+  <ion-list style="margin-bottom: 0px !important;">
     <ion-item class="campos-buscar2">
       <ion-label stacked>Ciudad:</ion-label>
       <ion-input class="campos-textbuscar" [(ngModel)]="article.ciudad" type="text" placeholder="Ciudad"></ion-input>
@@ -62,7 +62,7 @@
   <ion-scroll style="height: 40%;" scrollY="true">
     <div>
       <ion-list *ngFor="let publicacion of publicaciones">
-        <ion-item (click)="swapInfo(publicacion)">
+        <ion-item *ngIf="publicacion.usuario != usuarioLoggeado.email" (click)="swapInfo(publicacion)">
           <ion-thumbnail item-start>
             <img src="{{publicacion.imageThumb[0]}}">
           </ion-thumbnail>

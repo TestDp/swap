@@ -46,7 +46,7 @@ export class SwapPage {
   }
 
   ngAfterViewInit() {
-    this.myapp.submenu = false;
+    this.myapp.submenu = true;
   }
 
   ionViewWillLeave(){
@@ -94,8 +94,8 @@ export class SwapPage {
   }
 
   enviar() {
-
-    if (this.swapArticle.articulosOfrece != undefined) {
+  console.log("comentario",this.swapArticle);
+    if (this.swapArticle.articulosOfrece != undefined && this.swapArticle.comentario != undefined) {
       this.loading = this.loadingCtrl.create({
         content: 'Enviando solicitud...'
       });
@@ -127,6 +127,7 @@ export class SwapPage {
               text: 'Aceptar',
               role: 'Aceptar',
               handler: () => {
+                this.myapp.submenu = true;
                 this.navCtrl.setRoot('HomePage')
                // this.myapp.rootPage = 'HomePage';;
               }
@@ -144,7 +145,7 @@ export class SwapPage {
   alertCambio() {
     let alert = this.alertCtrl.create({
       title: 'Información importante',
-      subTitle: 'Debe seleccionar uno o varios artículos de cambio.',
+      subTitle: 'Debes llenar todos los campos solicitados.',
       cssClass: 'alert-danger',
       buttons: [
         {

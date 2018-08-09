@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { NavController, NavParams, AlertController, ViewController, Content, Platform } from 'ionic-angular';
+import { NavController, NavParams, AlertController, ViewController, Content, Platform, Events } from 'ionic-angular';
 import { FirebaseListObservable, AngularFireDatabase, } from 'angularfire2/database';
 import { RequestOptions, Headers, Http } from "@angular/http";
 import 'rxjs/add/operator/map';
@@ -40,6 +40,7 @@ export class ChatModalPage {
     public myapp: MyApp,
     private view: ViewController,
     public platform: Platform,
+    private events: Events
 
   ) {
 
@@ -49,7 +50,6 @@ export class ChatModalPage {
     this.mostrar = this.params.data.mostrar;
     this.usuarioLoggeado = JSON.parse(localStorage.getItem("usuarioLoggeado"));
     this.chatActual1 = this.params.get('datosChat');
-    console.log("chatactual", this.chatActual);
     this.contador = 0;
     if (this.chatActual != undefined) {
       this.cargarChat();
@@ -59,6 +59,7 @@ export class ChatModalPage {
       
       this.myapp.submenu = true;
       localStorage.setItem("paginaActual", JSON.stringify(("ChatPage")));
+      this.events.publish("contador");
       this.view.dismiss();
 
     }, 1);
@@ -73,7 +74,6 @@ export class ChatModalPage {
     });
     queryObservable
       .subscribe(queriedItems => {
-        console.log(queriedItems);
         this.conversaciones = queriedItems;
 
       });
@@ -136,7 +136,7 @@ export class ChatModalPage {
 
 
   crearChat() {
-    console.log("datos chat 2", this.chatActual);
+   
     this.items2 = this.af.list('/chatPrincipal' + "/", {
       query: {
         limitToLast: 7
@@ -156,7 +156,6 @@ export class ChatModalPage {
     });
     queryObservable
       .subscribe(queriedItems => {
-        console.log(queriedItems);
         this.conversaciones = queriedItems;
         if (this.conversaciones != null) {
           this.mostrar = true;
@@ -171,6 +170,7 @@ export class ChatModalPage {
     this.myapp.submenu = true;
     localStorage.setItem("paginaActual", JSON.stringify(("ChatPage")));
     this.view.dismiss();
+    this.events.publish("contador");
   }
 
   chatSend() {
@@ -239,7 +239,7 @@ export class ChatModalPage {
             return response;
           }).subscribe(data => {
             //post doesn't fire if it doesn't get subscribed to
-            console.log(data);
+            
           });
       });
 

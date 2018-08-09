@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, AlertController, NavParams, LoadingController } from 'ionic-angular';
+import { IonicPage, NavController, AlertController, NavParams, LoadingController, ViewController, Events } from 'ionic-angular';
 import { AngularFireDatabase } from "angularfire2/database/database";
 import { swapArticulo } from "../../../models/swapArticulo";
 import { RequestOptions, Headers, Http } from "@angular/http";
@@ -30,6 +30,8 @@ export class SwapPage {
     public http: Http,
     public myapp: MyApp,
     public loadingCtrl: LoadingController,
+    private view: ViewController,
+    private events: Events
 
   ) {
 
@@ -128,7 +130,9 @@ export class SwapPage {
               role: 'Aceptar',
               handler: () => {
                 this.myapp.submenu = true;
-                this.navCtrl.setRoot('HomePage')
+                this.view.dismiss();
+                this.events.publish("cerrarModalHome");
+               // this.navCtrl.setRoot('HomePage')
                // this.myapp.rootPage = 'HomePage';;
               }
             }

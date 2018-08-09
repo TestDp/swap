@@ -15,7 +15,7 @@
   </ion-header>
   <ion-content   padding>
   
-      <ion-scroll  style="width:100%;height:90vh" scrollY="true">
+      <ion-scroll  style="width:90%;height:90vh" scrollY="true">
          <ion-list (click)="onFocusList2(input)"  id="idLista"  *ngIf="mostrar" scroll="true" no-lines>
           <ion-item  *ngFor="let item of conversaciones || async;">
             <div *ngIf="item.usuario == usuarioLoggeado.email">

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, ModalController, NavController, NavParams, AlertController } from 'ionic-angular';
+import { IonicPage, ModalController, NavController, NavParams, AlertController, Events } from 'ionic-angular';
 import { FirebaseListObservable, AngularFireDatabase, } from 'angularfire2/database';
 import { RequestOptions, Headers, Http } from "@angular/http";
 import 'rxjs/add/operator/map';
@@ -31,6 +31,7 @@ export class ChatPage {
   usuarioLoggeado: any;
   tipoChatEnvio: any;
   payload: any;
+  cont: any;
 
   constructor(
     public database: AngularFireDatabase,
@@ -41,6 +42,7 @@ export class ChatPage {
     public myapp: MyApp,
     public alertCtrl: AlertController,
     public modalCtrl: ModalController,
+    private events: Events
 
   ) {
     this.usuarioLoggeado = JSON.parse(localStorage.getItem("usuarioLoggeado"));
@@ -54,6 +56,12 @@ export class ChatPage {
     }*/else {
       this.tipoChat = false;
     }
+    this.cont = 1;
+    
+    this.events.subscribe('contador', (calificacion) => {
+      console.log("se activo evento");
+      this.cont = 1;
+    });
 
   }
 
@@ -93,7 +101,6 @@ export class ChatPage {
       this.busquedaListaChat();
     }
     if (this.chatActual != null || this.chatActual != undefined) {
-      console.log("datos chat 2", this.chatActual);
       this.items2 = this.af.list('/chatPrincipal' + "/", {
         query: {
           limitToLast: 7
@@ -113,7 +120,6 @@ export class ChatPage {
       });
       queryObservable
         .subscribe(queriedItems => {
-          console.log(queriedItems);
           this.items = queriedItems;
           if (this.items != null) {
             this.mostrar = true;
@@ -123,6 +129,7 @@ export class ChatPage {
         });
 
     } else if (this.chatActual1 != null || this.chatActual1 != undefined) {
+      console.log("abrir modal 2");
       let profileModal = this.modalCtrl.create(ChatModalPage, { datosChat: this.chatActual1 });
       profileModal.present();
     }
@@ -178,7 +185,7 @@ export class ChatPage {
           .map(response => {
             return response;
           }).subscribe(data => {
-            
+
             console.log(data);
           });
       });
@@ -213,36 +220,38 @@ export class ChatPage {
   }
 
   cargarChat(conversacion) {
-    console.log("mensaje de chat nuevo ", conversacion);
-    this.tipoChatEnvio = 2;
-    this.chatActual = conversacion;
-    const queryObservable = this.af.list('/chatContenido' + "/" + conversacion.idChat + "/", {
-      query: {
-        limitToLast: 300
-      }
-    });
-    queryObservable
-      .subscribe(queriedItems => {
-        console.log(queriedItems);
-        this.items = queriedItems;
-        if (this.items != null) {
-          this.myapp.submenu = true;
-          this.mostrar = true;
-          // this.tipoChat = false;
-          //this.mostrarCerrar = true;
-          let paginaActual = JSON.parse(localStorage.getItem("paginaActual"));
-          if (paginaActual != "ModalCmp") {
-            let profileModal = this.modalCtrl.create(ChatModalPage, { conversacion: this.items, chatActual: this.chatActual, tipoChatEnvio: this.tipoChatEnvio, mostrar: this.mostrar });
-            profileModal.present();
-          }
-
-        } else {
-          this.mostrar = false;
+    if (this.cont == 1) {
+      this.cont = this.cont + 1;
+      this.tipoChatEnvio = 2;
+      this.chatActual = conversacion;
+      const queryObservable = this.af.list('/chatContenido' + "/" + conversacion.idChat + "/", {
+        query: {
+          limitToLast: 300
         }
       });
+      queryObservable
+        .subscribe(queriedItems => {
+          this.items = queriedItems;
+          if (this.items != null) {
+            this.myapp.submenu = true;
+            this.mostrar = true;
+            // this.tipoChat = false;
+            //this.mostrarCerrar = true;
+            let paginaActual = JSON.parse(localStorage.getItem("paginaActual"));
+            console.log("pagina actual", paginaActual);
+            if (paginaActual != "ModalCmp") {
+              console.log("abrir modal 1", paginaActual);
+              let profileModal = this.modalCtrl.create(ChatModalPage, { conversacion: this.items, chatActual: this.chatActual, tipoChatEnvio: this.tipoChatEnvio, mostrar: this.mostrar });
+              profileModal.present();
+            }
 
+          } else {
+            this.mostrar = false;
+          }
+        });
+
+    }
   }
-
 }
 /**
  * Created by N56J on 29/11/2017.

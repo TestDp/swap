@@ -1,5 +1,5 @@
-import {Component} from '@angular/core';
-import {NavParams, ViewController, NavController} from "ionic-angular";
+import { Component } from '@angular/core';
+import { NavParams, ViewController, NavController, Events } from "ionic-angular";
 import 'rxjs/add/operator/map';
 import { NativePageTransitions, NativeTransitionOptions } from '@ionic-native/native-page-transitions';
 
@@ -11,8 +11,11 @@ import { NativePageTransitions, NativeTransitionOptions } from '@ionic-native/na
 })
 export class modalHomePage {
   data: any = {};
-  constructor(private params: NavParams, private view: ViewController,private nativePageTransitions: NativePageTransitions,
-              public navCtrl: NavController,) {
+  constructor(private params: NavParams, private view: ViewController, private nativePageTransitions: NativePageTransitions,
+    public navCtrl: NavController, private events: Events) {
+    this.events.subscribe('cerrarModalHome', (calificacion) => {
+      this.closeModal();
+    });
   }
 
   ionViewDidLoad() {
@@ -20,13 +23,13 @@ export class modalHomePage {
   }
 
 
-  closeModal(){
+  closeModal() {
     this.view.dismiss();
   }
 
   swap() {
 
-    this.navCtrl.push('SwapPage',{swap: this.data});
+    this.navCtrl.push('SwapPage', { swap: this.data });
   }
 
   goBack() {

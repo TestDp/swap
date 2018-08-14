@@ -142,11 +142,11 @@ export class HomePage {
 
     this.afAuth.authState.subscribe(data => {
       // if (data && data.email && data.uid && this.MyApp.mensajeBienvenidad3 == true) {
-        // this.MyApp.mensajeBienvenidad3 = false;
-        // this.toast.create({
-          // message: 'Bienvenido a SWAP  '.concat(data.email),
-          // duration: 3000
-        // }).present();
+      // this.MyApp.mensajeBienvenidad3 = false;
+      // this.toast.create({
+      // message: 'Bienvenido a SWAP  '.concat(data.email),
+      // duration: 3000
+      // }).present();
 
       // }
       localStorage.setItem("usuarioLoggeado", JSON.stringify(data));
@@ -257,9 +257,9 @@ export class HomePage {
 
     queryObservable
       .subscribe(queriedItems => {
-        let publicacionesCompuesta:any= [];
+        let publicacionesCompuesta: any = [];
         this.publicaciones = queriedItems;
-        console.log("publicaciones",this.publicaciones);
+        console.log("publicaciones", this.publicaciones);
         this.publicaciones.forEach(element => {
           if (element.usuario != this.usuarioLoggeado.email) {
             publicacionesCompuesta.push(element);
@@ -270,11 +270,11 @@ export class HomePage {
           this.publicaciones = publicacionesCompuesta;
           publicacionesCompuesta = [];
         }
-        console.log("publicaciones",this.publicaciones);
-       /* for (var i = 0; i < this.publicaciones.length; i++) {
-          this.rutaImagenes = this.publicaciones[i].imageUrl;
-
-        }*/
+        console.log("publicaciones", this.publicaciones);
+        /* for (var i = 0; i < this.publicaciones.length; i++) {
+           this.rutaImagenes = this.publicaciones[i].imageUrl;
+ 
+         }*/
 
       });
 
@@ -373,9 +373,20 @@ export class HomePage {
     });
     queryObservable
       .subscribe(queriedItems => {
-        console.log(queriedItems);
-        this.publicaciones = queriedItems;
-        console.log("busqueda", this.publicaciones);
+        let publicacionesCompuesta: any = [];
+        this.publicaciones = queriedItems; 
+        this.publicaciones.forEach(element => {
+          if (element.usuario != this.usuarioLoggeado.email) {
+            publicacionesCompuesta.push(element);
+          }
+        })
+
+        if (publicacionesCompuesta.length > 0) {
+          this.publicaciones = publicacionesCompuesta;
+          publicacionesCompuesta = [];
+        }else{
+          this.publicaciones  = [];
+        }
 
       });
   }

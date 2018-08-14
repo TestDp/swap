@@ -17,13 +17,11 @@ export class ChatPage {
 
 
   items: any = []; // FirebaseListObservable<any>;
-  items2: FirebaseListObservable<any>;
   conversaciones: any = [];
   conversaciones2: any = [];
   conversacionesGeneral: any = [];
   name: any;
   msgVal: string = '';
-  chatActual: any;
   chatActual1: any;
   mostrar: boolean;
   tipoChat: boolean;
@@ -46,150 +44,31 @@ export class ChatPage {
 
   ) {
     this.usuarioLoggeado = JSON.parse(localStorage.getItem("usuarioLoggeado"));
-    this.chatActual = this.navParams.get('datosChat');
-    this.chatActual1 = this.navParams.get('datosChat1');
-    if ((this.chatActual == null && this.chatActual1 == null) || (this.chatActual == undefined && this.chatActual1 == undefined)) {
-      this.busquedaListaChat();
-      this.tipoChat = true;
-    }/* else if (this.chatActual1 != null || this.chatActual1 != undefined) {
-      let profileModal = this.modalCtrl.create(ChatModalPage, { datosChat: this.chatActual1});
-    }*/else {
-      this.tipoChat = false;
-    }
     this.cont = 1;
-    
     this.events.subscribe('contador', (calificacion) => {
       console.log("se activo evento");
       this.cont = 1;
     });
+    this.busquedaListaChat();
 
   }
 
-  chatSend() {
-
-    var formatDate = new Date(); //IMPORTANTE: POR EL MOMENTO ES PRUEBA
-    var date = formatDate.toISOString();
-    if (this.tipoChatEnvio == 2) {
-      this.items = this.af.list('/chatContenido' + "/" + this.chatActual.idChat + "/", {
-      });
-    } else {
-      this.items = this.af.list('/chatContenido' + "/" + this.chatActual.idRegUsuarioOfrece + this.chatActual.idRegUsuarioPertenece + "/", {
-      });
-    }
-
-    this.items.push({ mensaje: this.msgVal, usuario: this.usuarioLoggeado.email, fecha: date });
-    this.mostrar = true;
-
-    this.enviarNotificacionPush();
-    this.msgVal = '';
-  }
-
-  ngAfterViewInit() {
-
-    this.myapp.submenu = true;
-    //let currentPage = this.navCtrl.getActive().name;
-    //localStorage.setItem("paginaActual", JSON.stringify((currentPage)));
-  }
-
+ 
   ionViewDidLoad() {
     this.tipoChatEnvio = 1;
-    this.chatActual = this.navParams.get('datosChat');
     this.chatActual1 = this.navParams.get('datosChat1');
     this.payload = this.navParams.get('payload');
     //let entraIf: any;
     if (this.payload != null) {
       this.busquedaListaChat();
     }
-    if (this.chatActual != null || this.chatActual != undefined) {
-      this.items2 = this.af.list('/chatPrincipal' + "/", {
-        query: {
-          limitToLast: 7
-        }
-      });
-      this.items2.remove();
-      this.items2.push({
-        articulo: this.chatActual.articulo, usuarioOfrece: this.chatActual.usuarioOfrece, usuarioPertenece: this.chatActual.usuarioPertenece,
-        idChat: this.chatActual.idRegUsuarioOfrece + this.chatActual.idRegUsuarioPertenece, uidUsuarioPertenece: this.chatActual.uidUsuarioPertenece,
-        uidUsuarioOfrece: this.chatActual.uidUsuarioOfrece
-      });
-
-      const queryObservable = this.af.list('/chatContenido' + "/" + this.chatActual.idRegUsuarioOfrece + this.chatActual.idRegUsuarioPertenece + "/", {
-        query: {
-          limitToLast: 300
-        }
-      });
-      queryObservable
-        .subscribe(queriedItems => {
-          this.items = queriedItems;
-          if (this.items != null) {
-            this.mostrar = true;
-          } else {
-            this.mostrar = false;
-          }
-        });
-
+    if (this.chatActual1 == null || this.chatActual1 == undefined) {
+      this.busquedaListaChat();
+   
     } else if (this.chatActual1 != null || this.chatActual1 != undefined) {
-      console.log("abrir modal 2");
-      let profileModal = this.modalCtrl.create(ChatModalPage, { datosChat: this.chatActual1 });
+      let profileModal = this.modalCtrl.create(ChatModalPage, { datosChat: this.chatActual1,tipoChatEnvio: this.tipoChatEnvio });
       profileModal.present();
     }
-
-  }
-
-
-
-  enviarNotificacionPush() {
-
-    var uid;
-    if (this.usuarioLoggeado.uid == this.chatActual.uidUsuarioPertenece) {
-      uid = this.chatActual.uidUsuarioOfrece
-    } else if (this.usuarioLoggeado.uid == this.chatActual.uidUsuarioOfrece) {
-      uid = this.chatActual.uidUsuarioPertenece
-    }
-    const queryObservable = this.af.list('/usuarioInformacion/' + uid + '/', {
-    });
-    queryObservable
-      .subscribe(queriedItems => {
-        var usuarioPertenece = queriedItems;
-        var idRegistro = usuarioPertenece[0].idRegistro;
-        var json = {
-
-          "to": idRegistro,
-          "priority": "high",
-          "data": {
-            "title": "mensaje Swap",
-            "body": this.msgVal,
-            "payload": {
-              "message": this.msgVal,
-              "tipo": "ChatPage",
-              "image": "icon",
-              "idChat": this.chatActual.idChat,
-            }
-          },
-          "notification": {
-            "sound": "default",
-            "title": "Chat Swap",
-            "message": "pruebaMensaje",
-            "body": this.msgVal,
-            "click_action": "FCM_PLUGIN_ACTIVITY",
-          },
-        };
-        let apikey = "AAAAd2_6fnY:APA91bFdS2qkdHpev2U758YzNzRXUEkdYfepIq4HYjH5bkdJkhBzt8KVh-PdCNbeUybLSWGJ_teAsbAj7xqrKViBPeFH3gWZsubnOFbDqBJCypoggY_09ytvxibJ5_pab_lakOzkaljq";
-        let url = 'https://fcm.googleapis.com/fcm/send';
-        let headers: Headers = new Headers({
-          'Content-Type': 'application/json',
-          'Authorization': 'key=' + apikey
-        });
-        let options = new RequestOptions({ headers: headers });
-        return this.http.post(url, json, options)
-          .map(response => {
-            return response;
-          }).subscribe(data => {
-
-            console.log(data);
-          });
-      });
-
 
   }
 
@@ -203,7 +82,11 @@ export class ChatPage {
     });
     queryObservable
       .subscribe(queriedItems => {
+        this.conversaciones = [];
         this.conversaciones = queriedItems;
+        if(this.conversaciones.length > 0){
+          this.tipoChat = true;
+        }
       });
 
     const queryObservable2 = this.af.list('/chatPrincipal/', {
@@ -214,7 +97,11 @@ export class ChatPage {
     });
     queryObservable2
       .subscribe(queriedItems2 => {
+        this.conversaciones2 = [];
         this.conversaciones2 = queriedItems2;
+        if(this.conversaciones2.length > 0){
+          this.tipoChat = true;
+        }
       });
 
   }
@@ -223,7 +110,6 @@ export class ChatPage {
     if (this.cont == 1) {
       this.cont = this.cont + 1;
       this.tipoChatEnvio = 2;
-      this.chatActual = conversacion;
       const queryObservable = this.af.list('/chatContenido' + "/" + conversacion.idChat + "/", {
         query: {
           limitToLast: 300
@@ -235,13 +121,9 @@ export class ChatPage {
           if (this.items != null) {
             this.myapp.submenu = true;
             this.mostrar = true;
-            // this.tipoChat = false;
-            //this.mostrarCerrar = true;
             let paginaActual = JSON.parse(localStorage.getItem("paginaActual"));
-            console.log("pagina actual", paginaActual);
             if (paginaActual != "ModalCmp") {
-              console.log("abrir modal 1", paginaActual);
-              let profileModal = this.modalCtrl.create(ChatModalPage, { conversacion: this.items, chatActual: this.chatActual, tipoChatEnvio: this.tipoChatEnvio, mostrar: this.mostrar });
+              let profileModal = this.modalCtrl.create(ChatModalPage, { conversacion: this.items, tipoChatEnvio: this.tipoChatEnvio, mostrar: this.mostrar, chatActual:conversacion });
               profileModal.present();
             }
 
@@ -252,11 +134,5 @@ export class ChatPage {
 
     }
   }
-}
-/**
- * Created by N56J on 29/11/2017.
- */
 
-/**
- * Created by N56J on 29/12/2017.
- */
+}

@@ -25,7 +25,6 @@ export class ChatModalPage {
   chatActual: any;
   tipoChatEnvio: any;
   mostrar: boolean;
-  mostrar2: boolean;
   chatActual1: any;
   items2: FirebaseListObservable<any>;
   contador: any;
@@ -44,20 +43,9 @@ export class ChatModalPage {
 
   ) {
 
-    this.conversaciones = this.params.data.conversacion;
-    this.chatActual = this.params.data.chatActual;
-    this.tipoChatEnvio = this.params.data.tipoChatEnvio;
-    this.mostrar = this.params.data.mostrar;
     this.usuarioLoggeado = JSON.parse(localStorage.getItem("usuarioLoggeado"));
-    this.chatActual1 = this.params.get('datosChat');
     this.contador = 0;
-    if (this.chatActual != undefined) {
-      this.cargarChat();
-    }
-
     platform.registerBackButtonAction(() => {
-      
-      this.myapp.submenu = true;
       localStorage.setItem("paginaActual", JSON.stringify(("ChatPage")));
       this.events.publish("contador");
       this.view.dismiss();
@@ -66,50 +54,151 @@ export class ChatModalPage {
 
   }
 
-  cargarChat() {
-    const queryObservable = this.af.list('/chatContenido' + "/" + this.chatActual.idChat + "/", {
+  ionViewDidLoad() {
+    this.cargarInformacionUsuario();
+    this.tipoChatEnvio = this.params.data.tipoChatEnvio;
+    if (this.tipoChatEnvio == 1) {
+      this.chatActual1 = this.params.data.datosChat;
+      this.mostrar = false;
+      this.crearChat();
+    } else if (this.tipoChatEnvio == 2) {
+      this.conversaciones = this.params.data.conversacion;
+      this.mostrar = this.params.data.mostrar;
+      this.chatActual = this.params.data.chatActual;
+      setTimeout(() => {
+        this.content.scrollToBottom(0);
+      }, 50);
+
+      this.myInput.setFocus();
+    }
+  }
+
+
+
+
+  crearChat() {
+    this.validarChat().then(respuesta => {
+      let ida = this.chatActual1.idArticulo.replace('.','');
+      if (respuesta === "P") {
+        const queryObservable = this.af.list('/chatContenido' + "/" + this.chatActual1.uidUsuarioOfrece + this.chatActual1.uidUsuarioPertenece + ida + "/", {
+          query: {
+            limitToLast: 300
+          }
+        });
+        queryObservable
+          .subscribe(queriedItems => {
+            this.conversaciones = [];
+            this.conversaciones = queriedItems;
+            if (this.conversaciones != null) {
+              this.mostrar = true;
+            } else {
+              this.mostrar = false;
+            }
+          });
+      } else if (respuesta === "F") {
+        this.items2 = this.af.list('/chatPrincipal' + "/", {
+          query: {
+            limitToLast: 1
+          }
+        });
+        this.items2.push({
+          articulo: this.chatActual1.articulo,
+          usuarioOfrece: this.chatActual1.usuarioOfrece,
+          usuarioPertenece: this.chatActual1.usuarioPertenece,
+          idChat: this.chatActual1.uidUsuarioOfrece + this.chatActual1.uidUsuarioPertenece + ida,
+          uidUsuarioPertenece: this.chatActual1.uidUsuarioPertenece,
+          uidUsuarioOfrece: this.chatActual1.uidUsuarioOfrece
+        });
+
+        const queryObservable = this.af.list('/chatContenido' + "/" + this.chatActual1.uidUsuarioOfrece + this.chatActual1.uidUsuarioPertenece + ida + "/", {
+          query: {
+            limitToLast: 300
+          }
+        });
+        queryObservable
+          .subscribe(queriedItems => {
+            this.conversaciones = [];
+            this.conversaciones = queriedItems;
+            if (this.conversaciones != null) {
+              this.mostrar = true;
+            } else {
+              this.mostrar = false;
+            }
+          });
+
+      }
+    })
+
+
+  }
+
+  validarChat() {
+    return new Promise((resolve, reject) => {
+      let ida = this.chatActual1.idArticulo.replace('.','');
+      const queryObservable = this.af.list('/chatPrincipal/', {
+        query: {
+          orderByChild: 'idChat',
+          equalTo: this.chatActual1.uidUsuarioOfrece + this.chatActual1.uidUsuarioPertenece + ida,
+        }
+      });
+      queryObservable
+        .subscribe(queriedItems => {
+          let respuestaF = queriedItems;
+          if (respuestaF.length > 0) {
+            resolve("P");
+          } else {
+            resolve("F");
+          }
+
+        });
+    });
+  }
+
+  chatSend() {
+
+    let id;
+    var formatDate = new Date(); //IMPORTANTE: POR EL MOMENTO ES PRUEBA
+    var date = formatDate.toISOString();
+    if (this.tipoChatEnvio == 2) {
+      this.conversaciones2 = this.af.list('/chatContenido' + "/" + this.chatActual.idChat + "/", {
+      });
+      id = this.chatActual.idChat;
+    } else if (this.tipoChatEnvio == 1) {
+      let ida = this.chatActual1.idArticulo.replace('.','');
+      id = this.chatActual1.uidUsuarioOfrece + this.chatActual1.uidUsuarioPertenece + ida;
+      this.conversaciones2 = this.af.list('/chatContenido' + "/" + this.chatActual1.uidUsuarioOfrece + this.chatActual1.uidUsuarioPertenece + ida + "/", {
+      });
+     
+    }
+
+    this.conversaciones2.push({ mensaje: this.msgVal, usuario: this.usuarioLoggeado.email, fecha: date, nombre: this.usuario[0].nombre });
+    this.mostrar = true;
+    this.msgVal = '';
+    this.actualizarConversacion(id);
+    this.enviarNotificacionPush();
+
+  }
+
+  actualizarConversacion(id) {
+    const queryObservable = this.af.list('/chatContenido' + "/" + id + "/", {
       query: {
         limitToLast: 300
       }
     });
     queryObservable
       .subscribe(queriedItems => {
+        this.conversaciones = [];
         this.conversaciones = queriedItems;
 
       });
 
   }
 
-  ngAfterViewInit() {
-    let currentPage = this.navCtrl.getActive().name;
-    localStorage.setItem("paginaActual", JSON.stringify((currentPage)));
-  }
-
-
-
-  ionViewDidLoad() {
-    this.cargarInformacionUsuario();
-    this.conversaciones = this.params.data.conversacion;
-    this.chatActual = this.params.data.chatActual;
-    this.tipoChatEnvio = this.params.data.tipoChatEnvio;
-    this.mostrar = this.params.data.mostrar;
-    this.mostrar2 = false;
-    //this.chatActual1 = this.params.get('datosChat1');
-    if (this.chatActual1 != null && this.chatActual1 != "" && this.chatActual1 != undefined) {
-      console.log("opcion didload", this.chatActual1);
-      this.crearChat();
-
-    }
-    if (this.chatActual != undefined) {
-      setTimeout(() => {
-        this.content.scrollToBottom(0);
-      }, 50);
-
-      this.myInput.setFocus();
-
-    }
-
-
+  cerrarChat() {
+    this.myapp.submenu = true;
+    localStorage.setItem("paginaActual", JSON.stringify(("ChatPage")));
+    this.view.dismiss();
+    this.events.publish("contador");
   }
 
   onFocusList() {
@@ -131,64 +220,9 @@ export class ChatModalPage {
     input.setFocus();
   }
 
-
-
-
-
-  crearChat() {
-   
-    this.items2 = this.af.list('/chatPrincipal' + "/", {
-      query: {
-        limitToLast: 7
-      }
-    });
-    //this.items2.remove();
-    this.items2.push({
-      articulo: this.chatActual1.articulo, usuarioOfrece: this.chatActual1.usuarioOfrece, usuarioPertenece: this.chatActual1.usuarioPertenece,
-      idChat: this.chatActual1.idRegUsuarioOfrece + this.chatActual1.idRegUsuarioPertenece, uidUsuarioPertenece: this.chatActual1.uidUsuarioPertenece,
-      uidUsuarioOfrece: this.chatActual1.uidUsuarioOfrece
-    });
-
-    const queryObservable = this.af.list('/chatContenido' + "/" + this.chatActual1.idRegUsuarioOfrece + this.chatActual1.idRegUsuarioPertenece + "/", {
-      query: {
-        limitToLast: 300
-      }
-    });
-    queryObservable
-      .subscribe(queriedItems => {
-        this.conversaciones = queriedItems;
-        if (this.conversaciones != null) {
-          this.mostrar = true;
-        } else {
-          this.mostrar = false;
-        }
-      });
-    this.chatActual = this.chatActual1;
-  }
-
-  cerrarChat() {
-    this.myapp.submenu = true;
-    localStorage.setItem("paginaActual", JSON.stringify(("ChatPage")));
-    this.view.dismiss();
-    this.events.publish("contador");
-  }
-
-  chatSend() {
-
-    var formatDate = new Date(); //IMPORTANTE: POR EL MOMENTO ES PRUEBA
-    var date = formatDate.toISOString();
-    if (this.tipoChatEnvio == 2) {
-      this.conversaciones2 = this.af.list('/chatContenido' + "/" + this.chatActual.idChat + "/", {
-      });
-    } else {
-      this.conversaciones2 = this.af.list('/chatContenido' + "/" + this.chatActual.idRegUsuarioOfrece + this.chatActual.idRegUsuarioPertenece + "/", {
-      });
-    }
-
-    this.conversaciones2.push({ mensaje: this.msgVal, usuario: this.usuarioLoggeado.email, fecha: date, nombre: this.usuario[0].nombre });
-    this.mostrar = true;
-    this.enviarNotificacionPush();
-    this.msgVal = '';
+  ngAfterViewInit() {
+    let currentPage = this.navCtrl.getActive().name;
+    localStorage.setItem("paginaActual", JSON.stringify((currentPage)));
   }
 
   enviarNotificacionPush() {
@@ -239,14 +273,14 @@ export class ChatModalPage {
             return response;
           }).subscribe(data => {
             //post doesn't fire if it doesn't get subscribed to
-            
+
           });
       });
 
 
   }
 
-  cargarInformacionUsuario(){
+  cargarInformacionUsuario() {
     const queryObservable = this.af.list('/usuario/', {
       query: {
         orderByChild: 'email',
@@ -256,14 +290,14 @@ export class ChatModalPage {
     queryObservable.subscribe(queriedItems => {
       this.usuario = queriedItems;
     })
-    
+
   }
 
 
 
 }
 /**
- * Created by N56J on 29/11/2017.
+ * Created by N56J on 29/11/2017..
  */
 
 /**

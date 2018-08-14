@@ -1,7 +1,7 @@
 
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Component } from '@angular/core';
-import { IonicPage, NavController, AlertController, LoadingController } from 'ionic-angular';
+import { IonicPage, NavController, AlertController, LoadingController, ViewController } from 'ionic-angular';
 import { FirebaseListObservable, AngularFireDatabase } from 'angularfire2/database';
 import { Article } from "../../models/article";
 import { AngularFireAuth } from 'angularfire2/auth';
@@ -49,6 +49,7 @@ export class PublishPage {
     public myapp: MyApp,
     private base64: Base64,
     public loadingCtrl: LoadingController,
+    private view: ViewController,
 
   ) {
     this.myForm = this.createMyForm();
@@ -210,8 +211,10 @@ export class PublishPage {
   }
 
   redireccionarHome() {
+    this.navCtrl.pop();
+    this.navCtrl.pop();
     //this.navCtrl.push('HomePage')
-    this.myapp.rootPage = 'HomePage';
+    //this.myapp.rootPage = 'HomePage';
   }
 
 

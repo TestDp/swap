@@ -232,6 +232,27 @@ export class MyApp {
   }
 
   async disabledCount() {
+    let alert = this.alertCtrl.create({
+      title: 'Importante',
+      subTitle: 'Esta seguro que desea deshabilitar su cuenta.',
+      cssClass: 'alert-danger2',
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel',
+          handler: () => {
+
+          }
+        },
+        {
+          text: 'Aceptar',
+          handler: () => {
+            this.deshabilitar();
+          }
+        }
+      ]
+    });
+    alert.present();
     /* let usuarioLoggeado = JSON.parse(localStorage.getItem("usuarioLoggeado"));
      let disabled = admin.auth().updateUser(usuarioLoggeado.uid, { disabled: true }); 
      disabled.then(respuesta =>{
@@ -239,8 +260,22 @@ export class MyApp {
      }) */
   }
 
+  deshabilitar(){
+    let usuarioDeshabilitar = this.af.list('/usuarioDeshabilitar/');
+    var date = new Date();
+    var formatDate = date.toISOString();
+    usuarioDeshabilitar.push({
+        usuario: this.usuarioLoggeado.email,
+        uid: this.usuarioLoggeado.uid,
+        fechaSolicitu: formatDate,
+
+    })
+
+  }
+
   obtenerUbicacion() {
     this.geolocation.getCurrentPosition().then((resp) => {
+      console.log('posicion', resp);
       this.obtenerCiudad(resp);
     }).catch((error) => {
       console.log('Error getting location', error);

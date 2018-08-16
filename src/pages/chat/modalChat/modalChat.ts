@@ -78,7 +78,7 @@ export class ChatModalPage {
 
   crearChat() {
     this.validarChat().then(respuesta => {
-      let ida = this.chatActual1.idArticulo.replace('.','');
+      let ida = this.chatActual1.idArticulo.replace('.', '');
       if (respuesta === "P") {
         const queryObservable = this.af.list('/chatContenido' + "/" + this.chatActual1.uidUsuarioOfrece + this.chatActual1.uidUsuarioPertenece + ida + "/", {
           query: {
@@ -134,7 +134,7 @@ export class ChatModalPage {
 
   validarChat() {
     return new Promise((resolve, reject) => {
-      let ida = this.chatActual1.idArticulo.replace('.','');
+      let ida = this.chatActual1.idArticulo.replace('.', '');
       const queryObservable = this.af.list('/chatPrincipal/', {
         query: {
           orderByChild: 'idChat',
@@ -164,18 +164,18 @@ export class ChatModalPage {
       });
       id = this.chatActual.idChat;
     } else if (this.tipoChatEnvio == 1) {
-      let ida = this.chatActual1.idArticulo.replace('.','');
+      let ida = this.chatActual1.idArticulo.replace('.', '');
       id = this.chatActual1.uidUsuarioOfrece + this.chatActual1.uidUsuarioPertenece + ida;
       this.conversaciones2 = this.af.list('/chatContenido' + "/" + this.chatActual1.uidUsuarioOfrece + this.chatActual1.uidUsuarioPertenece + ida + "/", {
       });
-     
+
     }
 
     this.conversaciones2.push({ mensaje: this.msgVal, usuario: this.usuarioLoggeado.email, fecha: date, nombre: this.usuario[0].nombre });
     this.mostrar = true;
     this.msgVal = '';
     this.actualizarConversacion(id);
-    this.enviarNotificacionPush();
+    this.enviarNotificacionPush(this.tipoChatEnvio,id);
 
   }
 
@@ -225,14 +225,28 @@ export class ChatModalPage {
     localStorage.setItem("paginaActual", JSON.stringify((currentPage)));
   }
 
-  enviarNotificacionPush() {
+  enviarNotificacionPush(int, id) {
 
     var uid;
-    if (this.usuarioLoggeado.uid == this.chatActual.uidUsuarioPertenece) {
-      uid = this.chatActual.uidUsuarioOfrece;
-    } else if (this.usuarioLoggeado.uid == this.chatActual.uidUsuarioOfrece) {
-      uid = this.chatActual.uidUsuarioPertenece;
+
+    console.log("tipo chat not", int);
+    console.log("tipo chatActual1 not", this.chatActual1);
+    console.log("tipo chatActual1 not", this.chatActual);
+    if (int == 1) {
+      if (this.usuarioLoggeado.uid == this.chatActual1.uidUsuarioPertenece) {
+        uid = this.chatActual1.uidUsuarioOfrece;
+      } else if (this.usuarioLoggeado.uid == this.chatActual1.uidUsuarioOfrece) {
+        uid = this.chatActual1.uidUsuarioPertenece;
+      }
+    } else if (int == 2) {
+      if (this.usuarioLoggeado.uid == this.chatActual.uidUsuarioPertenece) {
+        uid = this.chatActual.uidUsuarioOfrece;
+      } else if (this.usuarioLoggeado.uid == this.chatActual.uidUsuarioOfrece) {
+        uid = this.chatActual.uidUsuarioPertenece;
+      }
     }
+
+
     const queryObservable = this.af.list('/usuarioInformacion/' + uid + '/', {
     });
     queryObservable
@@ -250,7 +264,7 @@ export class ChatModalPage {
               "message": this.msgVal,
               "tipo": "ChatPage",
               "image": "icon",
-              "idChat": this.chatActual.idChat,
+              "idChat": id,
             }
           },
           "notification": {

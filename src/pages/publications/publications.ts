@@ -49,6 +49,17 @@ export class PublitacionsPage {
       .subscribe(queriedItems => {
         console.log(queriedItems);
         this.publicaciones = queriedItems;
+        let publicacionesCompuesta: any = [];
+        this.publicaciones.forEach(element => {
+          if (element.estado === 'A') {
+            publicacionesCompuesta.push(element);
+          }
+        })
+
+        if (publicacionesCompuesta.length > 0) {
+          this.publicaciones = publicacionesCompuesta;
+          publicacionesCompuesta = [];
+        }
         /*for (var i = 0; i < this.publicaciones.length; i++){
          this.rutaImagenes = this.publicaciones[i].imageUrl;
           console.log("ruta imagenes",this.rutaImagenes );
@@ -64,7 +75,6 @@ export class PublitacionsPage {
           }
           this.publicaciones[i].imageUrl = rutaPublicacion;
         }*/
-        console.log("ruta imagenes23",this.publicaciones );
 
       });
 

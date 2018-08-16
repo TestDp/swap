@@ -161,7 +161,7 @@ export class HomePage {
 
     });
 
-    if (this.MyApp.mensajeBienvenidad == true && this.MyApp.mensajeBienvenidad2 == true) {
+    if (this.MyApp.mensajeBienvenidad == true && this.MyApp.mensajeBienvenidad2 == true && this.planUsuario.length == 0) {
       this.MyApp.mensajeBienvenidad = false;
       let alert = this.alertCtrl.create({
         title: 'Bienvenid@',
@@ -261,7 +261,7 @@ export class HomePage {
         this.publicaciones = queriedItems;
         console.log("publicaciones", this.publicaciones);
         this.publicaciones.forEach(element => {
-          if (element.usuario != this.usuarioLoggeado.email) {
+          if (element.usuario != this.usuarioLoggeado.email && element.estado === 'A') {
             publicacionesCompuesta.push(element);
           }
         })
@@ -376,7 +376,7 @@ export class HomePage {
         let publicacionesCompuesta: any = [];
         this.publicaciones = queriedItems; 
         this.publicaciones.forEach(element => {
-          if (element.usuario != this.usuarioLoggeado.email) {
+          if (element.usuario != this.usuarioLoggeado.email && element.estado === 'A') {
             publicacionesCompuesta.push(element);
           }
         })

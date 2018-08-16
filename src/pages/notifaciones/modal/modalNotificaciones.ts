@@ -79,12 +79,14 @@ export class modalNotificacionesPage {
           });
       });
     alert("Cambio exitoso");
-    this.myapp.rootPage = 'CambiosPage';
+    this.navCtrl.pop();
+    this.events.publish("cambioExitoso");
 
 
   }
 
   modificarArticuloCambio() {
+    let int = 1;
     const queryObservable = this.af.list('/article/', {
       query: {
         orderByChild: 'id',
@@ -93,31 +95,34 @@ export class modalNotificacionesPage {
     });
     queryObservable
       .subscribe(queriedItems => {
-        this.articulo = queriedItems;
-        this.historialArticulo = this.af.list('/articulosCambiados/');
-        this.historialArticulo.push({
-          titulo: this.articulo[0].titulo,
-          descripcion: this.articulo[0].descripcion,
-          usuario: this.articulo[0].usuario,
-          categoria: this.articulo[0].categoria,
-          categoriasCambio: this.articulo[0].categoriasCambio,
-          imageUrl: this.articulo[0].imageUrl,
-          estado: "C",
-          imageThumb: this.articulo[0].imageThumb,
-          ciudad: this.articulo[0].ciudad,
-          uid: this.articulo[0].uid,
-          id: this.articulo[0].id,
-          idArticuloCambio: this.publicacion.idArticulo,
-        }).then((snap) => {
-          this.eliminarArticuloIntercambiado1();
+        if (int == 1) {
+          this.articulo = queriedItems;
+          this.historialArticulo = this.af.list('/articulosCambiados/');
+          this.historialArticulo.push({
+            titulo: this.articulo[0].titulo,
+            descripcion: this.articulo[0].descripcion,
+            usuario: this.articulo[0].usuario,
+            categoria: this.articulo[0].categoria,
+            categoriasCambio: this.articulo[0].categoriasCambio,
+            imageUrl: this.articulo[0].imageUrl,
+            estado: "C",
+            imageThumb: this.articulo[0].imageThumb,
+            ciudad: this.articulo[0].ciudad,
+            uid: this.articulo[0].uid,
+            id: this.articulo[0].id,
+            idArticuloCambio: this.publicacion.idArticulo,
+          }).then((snap) => {
+            this.eliminarArticuloIntercambiado1();
 
-        })
+          })
 
-
+        }
+        int = int + 1;
       });
 
   }
   modificarArticuloSwap() {
+    let int = 1;
     const queryObservable = this.af.list('/article/', {
       query: {
         orderByChild: 'id',
@@ -126,28 +131,31 @@ export class modalNotificacionesPage {
     });
     queryObservable
       .subscribe(queriedItems => {
-        this.articulo = queriedItems;
-        this.historialArticulo = this.af.list('/articulosCambiados/');
-        this.historialArticulo.push({
-          titulo: this.articulo[0].titulo,
-          descripcion: this.articulo[0].descripcion,
-          usuario: this.articulo[0].usuario,
-          categoria: this.articulo[0].categoria,
-          categoriasCambio: this.articulo[0].categoriasCambio,
-          imageUrl: this.articulo[0].imageUrl,
-          estado: "C",
-          //pais: this.articulo[0].pais,
-          imageThumb: this.articulo[0].imageThumb,
-          ciudad: this.articulo[0].ciudad,
-          uid: this.articulo[0].uid,
-          id: this.articulo[0].id,
-          idArticuloCambio: this.data.id,
-        }).then((snap) => {
-          this.eliminarArticuloIntercambiado2();
+        
+        if (int == 1) {
+          this.articulo = queriedItems;
+          this.historialArticulo = this.af.list('/articulosCambiados/');
+          this.historialArticulo.push({
+            titulo: this.articulo[0].titulo,
+            descripcion: this.articulo[0].descripcion,
+            usuario: this.articulo[0].usuario,
+            categoria: this.articulo[0].categoria,
+            categoriasCambio: this.articulo[0].categoriasCambio,
+            imageUrl: this.articulo[0].imageUrl,
+            estado: "C",
+            //pais: this.articulo[0].pais,
+            imageThumb: this.articulo[0].imageThumb,
+            ciudad: this.articulo[0].ciudad,
+            uid: this.articulo[0].uid,
+            id: this.articulo[0].id,
+            idArticuloCambio: this.data.id,
+          }).then((snap) => {
+            this.eliminarArticuloIntercambiado2();
 
-        })
+          })
 
-
+        }
+        int = int + 1;
       });
 
 
@@ -160,13 +168,15 @@ export class modalNotificacionesPage {
       }
     })
     queryObservable.subscribe(queriedItems => {
-      const queryObservable2 = this.af.list('/article/' + queriedItems[0].$key + '/');
-      queryObservable2.remove();
+      let updateArticulo = this.af.database.ref('/article/' + queriedItems[0].$key + '/');
+      updateArticulo.update({
+        estado: "C"
+      });
     })
 
     const queryObservable1 = this.af.list('/articuloSwap/', {
       query: {
-        orderByChild: 'id',
+        orderByChild: 'idArticulo',
         equalTo: this.data.id,
       }
     })
@@ -185,9 +195,11 @@ export class modalNotificacionesPage {
       }
     });
     queryObservable.subscribe(queriedItems => {
-      const queryObservable2 = this.af.list('/article/' + queriedItems[0].$key + '/');
-      queryObservable2.remove();
-      
+      let updateArticulo = this.af.database.ref('/article/' + queriedItems[0].$key + '/');
+      updateArticulo.update({
+        estado: "C"
+      });
+
     })
 
   }

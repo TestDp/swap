@@ -60,6 +60,7 @@ export class PublishPage {
 
 
   ionViewDidLoad() {
+    localStorage.setItem("paginaActual", JSON.stringify(("PublishPage")));
     console.log('ionViewDidLoad PublishPage');
   }
 
@@ -180,6 +181,7 @@ export class PublishPage {
                 prioridad: prioridad
               }).then((snap) => {
                 this.loading.dismiss();
+                this.bigImg = [];
                 let alert = this.alertCtrl.create({
                   title: 'Creado exitosamente',
                   subTitle: 'Ya este articulo se puede cambiar',
@@ -211,7 +213,7 @@ export class PublishPage {
   }
 
   redireccionarHome() {
-    this.navCtrl.pop();
+    localStorage.setItem("paginaActual", JSON.stringify(("HomePage")));
     this.navCtrl.pop();
     //this.navCtrl.push('HomePage')
     //this.myapp.rootPage = 'HomePage';

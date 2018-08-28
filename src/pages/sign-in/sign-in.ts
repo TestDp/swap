@@ -202,10 +202,14 @@ export class SignInPage {
 
 
   crearUsuarioFirebaseFace(datos) {
+    console.log("datos facebook", datos);
+    if(datos.apellidos == undefined){
+      datos.apellidos = "";
+    }
     this.registrarUsuario = this.af.list('/usuario');
     this.registrarUsuario.push({
       nombre: datos.nombre,
-      apellidos: datos.apelliddos,
+      apellidos: datos.apellidos,
       email: datos.email,
       fechaNacimiento: "user.fechaNacimiento",
       genero: datos.genero,

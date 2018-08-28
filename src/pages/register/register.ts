@@ -51,8 +51,8 @@ export class RegisterPage {
       email: ['', [Validators.required, Validators.email]],
       dateBirth: ['', Validators.required],
       passwordRetry: this.formBuilder.group({
-        password: ['', [Validators.required, Validators.pattern(".*\\S.*[a-zA-z0-9_-].{8,12}")]],
-        passwordConfirmation: ['', [Validators.required, Validators.pattern(".*\\S.*[a-zA-z0-9_-].{8,12}")]]
+        password: ['', [Validators.required, Validators.pattern(".*\\S.*[a-zA-z0-9_-].{4,8}")]],
+        passwordConfirmation: ['', [Validators.required, Validators.pattern(".*\\S.*[a-zA-z0-9_-].{4,8}")]]
       }, { 'validator': this.matchingPasswords('password', 'passwordConfirmation') }),
       gender: ['', Validators.required],
     });

@@ -16,6 +16,7 @@ export class modalNotificacionesPage {
   data: any = {};
   publicacion: any = {};
   articulo: any = {};
+  articulosBorrar: any = {};
   historialArticulo: FirebaseListObservable<any[]>;
   constructor(private params: NavParams, private view: ViewController, private events: Events, public navCtrl: NavController,
     public http: Http, private af: AngularFireDatabase, public myapp: MyApp, public modalCtrl: ModalController, ) {
@@ -131,7 +132,7 @@ export class modalNotificacionesPage {
     });
     queryObservable
       .subscribe(queriedItems => {
-        
+
         if (int == 1) {
           this.articulo = queriedItems;
           this.historialArticulo = this.af.list('/articulosCambiados/');
@@ -177,12 +178,16 @@ export class modalNotificacionesPage {
     const queryObservable1 = this.af.list('/articuloSwap/', {
       query: {
         orderByChild: 'idArticulo',
-        equalTo: this.data.id,
+        equalTo: this.publicacion.idArticulo,
       }
     })
     queryObservable1.subscribe(queriedItems => {
-      const queryObservable2 = this.af.list('/articuloSwap/' + queriedItems[0].$key + '/');
-      queryObservable2.remove();
+      this.articulosBorrar = queriedItems;
+      this.articulosBorrar.forEach(element => {
+        const queryObservable2 = this.af.list('/articuloSwap/' + element.$key + '/');
+        queryObservable2.remove();
+      });
+
     })
 
   }

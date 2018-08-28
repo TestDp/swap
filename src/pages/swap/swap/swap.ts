@@ -51,14 +51,14 @@ export class SwapPage {
     this.myapp.submenu = true;
   }
 
-  ionViewWillLeave(){
+  ionViewWillLeave() {
     this.myapp.submenu = true;
   }
 
 
   cargarPublicacion() {
     if (this.usuarioPertenece == undefined) {
-       this.cargarDatosUsuarioPertenece(2);
+      this.cargarDatosUsuarioPertenece(2);
     } else {
       const queryObservable = this.af.list('/article/', {
         query: {
@@ -69,7 +69,24 @@ export class SwapPage {
       queryObservable
         .subscribe(queriedItems => {
           let idRegistro = JSON.parse(localStorage.getItem("idRegistro"));
+          let publicacionesCompuesta: any = [];
           this.publicaciones = queriedItems;
+          console.log("hoy",this.publicaciones);
+          this.publicaciones.forEach(element => {
+            if (element.estado === 'A') {
+              publicacionesCompuesta.push(element);
+            }
+          })
+          console.log("hoy 2",publicacionesCompuesta);
+          if (publicacionesCompuesta.length > 0) {
+            this.publicaciones = publicacionesCompuesta;
+            
+          }
+
+          if (publicacionesCompuesta.length === 0) {
+            this.publicaciones = [];
+          }
+
           this.swapArticle.articulo = this.articuloSeleccionado.titulo;
           this.swapArticle.usuarioPertenece = this.articuloSeleccionado.usuario;
           this.swapArticle.usuarioOfrece = this.usuarioLoggeado.email;
@@ -88,15 +105,15 @@ export class SwapPage {
     queryObservable
       .subscribe(queriedItems => {
         this.usuarioPertenece = queriedItems
-        if(int == 2){
+        if (int == 2) {
           this.cargarPublicacion();
         }
       });
-      
+
   }
 
   enviar() {
-  console.log("comentario",this.swapArticle);
+    console.log("comentario", this.swapArticle);
     if (this.swapArticle.articulosOfrece != undefined && this.swapArticle.comentario != undefined) {
       this.loading = this.loadingCtrl.create({
         content: 'Enviando solicitud...'
@@ -132,8 +149,8 @@ export class SwapPage {
                 this.myapp.submenu = true;
                 this.view.dismiss();
                 this.events.publish("cerrarModalHome");
-               // this.navCtrl.setRoot('HomePage')
-               // this.myapp.rootPage = 'HomePage';;
+                // this.navCtrl.setRoot('HomePage')
+                // this.myapp.rootPage = 'HomePage';;
               }
             }
           ]

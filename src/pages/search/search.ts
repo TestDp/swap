@@ -95,7 +95,22 @@ export class SearchPage {
           if (validador == 1) {
             this.publicaciones = [];
           }
-          //this.publicaciones
+
+          let publicacionesCompuesta1: any = [];
+          this.publicaciones.forEach(element => {
+            if (element.usuario != this.usuarioLoggeado.email && element.estado === 'A') {
+              publicacionesCompuesta1.push(element);
+            }
+          })
+          if (publicacionesCompuesta1.length > 0) {
+            this.publicaciones = publicacionesCompuesta1;
+          }
+          if (publicacionesCompuesta1.length == 0) {
+            this.publicaciones = [];
+          }
+          publicacionesCompuesta1 = [];
+
+
         });
     } else if (vbusquedad.categoria != null) {
       const queryObservable = this.af.list('/article/', {
@@ -124,6 +139,19 @@ export class SearchPage {
            this.publicaciones[i].imageUrl = rutaPublicacion;
          }*/
 
+         let publicacionesCompuesta1: any = [];
+         this.publicaciones.forEach(element => {
+           if (element.usuario != this.usuarioLoggeado.email && element.estado === 'A') {
+             publicacionesCompuesta1.push(element);
+           }
+         })
+         if (publicacionesCompuesta1.length > 0) {
+           this.publicaciones = publicacionesCompuesta1;
+         }
+         if (publicacionesCompuesta1.length == 0) {
+           this.publicaciones = [];
+         }
+         publicacionesCompuesta1 = [];
           console.log("ruta imagenes23", this.publicaciones);
 
         });
@@ -161,6 +189,20 @@ export class SearchPage {
           if (this.publicacionesCompuesta.length > 0) {
             this.publicaciones = this.publicacionesCompuesta;
           }
+
+          let publicacionesCompuesta1: any = [];
+          this.publicaciones.forEach(element => {
+            if (element.usuario != this.usuarioLoggeado.email && element.estado === 'A') {
+              publicacionesCompuesta1.push(element);
+            }
+          })
+          if (publicacionesCompuesta1.length > 0) {
+            this.publicaciones = publicacionesCompuesta1;
+          }
+          if (publicacionesCompuesta1.length == 0) {
+            this.publicaciones = [];
+          }
+          publicacionesCompuesta1 = [];
 
         });
 

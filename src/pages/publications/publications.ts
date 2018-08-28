@@ -59,6 +59,8 @@ export class PublitacionsPage {
         if (publicacionesCompuesta.length > 0) {
           this.publicaciones = publicacionesCompuesta;
           publicacionesCompuesta = [];
+        }else if (publicacionesCompuesta.length == 0){
+          this.publicaciones = [];
         }
         /*for (var i = 0; i < this.publicaciones.length; i++){
          this.rutaImagenes = this.publicaciones[i].imageUrl;

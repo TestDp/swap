@@ -1,6 +1,6 @@
 //import { User } from './../models/user';
 import { Component, ViewChild } from '@angular/core';
-import { Platform, NavController, AlertController, Nav } from 'ionic-angular';
+import { Platform, NavController, AlertController, Nav, Events } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { AngularFireAuth } from 'angularfire2/auth';
@@ -45,6 +45,7 @@ export class MyApp {
     private af: AngularFireDatabase,
     private iab: InAppBrowser,
     private badge: Badge,
+    private events: Events
   ) {
     this.mensajeBienvenidad = true;
     this.mensajeBienvenidad2 = true;
@@ -90,17 +91,17 @@ export class MyApp {
               cssClass: 'alert-danger',
               buttons: [
                 {
-                    text: 'Aceptar',
-                    handler: () => {
-                        this.cerrarAlert();
-                    }
+                  text: 'Aceptar',
+                  handler: () => {
+                    this.cerrarAlert();
+                  }
                 },
-                
-            ]
+
+              ]
             });
           }
 
-         
+
           console.log("pagina actual", paginaActual);
           if (paginaActual != "ModalCmp") {
             if (this.alert != undefined) {
@@ -143,6 +144,11 @@ export class MyApp {
       statusBar.styleDefault();
       splashScreen.hide();
       this.obtenerUbicacion();
+
+      this.events.subscribe('cambioExitoso', (calificacion) => {
+        console.log("cambio existoso")
+        this.nav.push('CambiosPage');
+      });
     });
 
 
@@ -152,7 +158,7 @@ export class MyApp {
     this.rootPage = rootSet;
   }
 
-  cerrarAlert(){
+  cerrarAlert() {
     this.alert.dismiss();
     this.alert = undefined;
   }
@@ -260,15 +266,18 @@ export class MyApp {
      }) */
   }
 
-  deshabilitar(){
+  deshabilitar() {
     let usuarioDeshabilitar = this.af.list('/usuarioDeshabilitar/');
     var date = new Date();
     var formatDate = date.toISOString();
     usuarioDeshabilitar.push({
-        usuario: this.usuarioLoggeado.email,
-        uid: this.usuarioLoggeado.uid,
-        fechaSolicitu: formatDate,
+      usuario: this.usuarioLoggeado.email,
+      uid: this.usuarioLoggeado.uid,
+      fechaSolicitu: formatDate,
 
+    })
+    this.afAuth.auth.signOut().then(() => {
+      this.rootPage = 'SignInPage';
     })
 
   }
@@ -298,6 +307,7 @@ export class MyApp {
   }
 
   validarPublicaciones() {
+    let int = 1;
     this.usuarioLoggeado = JSON.parse(localStorage.getItem("usuarioLoggeado"));
     if (this.planUsuario.length == 0) {
       const queryObservable = this.af.list('/article/', {
@@ -309,38 +319,42 @@ export class MyApp {
 
       queryObservable
         .subscribe(queriedItems => {
-          this.publicacion = queriedItems;
-          if (this.publicacion.length >= 5) {
-            let alert = this.alertCtrl.create({
-              title: 'Mensaje informativo ',
-              subTitle: 'Has utilizado tus 5 publicaciones gratuitas, para seguir haciendolo ilimitadamente adquiere una membresia de 6 meses',
-              cssClass: 'alert-danger2',
-              buttons: [
-                {
-                  text: 'Cancelar',
-                  role: 'cancel',
-                  handler: () => {
+          if (int == 1) {
+            this.publicacion = queriedItems;
+            if (this.publicacion.length >= 5) {
+              let alert = this.alertCtrl.create({
+                title: 'Mensaje informativo ',
+                subTitle: 'Has utilizado tus 5 publicaciones gratuitas, para seguir haciendolo ilimitadamente adquiere una membresia de 6 meses',
+                cssClass: 'alert-danger2',
+                buttons: [
+                  {
+                    text: 'Cancelar',
+                    role: 'cancel',
+                    handler: () => {
 
+                    }
+                  },
+                  {
+                    text: 'Subcribirme',
+                    handler: () => {
+                      this.realizarPago();
+                    }
                   }
-                },
-                {
-                  text: 'Subcribirme',
-                  handler: () => {
-                    this.realizarPago();
-                  }
-                }
-              ]
-            });
-            alert.present();
-          } else {
-            this.nav.push('PublishPage');
-            //this.rootPage = 'PublishPage';
+                ]
+              });
+              alert.present();
+            } else {
+              let paginaActual = JSON.parse(localStorage.getItem("paginaActual"));
+              if (paginaActual !== "PublishPage") {
+                this.nav.push('PublishPage');
+              }
+              //this.rootPage = 'PublishPage';
+            }
           }
-
         });
 
     } else {
-      //this.rootPage = 'PublishPage';
+      ///this.rootPage = 'PublishPage';
       this.nav.push('PublishPage');
     }
 

@@ -49,8 +49,8 @@ export class PagoPage {
 
     paypalInit() {
         this.payPal.init({
-            PayPalEnvironmentProduction: 'YOUR_PRODUCTION_CLIENT_ID',
-            PayPalEnvironmentSandbox: 'AexT_etnC1SI5dWlRjJbMX1ETcNvLNEkXpWncWZSv7IEXrGvGqlfjjePv1_X4HU2mfBtvrWeKOy3gZIP'
+            PayPalEnvironmentProduction: 'AfAA8SizQlq6rEnQnW5MBiGP5jIMyv_yAgpApzkLgjCQ7vzi7SqPmNXVhxfMynP79UEiOlJRoqo5yNrD',
+            PayPalEnvironmentSandbox: 'AWM7xR0OHdWrfKO-7GIdC6oHduw3ih-gs4Lp3SoySpTepjapkbHKCuyy5fdVroGtLbWsPM9RD03vsLX3'
         }).then(() => {
             // Environments: PayPalEnvironmentNoNetwork, PayPalEnvironmentSandbox, PayPalEnvironmentProduction
             this.payPal.prepareToRender('PayPalEnvironmentSandbox', new PayPalConfiguration({
@@ -103,12 +103,12 @@ export class PagoPage {
         if(this.preferencial == true){
             this.valorTotal = this.valorTotal + 1;   
         }
-        let merchantId = 508029; // 708031;  aca se debe colocar el merchantid propip
-        let accountId = 512321; // 711291 aca se debe colocar el accountId propip 
+        let merchantId = 708031; // (508029- pruebas) 708031 - propio;  aca se debe colocar el merchantid propip
+        let accountId = 711291; // (512321 - pruebas) 711291 -propio  aca se debe colocar el accountId propip 
         var date = new Date();
         var formatDate = date.toISOString();
         let referenceCode = formatDate + this.usuarioLoggeado.uid;
-        let signatureNormal = "4Vj8eK4rloUd272L48hsrarnUA" + "~" + "508029" + "~" + referenceCode + "~" + this.valorTotal + "~" + "COP"; //0cdkasjVRvnj28y8jxK9ivon0F
+        let signatureNormal = "4Vj8eK4rloUd272L48hsrarnUA" + "~" + "708031" + "~" + referenceCode + "~" + this.valorTotal + "~" + "COP"; //0cdkasjVRvnj28y8jxK9ivon0F
         var hash2 = Md5.hashStr(signatureNormal);
         this.signatureNormal = hash2.toString();
         var pageContent = '<html><head></head><body><form id="loginForm" action="https://sandbox.gateway.payulatam.com/ppp-web-gateway/" method="POST">' +
@@ -121,7 +121,7 @@ export class PagoPage {
             '<input type="hidden" name="taxReturnBase" value="' + "0" + '">' +
             '<input type="hidden" name="currency" value="' + "COP" + '">' +
             '<input type="hidden" name="signature" value="' + this.signatureNormal + '">' +
-            '<input type="hidden" name="test" value="' + "1" + '">' +
+             // '<input type="hidden" name="test" value="' + "1" + '">' + IMPORTANTE: Solo para pruebas
             '<input type="hidden" name="buyerEmail" value="' + this.usuarioLoggeado.email + '">' +
             '<input type="hidden" name="responseUrl" value="' + "http://localhost:8100/#/pago" + '">' +
             '<input type="hidden" name="confirmationUrl" value="' + "http://localhost:8100/#/pago" + '">' +
@@ -169,9 +169,6 @@ export class PagoPage {
                 }
             }
         )
-
-
-
 
     }
 

@@ -68,7 +68,7 @@ export class HomePage {
 
   enableLocation() {
     this.locationAccuracy.canRequest().then((canRequest: boolean) => {
-      console.log("estado gps", canRequest);
+      console.log("estado gpsS", canRequest);
       if (canRequest) {
         // the accuracy option will be ignored by iOS
         this.locationAccuracy.request(this.locationAccuracy.REQUEST_PRIORITY_HIGH_ACCURACY).then(
@@ -132,64 +132,72 @@ export class HomePage {
 
 
   ionViewDidLoad() {
-    this.MyApp.submenu = true;
-    /*  let payl = JSON.parse(localStorage.getItem("payload"));
-      localStorage.setItem("payload", JSON.stringify(("")));
-      if(payl != null && payl != null && payl != ""){
-          let paylP =  JSON.parse(payl.payload);
-          this.navCtrl.push(paylP.tipo,  { payload: paylP });
-      } */
+    let redireccionamiento = JSON.parse(localStorage.getItem("redireccionamiento"));
+    localStorage.setItem("redireccionamiento", JSON.stringify((null)));
+    if (redireccionamiento !== null) {
 
-    this.afAuth.authState.subscribe(data => {
-      // if (data && data.email && data.uid && this.MyApp.mensajeBienvenidad3 == true) {
-      // this.MyApp.mensajeBienvenidad3 = false;
-      // this.toast.create({
-      // message: 'Bienvenido a SWAP  '.concat(data.email),
-      // duration: 3000
-      // }).present();
+    } else {
 
-      // }
-      localStorage.setItem("usuarioLoggeado", JSON.stringify(data));
-      let usuarioLoggeado = JSON.parse(localStorage.getItem("usuarioLoggeado"));
-      let idRegistro = JSON.parse(localStorage.getItem("idRegistro"));
-      let usuarioInfo = this.af.list('/usuarioInformacion/' + usuarioLoggeado.uid + '/');
-      usuarioInfo.remove();
-      usuarioInfo.push({
-        idRegistro: idRegistro,
-      })
+      this.MyApp.submenu = true;
+      /*  let payl = JSON.parse(localStorage.getItem("payload"));
+        localStorage.setItem("payload", JSON.stringify(("")));
+        if(payl != null && payl != null && payl != ""){
+            let paylP =  JSON.parse(payl.payload);
+            this.navCtrl.push(paylP.tipo,  { payload: paylP });
+        } */
+
+      this.afAuth.authState.subscribe(data => {
+        // if (data && data.email && data.uid && this.MyApp.mensajeBienvenidad3 == true) {
+        // this.MyApp.mensajeBienvenidad3 = false;
+        // this.toast.create({
+        // message: 'Bienvenido a SWAP  '.concat(data.email),
+        // duration: 3000
+        // }).present();
+
+        // }
+        localStorage.setItem("usuarioLoggeado", JSON.stringify(data));
+        let usuarioLoggeado = JSON.parse(localStorage.getItem("usuarioLoggeado"));
+        let idRegistro = JSON.parse(localStorage.getItem("idRegistro"));
+        let usuarioInfo = this.af.list('/usuarioInformacion/' + usuarioLoggeado.uid + '/');
+        usuarioInfo.remove();
+        usuarioInfo.push({
+          idRegistro: idRegistro,
+        })
 
 
-    });
-
-    if (this.MyApp.mensajeBienvenidad == true && this.MyApp.mensajeBienvenidad2 == true && this.planUsuario.length == 0) {
-      this.MyApp.mensajeBienvenidad = false;
-      let alert = this.alertCtrl.create({
-        title: 'Bienvenid@',
-        subTitle: 'Tienes cinco publicaciones gratuitas, para hacer el trato, en la sexta te invitamos a seguir intercambiando felicidad, solo debes suscribirte',
-        cssClass: 'alert-danger2',
-        buttons: [
-          {
-            text: 'Cancelar',
-            role: 'cancel',
-            handler: () => {
-              this.MyApp.mensajeBienvenidad = false;
-
-              console.log('Cancel clicked');
-            }
-          },
-          {
-            text: 'Suscribirme',
-            handler: () => {
-              this.MyApp.mensajeBienvenidad = false;
-              this.validarPublicaciones();
-
-            }
-          }
-        ]
       });
-      alert.present();
+
+      if (this.MyApp.mensajeBienvenidad == true && this.MyApp.mensajeBienvenidad2 == true && this.planUsuario.length == 0) {
+        this.MyApp.mensajeBienvenidad = false;
+        let alert = this.alertCtrl.create({
+          title: 'Bienvenid@',
+          subTitle: 'Tienes cinco publicaciones gratuitas, para hacer el trato, en la sexta te invitamos a seguir intercambiando felicidad, solo debes suscribirte',
+          cssClass: 'alert-danger2',
+          buttons: [
+            {
+              text: 'Cancelar',
+              role: 'cancel',
+              handler: () => {
+                this.MyApp.mensajeBienvenidad = false;
+
+                console.log('Cancel clicked');
+              }
+            },
+            {
+              text: 'Suscribirme',
+              handler: () => {
+                this.MyApp.mensajeBienvenidad = false;
+                this.validarPublicaciones();
+
+              }
+            }
+          ]
+        });
+        alert.present();
+      }
+      // this.cargarPublicaciones();
+
     }
-    // this.cargarPublicaciones();
 
   }
 
@@ -374,7 +382,7 @@ export class HomePage {
     queryObservable
       .subscribe(queriedItems => {
         let publicacionesCompuesta: any = [];
-        this.publicaciones = queriedItems; 
+        this.publicaciones = queriedItems;
         this.publicaciones.forEach(element => {
           if (element.usuario != this.usuarioLoggeado.email && element.estado === 'A') {
             publicacionesCompuesta.push(element);
@@ -384,8 +392,8 @@ export class HomePage {
         if (publicacionesCompuesta.length > 0) {
           this.publicaciones = publicacionesCompuesta;
           publicacionesCompuesta = [];
-        }else{
-          this.publicaciones  = [];
+        } else {
+          this.publicaciones = [];
         }
 
       });

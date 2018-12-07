@@ -32,6 +32,13 @@ $colors: (
   happiness:  #25cad3,
 );
 
+@font-face {
+  font-family: "HelveticaNeueLTStd-Bd";
+  src: url('../assets/fonts/HelveticaNeueLTStd-Bd.ttf');
+}
+
+$font-family-base: "HelveticaNeueLTStd-Bd";
+
 
 // App iOS Variables
 // --------------------------------------------------

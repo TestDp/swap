@@ -19,6 +19,7 @@ export class RegisterPage {
   myForm: FormGroup;
   user = {} as User;
   registrarUsuario: FirebaseListObservable<any>;
+  usuario: any;
 
 
 
@@ -74,63 +75,77 @@ export class RegisterPage {
   }
 
   async register(user: User) {
+    this.validarExistenciaUsuario(user.email).then(response => {
+      if (response === 'existe') {
+        this.alertCtrl.create({
+          title: 'Aviso importante',
+          subTitle: 'Ya existe un usuario con el correo indicado',
+          buttons: ['Aceptar']
+        }).present();
 
-    try {
-      //var noEsUsuario = true;
-     // var minUser = (user.email).toLowerCase();
-      this.afAuth.auth.createUserWithEmailAndPassword(user.email, user.password)
-        .then(userAut => {
-          // this.registrarUsuario.subscribe(ListaUsuarios => {
-          //   ListaUsuarios.forEach(usuario => {
-          //     var minUsuario = (usuario.email).toLowerCase();
-          //     if (minUsuario == minUser) {
-          //       this.registrarUsuario.update(usuario.$key, {
-          //         nombre: user.nombre,
-          //         apellidos: user.apellidos,
-          //         email: user.email,
-          //         fechaNacimiento: user.fechaNacimiento,
-          //         genero: user.genero,
-          //         estado: "A"
-          //       }).then(userUpdate => {
-          //         this.navCtrl.setRoot('HomePage');
-          //       });
-          //       noEsUsuario=false;
-          //     }
-          //   });
-          // });
-        //  if (noEsUsuario) {
-            this.registrarUsuario.push({
-                  nombre: user.nombre,
-                  apellidos: user.apellidos,
-                  email: user.email,
-                  fechaNacimiento: user.fechaNacimiento,
-                  genero: user.genero,
-                  estado: "A"
-                }).then(userNew => {
-                  this.navCtrl.setRoot('HomePage');
-                });
-         // }
-        }).catch(e => {
-          if (e.message == 'La dirección de correo electrónico ya está siendo utilizada por otra cuenta.') {
+      } else if (response === 'noexiste') {
+        try {
+          this.afAuth.auth.createUserWithEmailAndPassword(user.email, user.password)
+            .then(userAut => {
+              this.registrarUsuario.push({
+                nombre: user.nombre,
+                apellidos: user.apellidos,
+                email: user.email,
+                fechaNacimiento: user.fechaNacimiento,
+                genero: user.genero,
+                estado: "A"
+              }).then(userNew => {
+                this.navCtrl.setRoot('HomePage');
+              });
+              // }
+            }).catch(e => {
+              if (e.message == 'La dirección de correo electrónico ya está siendo utilizada por otra cuenta.') {
+                this.alertCtrl.create({
+                  title: 'Email ya registrado',
+                  subTitle: 'valide el Email',
+                  buttons: ['Volver a intentar']
+                }).present();
+                console.log('Email ya registrado');
+              }
+            });
+        }
+        catch (e) {
+          console.log(e.code);
+          if (e.code === 'Email ya esta en Uso') {
             this.alertCtrl.create({
               title: 'Email ya registrado',
               subTitle: 'valide el Email',
               buttons: ['Volver a intentar']
             }).present();
-            console.log('Email ya registrado');
           }
-        });
-    }
-    catch (e) {
-      console.log(e.code);
-      if (e.code === 'Email ya esta en Uso') {
-        this.alertCtrl.create({
-          title: 'Email ya registrado',
-          subTitle: 'valide el Email',
-          buttons: ['Volver a intentar']
-        }).present();
+        }
+
       }
-    }
+
+    })
+
+  }
+
+
+  validarExistenciaUsuario(email) {
+    return new Promise((resolve, reject) => {
+      const queryObservable = this.af.list('/usuario/', {
+        query: {
+          orderByChild: 'email',
+          equalTo: email
+        }
+      });
+      queryObservable
+        .subscribe(queriedItems => {
+          this.usuario = queriedItems;
+          if (this.usuario.length > 0) {
+            resolve("existe");
+          } else {
+            resolve("noexiste");
+          }
+
+        });
+    });
   }
 
   ionViewDidLoad() {

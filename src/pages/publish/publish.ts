@@ -1,7 +1,7 @@
 
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Component } from '@angular/core';
-import { IonicPage, NavController, AlertController, LoadingController, ViewController } from 'ionic-angular';
+import { IonicPage, NavController, AlertController, LoadingController, ViewController, Platform } from 'ionic-angular';
 import { FirebaseListObservable, AngularFireDatabase } from 'angularfire2/database';
 import { Article } from "../../models/article";
 import { AngularFireAuth } from 'angularfire2/auth';
@@ -50,11 +50,13 @@ export class PublishPage {
     private base64: Base64,
     public loadingCtrl: LoadingController,
     private view: ViewController,
+    public platform: Platform,
 
   ) {
     this.myForm = this.createMyForm();
     this.usuarioLoggeado = JSON.parse(localStorage.getItem("usuarioLoggeado"));
     this.publicarArticulo = this.af.list('/article/');
+   
 
   }
 
@@ -63,6 +65,7 @@ export class PublishPage {
     localStorage.setItem("paginaActual", JSON.stringify(("PublishPage")));
     console.log('ionViewDidLoad PublishPage');
   }
+  
 
   private createMyForm() {
     return this.formBuilder.group({
@@ -99,6 +102,7 @@ export class PublishPage {
   }
 
   ionViewWillLeave(){
+    localStorage.setItem("paginaActual", JSON.stringify(("HomePage")));
     this.myapp.submenu = true;
   }
 

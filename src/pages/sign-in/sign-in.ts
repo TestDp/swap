@@ -7,7 +7,7 @@ import { GooglePlus } from '@ionic-native/google-plus';
 import firebase from 'firebase';
 //import { Facebook } from '@ionic-native/facebook';
 import { OauthCordova } from 'ng2-cordova-oauth/platform/cordova';
-import { Facebook } from "ng2-cordova-oauth/core";
+import { Facebook} from "ng2-cordova-oauth/core";
 import { FacebookServiceProvider } from '../utilitys/facebook-service';
 import { Alert } from 'ionic-angular/components/alert/alert';
 
@@ -33,20 +33,21 @@ export class SignInPage {
   private facebookProvider: Facebook = new Facebook({
     clientId: '1801513843512058',
     responseType: 'code%20token',
-    redirectUri: 'http://localhost/callback',
+    redirectUri: 'https://swap-5f943.firebaseapp.com/__/auth/handler',
     appScope: ["email"]
   })
 
-  datos= {
+  datos = {
     nombre: '',
     email: '',
     genero: '',
     apellidos: '',
 
-};
+  };
   access_token: any;
   datoss: any;
-  
+  usuario: any;
+
 
   constructor(private afAuth: AngularFireAuth,
     public navCtrl: NavController,
@@ -93,7 +94,7 @@ export class SignInPage {
       console.log("error login", JSON.parse(error));
       this.alertCtrl.create({
         title: 'Información',
-        subTitle: 'Valide el usuario o contraseña 2',
+        subTitle: 'Valide el usuario o contraseña 2.',
         buttons: ['Volver a intentar']
       }).present();
 
@@ -112,24 +113,46 @@ export class SignInPage {
 
   loginGoogle(): void {
     this.googlePlus.login({
-      'webClientId': '512979795574-9fd1sac0f3arvseemqke0ivropb0m40p.apps.googleusercontent.com',
+      'webClientId': '512979795574-lj2b3o84svbsibelf7fdfremv2mu9dbm.apps.googleusercontent.com',
       'offline': true
     }).then(res => {
-      firebase.auth().signInWithCredential(firebase.auth.GoogleAuthProvider.credential(res.idToken))
-        .then(success => {
-          console.log("Google sing in success: " + JSON.stringify(success));
-          this.crearUsuarioFirebase(success);
-        })
-        .catch(error => alert("Google sing in success: " + JSON.stringify(error)));
+      this.validarExistenciaUsuario2(res.email).then(response => {
+        if (response === 'existe') {
+          this.alertCtrl.create({
+            title: 'Aviso importante',
+            subTitle: 'Ya existe un usuario con el correo indicado. Debes reestablecer la contraseña.',
+            buttons: ['Aceptar']
+          }).present();
+
+        } else if (response === 'noexiste') {
+          firebase.auth().signInWithCredential(firebase.auth.GoogleAuthProvider.credential(res.idToken))
+            .then(success => {
+              console.log("Google sing in success: " + JSON.stringify(success));
+              if (this.usuario.length == 0) {
+                this.crearUsuarioFirebase(success);
+              }
+              let idRegistro = JSON.parse(localStorage.getItem("idRegistro"));
+              let usuarioInfo = this.af.list('/usuarioInformacion/' + success.uid + '/');
+              usuarioInfo.remove();
+              usuarioInfo.push({
+                usuario: success.email,
+              })
+            })
+            .catch(error => alert("Google sing in success: " + JSON.stringify(error)));
+
+        }
+
+      })
+
     }).catch((error) => {
-      alert("error 22" + JSON.stringify(error));
+      alert("error 22 " + JSON.stringify(error));
       console.error("Error: ", error);
     })
 
   }
 
 
-  /*
+   /*
   loginFacebook(): void {
     this.facebook.login(['email']).then((response) => {
       firebase.auth().signInWithCredential(firebase.auth.FacebookAuthProvider.credential(response.authResponse.accessToken))
@@ -151,7 +174,7 @@ export class SignInPage {
     this.platform.ready().then(() => {
       try {
         this.oauth.logInVia(this.facebookProvider).then(success => {
-          
+
           lobThis.access_token = success["access_token"];
           lobThis.facebookService.setRemoteData(lobThis.access_token);
           this.facebookService.getRemoteData().subscribe(result => {
@@ -160,18 +183,39 @@ export class SignInPage {
             this.datos.email = this.datoss["email"];
             this.datos.genero = this.datoss["gender"];
             this.datos.apellidos = this.datoss["middle_name"];
-            firebase.auth().signInWithCredential(firebase.auth.FacebookAuthProvider.credential(lobThis.access_token ))
-            .then((success) => {
-              console.log("Facebook sing in success: " + JSON.stringify(success));
-              this.userProfile = success
-              this.navCtrl.setRoot('HomePage');
-            })
-            .catch((error) => {
-              console.log("Facebook sing in failure: " + JSON.stringify(error));
-            });
-            this.crearUsuarioFirebaseFace(this.datos);
-          
+            this.validarExistenciaUsuario(this.datos.email).then(response => {
+              if (response === 'existe') {
+                this.alertCtrl.create({
+                  title: 'Aviso importante',
+                  subTitle: 'Ya existe un usuario con el correo indicado. Debes reestablecer la contraseña.',
+                  buttons: ['Aceptar']
+                }).present();
 
+              } else if (response === 'noexiste') {
+                firebase.auth().signInWithCredential(firebase.auth.FacebookAuthProvider.credential(lobThis.access_token))
+                  .then((success) => {
+                    console.log("Facebook sing in success: " + JSON.stringify(success));
+                    let idRegistro = JSON.parse(localStorage.getItem("idRegistro"));
+                    let usuarioInfo = this.af.list('/usuarioInformacion/' + success.uid + '/');
+                    usuarioInfo.remove();
+                    usuarioInfo.push({
+                      usuario: success.email,
+                    })
+                    this.userProfile = success
+                    this.navCtrl.setRoot('HomePage');
+                  })
+                  .catch((error) => {
+                    console.log("Facebook sing in failure: " + JSON.stringify(error));
+                  });
+                if (this.usuario.length == 0) {
+
+                  this.crearUsuarioFirebaseFace(this.datos);
+                }
+                
+
+
+              }
+            })
           });
         }, error => {
           console.log("iam in fail");
@@ -194,7 +238,7 @@ export class SignInPage {
       fechaNacimiento: "user.fechaNacimiento",
       genero: "1",
       estado: "A",
-     
+
     }).then(userNew => {
       this.navCtrl.setRoot('HomePage');
     });
@@ -203,13 +247,13 @@ export class SignInPage {
 
   crearUsuarioFirebaseFace(datos) {
     console.log("datos facebook", datos);
-    if(datos.apellidos == undefined){
+    if (datos.apellidos == undefined) {
       datos.apellidos = "";
     }
     this.registrarUsuario = this.af.list('/usuario');
     this.registrarUsuario.push({
       nombre: datos.nombre,
-      apellidos: datos.apellidos,
+      apellidos: "Ingreso facebook",
       email: datos.email,
       fechaNacimiento: "user.fechaNacimiento",
       genero: datos.genero,
@@ -219,6 +263,48 @@ export class SignInPage {
     });
   }
 
+
+  validarExistenciaUsuario(email) {
+    return new Promise((resolve, reject) => {
+      const queryObservable = this.af.list('/usuario/', {
+        query: {
+          orderByChild: 'email',
+          equalTo: email
+        }
+      });
+      queryObservable
+        .subscribe(queriedItems => {
+          this.usuario = queriedItems;
+          if (this.usuario.length > 0 && this.usuario[0].apellidos !== 'Ingreso facebook') {
+            resolve("existe");
+          } else {
+            resolve("noexiste");
+          }
+
+        });
+    });
+  }
+
+  validarExistenciaUsuario2(email) {
+    return new Promise((resolve, reject) => {
+      const queryObservable = this.af.list('/usuario/', {
+        query: {
+          orderByChild: 'email',
+          equalTo: email
+        }
+      });
+      queryObservable
+        .subscribe(queriedItems => {
+          this.usuario = queriedItems;
+          if (this.usuario.length > 0 && this.usuario[0].apellidos !== 'Ingreso google') {
+            resolve("existe");
+          } else {
+            resolve("noexiste");
+          }
+
+        });
+    });
+  }
 
   forgot() {
     this.navCtrl.push('ForgotpassPage')

@@ -251,38 +251,6 @@ export class SwapPage {
       },
 
     };
-    /*
-      var json = {
-  
-        "to":"f48XUA5lbw0:APA91bFv6-JKzkod8OisbWbS2r8n6M09PMxpZqgrCsM-qnoEIhFZNxttxLuvig0-MI84V-oE6wKMlAd1gqqrcSgpoTnmirKoZNFOvkRaN4ru3M79MemF3hCyldJwqX5se8nv5xci58Mx",
-        "priority": "high",
-        "show_in_foreground": true,
-        "badge":"true",
-        "sound":"true",
-        "alert":"true",
-        "content_available": true,
-        "click_action":"ChatPage",
-        "vibrate":"true",
-         "notification": {
-          "message": "test message",
-          "sound":"default",
-          "title": "Solicitud Swap",
-          "body": "prueba notificacion 3",
-          "icon": "fcm_push_icon",
-          "tipo": "swapSolicitud",
-  
-        },
-        "data": {
-          "title": "mensaje Swap",
-          "body": "prueba notificacion 1",
-          "message": "prueba notificacion 5",
-          "payload": {
-            "message": "ChatPage",
-            "tipo": "swapSolicitud",
-            "image": "icon"
-          }
-        },
-      };*/
     let apikey = "AAAAd2_6fnY:APA91bFdS2qkdHpev2U758YzNzRXUEkdYfepIq4HYjH5bkdJkhBzt8KVh-PdCNbeUybLSWGJ_teAsbAj7xqrKViBPeFH3gWZsubnOFbDqBJCypoggY_09ytvxibJ5_pab_lakOzkaljq";
     let url = 'https://fcm.googleapis.com/fcm/send';
     let headers: Headers = new Headers({

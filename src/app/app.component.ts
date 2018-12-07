@@ -83,7 +83,7 @@ export class MyApp {
           this.badge.clear();
           let paginaActual = JSON.parse(localStorage.getItem("paginaActual"));
           let prueba = JSON.parse(data.payload);
-          console.log("alerta 1", JSON.stringify((data)));
+          console.log("alerta 11", JSON.stringify((data)));
           if (this.alert == undefined) {
             this.alert = this.alertCtrl.create({
               title: data.title,
@@ -93,7 +93,7 @@ export class MyApp {
                 {
                   text: 'Aceptar',
                   handler: () => {
-                    this.cerrarAlert();
+                    this.cerrarAlert(prueba);
                   }
                 },
 
@@ -120,6 +120,7 @@ export class MyApp {
 
         } else if (data.wasTapped) {
           let prueba = JSON.parse(data.payload);
+          localStorage.setItem("redireccionamiento", JSON.stringify((prueba.tipo)));
           if (prueba.tipo == "NotificacionesPage") {
             this.rootPage = 'NotificacionesPage';
           } else if (prueba.tipo == "ChatPage") {
@@ -147,7 +148,8 @@ export class MyApp {
 
       this.events.subscribe('cambioExitoso', (calificacion) => {
         console.log("cambio existoso")
-        this.nav.push('CambiosPage');
+        //this.nav.push('CambiosPage');
+        this.rootPage = 'CambiosPCambiosPageage';
       });
     });
 
@@ -158,9 +160,25 @@ export class MyApp {
     this.rootPage = rootSet;
   }
 
-  cerrarAlert() {
+  cerrarAlert(data) {
+    console.log("data alert push notificacion direction", data);
     this.alert.dismiss();
     this.alert = undefined;
+    if (data.tipo === 'ChatPage') {
+      this.submenu = true;
+      //this.nav.push('ChatPage');
+      this.rootPage = 'ChatPage';
+
+    } else if (data.tipo === 'CambiosPage') {
+      this.submenu = true;
+      //this.nav.push('CambiosPage');
+      this.rootPage = 'CambiosPage';
+
+    } else if (data.tipo === 'NotificacionesPage') {
+      this.submenu = true;
+      //this.nav.push('NotificacionesPage');
+      this.rootPage = 'NotificacionesPage';
+    }
   }
 
   async publicaciones() {

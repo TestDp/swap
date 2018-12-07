@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavParams, ViewController, Events, NavController, ModalController } from "ionic-angular";
+import { NavParams, ViewController, Events, NavController, ModalController, AlertController } from "ionic-angular";
 import { RequestOptions, Headers, Http } from "@angular/http";
 import 'rxjs/add/operator/map';
 import { AngularFireDatabase } from "angularfire2/database/database";
@@ -18,8 +18,10 @@ export class modalNotificacionesPage {
   articulo: any = {};
   articulosBorrar: any = {};
   historialArticulo: FirebaseListObservable<any[]>;
+  articuloEstado: any;
   constructor(private params: NavParams, private view: ViewController, private events: Events, public navCtrl: NavController,
-    public http: Http, private af: AngularFireDatabase, public myapp: MyApp, public modalCtrl: ModalController, ) {
+    public http: Http, private af: AngularFireDatabase, public myapp: MyApp, public modalCtrl: ModalController,
+    public alertCtrl: AlertController, ) {
   }
 
   ionViewDidLoad() {
@@ -30,58 +32,71 @@ export class modalNotificacionesPage {
   }
 
   confirmarCambio() {
-    this.modificarArticuloCambio();
-    this.modificarArticuloSwap();
+    this.validarDisponibilidadArticulos().then(Response => {
+      if (Response === "D") {
 
-    const queryObservable = this.af.list('/usuarioInformacion/' + this.publicacion.uidUsuarioOfrece + '/', {
-    });
-    queryObservable
+        this.modificarArticuloCambio();
+        this.modificarArticuloSwap();
 
-      .subscribe(queriedItems => {
-
-        var usuarioOfrece = queriedItems;
-        var idRegistro = usuarioOfrece[0].idRegistro;
-        var json = {
-
-          "to": idRegistro,
-          "priority": "high",
-          "data": {
-            "title": "Confirmación cambio Swap",
-            "body": "se confirma cambio de articulo Swap",
-            "payload": {
-              "message": "se confirma cambio de articulo Swap",
-              "tipo": "CambiosPage",
-              "idArticuloCambio": this.data.id,
-              "idArticuloSwap": this.publicacion.idArticulo,
-              "image": "icon"
-            }
-          },
-          "notification": {
-            "sound": "default",
-            "title": "Confirmación cambio Swap",
-            "message": "pruebaMensaje",
-            "body": "se confirma cambio de articulo Swap",
-            "click_action": "FCM_PLUGIN_ACTIVITY",
-          },
-        };
-        let apikey = "AAAAd2_6fnY:APA91bFdS2qkdHpev2U758YzNzRXUEkdYfepIq4HYjH5bkdJkhBzt8KVh-PdCNbeUybLSWGJ_teAsbAj7xqrKViBPeFH3gWZsubnOFbDqBJCypoggY_09ytvxibJ5_pab_lakOzkaljq";
-        let url = 'https://fcm.googleapis.com/fcm/send';
-        let headers: Headers = new Headers({
-          'Content-Type': 'application/json',
-          'Authorization': 'key=' + apikey
+        const queryObservable = this.af.list('/usuarioInformacion/' + this.publicacion.uidUsuarioOfrece + '/', {
         });
-        let options = new RequestOptions({ headers: headers });
-        return this.http.post(url, json, options)
-          .map(response => {
-            return response;
-          }).subscribe(data => {
-            //post doesn't fire if it doesn't get subscribed to
-            console.log(data);
+        queryObservable
+
+          .subscribe(queriedItems => {
+
+            var usuarioOfrece = queriedItems;
+            var idRegistro = usuarioOfrece[0].idRegistro;
+            var json = {
+
+              "to": idRegistro,
+              "priority": "high",
+              "data": {
+                "title": "Confirmación cambio Swap",
+                "body": "se confirma cambio de articulo Swap",
+                "payload": {
+                  "message": "se confirma cambio de articulo Swap",
+                  "tipo": "CambiosPage",
+                  "idArticuloCambio": this.data.id,
+                  "idArticuloSwap": this.publicacion.idArticulo,
+                  "image": "icon"
+                }
+              },
+              "notification": {
+                "sound": "default",
+                "title": "Confirmación cambio Swap",
+                "message": "pruebaMensaje",
+                "body": "se confirma cambio de articulo Swap",
+                "click_action": "FCM_PLUGIN_ACTIVITY",
+              },
+            };
+            let apikey = "AAAAd2_6fnY:APA91bFdS2qkdHpev2U758YzNzRXUEkdYfepIq4HYjH5bkdJkhBzt8KVh-PdCNbeUybLSWGJ_teAsbAj7xqrKViBPeFH3gWZsubnOFbDqBJCypoggY_09ytvxibJ5_pab_lakOzkaljq";
+            let url = 'https://fcm.googleapis.com/fcm/send';
+            let headers: Headers = new Headers({
+              'Content-Type': 'application/json',
+              'Authorization': 'key=' + apikey
+            });
+            let options = new RequestOptions({ headers: headers });
+            return this.http.post(url, json, options)
+              .map(response => {
+                return response;
+              }).subscribe(data => {
+                //post doesn't fire if it doesn't get subscribed to
+                console.log(data);
+              });
           });
-      });
-    alert("Cambio exitoso");
-    this.navCtrl.pop();
-    this.events.publish("cambioExitoso");
+        alert("Cambio exitoso");
+        this.navCtrl.pop();
+        this.events.publish("cambioExitoso");
+
+      } else if (Response === "C") {
+        this.alertCtrl.create({
+          title: 'Información',
+          subTitle: 'Este artículo ya fue intercambiado. ',
+          buttons: ['Aceptar']
+        }).present();
+
+      }
+    })
 
 
   }
@@ -215,6 +230,28 @@ export class modalNotificacionesPage {
     this.navCtrl.push('ChatPage', { datosChat1: this.publicacion });
 
 
+  }
+
+  validarDisponibilidadArticulos() {
+    return new Promise((resolve, reject) => {
+      const queryObservable = this.af.list('/article/', {
+        query: {
+          orderByChild: 'id',
+          equalTo: this.publicacion.idArticulo
+        }
+      });
+      queryObservable
+        .subscribe(queriedItems => {
+          this.articuloEstado = queriedItems;
+
+          if (this.articuloEstado[0].estado === "C") {
+            resolve("C");
+          } else {
+            resolve("D");
+          }
+
+        });
+    });
   }
 
   closeModal() {
